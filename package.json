@@ -1,4 +1,6 @@
 {
+  "author": "Daniel Barboza da Silva",
+  "license": "GPLv3 License",
   "name": "financial-system-frontend",
   "version": "1.0.0",
   "private": true,
