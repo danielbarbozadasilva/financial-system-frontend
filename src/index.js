@@ -1,14 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import reportWebVitals from './reportWebVitals'
-import { Provider } from 'react-redux'
-import Routers from './routers';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import Routers from './routers.js';
+import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
+import Layout from './components/layout'
 
-ReactDOM.render(
-  <Provider>
-    <Routers />
-  </Provider>,
-  document.getElementById('root')
-)
-
-reportWebVitals()
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <Layout/>
+    <BrowserRouter>
+      <Routers />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+reportWebVitals();
