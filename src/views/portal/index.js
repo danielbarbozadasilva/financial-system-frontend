@@ -1,4 +1,4 @@
-import { Router } from '@reach/router'
+import { Router, Redirect } from '@reach/router'
 
 import Layout from '../../components/layout/index'
 import SignIn from '../auth/signin'
@@ -25,7 +25,7 @@ const Menu = [
   {
     title: 'NotFound',
     icons: '',
-    route: '/*' || '/error404',
+    route: '/error404',
     visibleMenu: true,
     enabled: true,
     component: Error404
@@ -40,6 +40,7 @@ const Portal = (props) => {
           {Menu.map(({ component: Component, route, tipo = '' }, i) => (
             <Component key={i} path={route} tipo={tipo} />
           ))}
+          <Redirect from="/*" to="/error404" noThrow />
         </Layout>
       </Router>
     </>
