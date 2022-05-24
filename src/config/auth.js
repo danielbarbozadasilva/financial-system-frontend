@@ -20,8 +20,15 @@ const isAuthenticated = () => {
   return getToken() !== false
 }
 
-const clearStorage = () => localStorage.removeItem(TOKEN_KEY)
+const removeToken = () => localStorage.removeItem(TOKEN_KEY)
 
 const saveAuth = (data) => localStorage.setItem(TOKEN_KEY, JSON.stringify(data))
 
-export { saveAuth, getToken, getUser, isAuthenticated, clearStorage }
+export {
+  saveAuth,
+  getToken,
+  getUser,
+  isAuthenticated,
+  removeToken
+}
+
