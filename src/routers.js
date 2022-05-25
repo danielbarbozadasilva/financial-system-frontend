@@ -1,16 +1,23 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Router, Redirect } from '@reach/router'
+import AdminView from './views/admin/'
+import PortalView from './views/portal'
+import { isAuthenticated } from './config/auth'
 
-import Home from './views/home'
-
-const Routers = () => {
-  return (
-     <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='*' element={<h1>Not Found</h1>} />
-    </Routes>
- 
-  )
+const PrivateRoute = ({ component: Component, ...rest }) => {
+  if (!isAuthenticated()) {
+    return <Redirect to='/signin' noThrow />
+  }
+  return <Component {...rest} />
 }
+
+const Routers = () => (
+  <>
+    <Router>
+      <PortalView path='/*' />
+      <PrivateRoute component={AdminView} path='/admin/*' />
+    </Router>
+  </>
+)
 
 export default Routers

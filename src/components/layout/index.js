@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from './header'
-import Footer from './footer'
+import Footer from './footer/index'
 import styled from 'styled-components'
 import '../../assets/css/style.css'
 
