@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { getToken } from './auth'
-import history from './history'
 import store from '../store'
 import { logoutAction } from '../store/auth/auth.action'
+import { navigate } from '@reach/router'
 
 const { REACT_APP_VERSION: version, REACT_APP_API: api } = process.env
 const urlApi = api + version
@@ -22,7 +22,7 @@ http.interceptors.response.use((response) => {
 }, function (error) {
   switch (error.response.status) {
     case 401:
-      history.push('/signin')
+      navigate('/signin')
       toastr.info('Token temporário expirado!')
       break
     case 500:
