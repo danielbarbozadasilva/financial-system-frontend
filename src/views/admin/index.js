@@ -10,13 +10,13 @@ export const Menu = [
     visibleMenu: true,
     enabled: true,
     component: Home,
-    authorization: [1, 2, 3]
+    authorization: [1]
   }
 ]
 
 const Admin = (props) => {
-  const typeUser = useSelector((state) => state.auth.user.typeUser)
-  const rotasAutorizadas = Menu.filter((route) =>
+  const typeUser = useSelector((state) => state.auth.user.type)
+  const authorizedRoutes = Menu.filter((route) =>
     route.authorization.includes(typeUser)
   )
 
@@ -24,7 +24,7 @@ const Admin = (props) => {
 
   return (
     <Router>
-        {rotasAutorizadas.map(({ component: Component, route }, i) => (
+        {authorizedRoutes.map(({ component: Component, route }, i) => (
           <Component key={i} path={route} />
         ))}
         <NotFound default />

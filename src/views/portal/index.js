@@ -37,8 +37,8 @@ const Portal = (props) => {
     <>
       <Router>
         <Layout path="/">
-          {Menu.map(({ component: Component, route, tipo = '' }, i) => (
-            <Component key={i} path={route} tipo={tipo} />
+          {Menu.map(({ component: Component, route, type = '' }, i) => (
+            <Component key={i} path={route} type={type} />
           ))}
           <Redirect from="/*" to="/error404" noThrow />
         </Layout>
