@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, Redirect } from '@reach/router'
 import AdminView from './views/admin/'
 import PortalView from './views/portal'
-import { isAuthenticated } from './config/storage'
+import { isAuthenticated } from './config/auth'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   if (!isAuthenticated()) {
