@@ -1,21 +1,31 @@
-import React from 'react';
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import React from 'react'
+import { Navbar, Container, Nav } from 'react-bootstrap'
 
 const Header = (props) => {
-    return (
-        <>
-        <Navbar bg="dark" variant="dark">
-          <Container>
-          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+  return (
+    <>
+      <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand>Investimentos</Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
+            <Nav.Link>Home</Nav.Link>
+            <Nav.Link>Ativos</Nav.Link>
+            <Nav.Link>Preços</Nav.Link>
           </Nav>
-          </Container>
-        </Navbar>
-      </>
-    )
+          <Navbar.Collapse className="justify-content-end">
+            <Nav>
+              <Nav.Link href="/signin">
+                Logar
+              </Nav.Link>
+              <Nav.Link href="/signup">
+                Cadastrar
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+    </>
+  )
 }
 
 export default Header
