@@ -17,20 +17,21 @@ if (getToken()) {
   http.defaults.headers.token = getToken()
 }
 
-http.interceptors.response.use((response) => {
-  return response
-}, function (error) {
-  switch (error.response.status) {
-    case 401:
-      navigate('/signin')
-      toastr.info('Token temporário expirado!')
-      break
-    case 500:
-      store.dispatch(logoutAction())
-      toastr.info('Faça o Login novamente!')
-      break
+http.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    switch (error.response.status) {
+      case 401:
+        if (getToken()) {
+          store.dispatch(logoutAction())
+          navigate('/signin')
+          toastr.info('Token temporário expirado!')
+        }
+        return Promise.reject(error)
+      default:
+        return Promise.reject(error)
+    }
   }
-  return Promise.reject(error.response)
-})
+)
 
 export default http
