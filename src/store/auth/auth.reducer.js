@@ -5,7 +5,8 @@ const INITIAL_STATE = {
   loading: false,
   token: getToken() || '',
   user: getUser() || {},
-  error: []
+  error: [],
+  registered: false
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -16,6 +17,13 @@ const reducer = (state = INITIAL_STATE, action) => {
       return state
 
     case TYPES.SIGN_IN:
+      state.token = action.data.token
+      state.user = action.data.userDTO
+      state.loading = false
+      return state
+
+    case TYPES.SIGN_UP:
+      state.registered = true
       state.token = action.data.token
       state.user = action.data.userDTO
       state.loading = false

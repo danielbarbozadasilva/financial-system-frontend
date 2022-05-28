@@ -2,6 +2,7 @@ import { Router, Redirect } from '@reach/router'
 
 import Layout from '../../components/layout/index'
 import SignIn from '../auth/signin'
+import SignUp from '../auth/signup'
 import Home from '../portal/home/index'
 import Error404 from '../error/404'
 
@@ -21,6 +22,14 @@ const Menu = [
     visibleMenu: true,
     enabled: true,
     component: SignIn
+  },
+  {
+    title: 'SignUp',
+    icons: '',
+    route: '/signup',
+    visibleMenu: true,
+    enabled: true,
+    component: SignUp
   },
   {
     title: 'NotFound',
