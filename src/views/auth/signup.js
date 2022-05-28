@@ -25,11 +25,11 @@ const SignUp = () => {
   const handleChange = (props) => {
     setDisableInit(false)
     const { value, name } = props.target
-    fieldValidate(name, value)
     setForm({
       ...form,
       [name]: value
     })
+    fieldValidate(name, value)
   }
 
   useEffect(() => {
@@ -71,19 +71,14 @@ const SignUp = () => {
         break
 
       case 'cpf':
-        regex = /[^0-9.]/
-        if (filtraCpf.test(valor)) {
-          menssage += 'CPF inválido'
-        } else if (valor.trim() === '') {
-          menssage += 'Não pode ser vazio!'
-        } else if (valor.length < 11) {
-          menssage += 'CPF inválido!'
+        if (value.trim().length < 14) {
+          message += 'CPF inválido!'
         }
         break
 
       case 'gender':
-        if (value === 'gender') {
-          message += 'Selecione uma sexo!'
+        if (value === '0') {
+          message += 'Selecione um sexo!'
         }
         break
 
@@ -95,6 +90,8 @@ const SignUp = () => {
           message += 'Data inválida!'
         } else if (moment(datanasc).isAfter(dataAtual)) {
           message += 'Data maior que a atual!'
+        } else if (moment().diff(moment(datanasc), 'years') < 18) {
+          message += 'O usuário precisa ter no mínimo 18 anos!'
         }
         break
 
@@ -105,7 +102,9 @@ const SignUp = () => {
         break
 
       case 'confirmPassword':
-        if (form.password !== value) {
+        if (value?.length !== form.password?.length) {
+          message += 'Senhas não conferem!'
+        } else if (form.password !== value) {
           message += 'Senhas não conferem!'
         }
         break
@@ -122,10 +121,7 @@ const SignUp = () => {
         break
 
       case 'address':
-        regex = /\d/g
-        if (regex.test(value)) {
-          message += 'Não pode conter números!'
-        } else if (value.trim() === '') {
+        if (value.trim() === '') {
           message += 'Não pode ser vazio!'
         } else if (value.length <= 4) {
           message += 'Precisa ter mais que 4 caracteres!'
@@ -145,24 +141,10 @@ const SignUp = () => {
         break
 
       case 'cep':
-        regex = /\d/g
-        if (regex.test(value)) {
-          message += 'Não pode conter números!'
-        } else if (value.trim() === '') {
+        if (value.trim() === '') {
           message += 'Não pode ser vazio!'
-        } else if (value.length !== 9) {
+        } else if (value.trim().length !== 9) {
           message += 'Precisa ter 9 caracteres!'
-        }
-        break
-
-      case 'complement':
-        regex = /\d/g
-        if (regex.test(value)) {
-          message += 'Não pode conter números!'
-        } else if (value.trim() === '') {
-          message += 'Não pode ser vazio!'
-        } else if (value.length <= 4) {
-          message += 'Precisa ter mais que 4 caracteres!'
         }
         break
     }
@@ -183,16 +165,15 @@ const SignUp = () => {
       'address',
       'uf',
       'city',
-      'cep',
-      'complement'
+      'cep'
     ]
     const invalid = (label) =>
       !Object.keys(form).includes(label) || form[label].length === 0
 
-    const validacoes =
+    const validations =
       Object.values(formValidate).filter((item) => item !== '').length > 0
 
-    return inputs.some((item) => invalid(item)) || validacoes
+    return inputs.some((item) => invalid(item)) || validations
   }
 
   useEffect(() => {
@@ -208,34 +189,34 @@ const SignUp = () => {
     }
   }, [error, registered])
 
-  const insertData = () => {
+  const insertData = async () => {
     const nform = {
       name: form.name,
       email: form.email,
       cpf: form.cpf,
       gender: form.gender,
-      birthDate: form.birthDate,
+      birth_date: form.birthDate,
       password: form.password,
-      confirmPassword: form.confirmPassword,
       phone: form.phone,
       address: form.address,
       uf: form.uf,
       city: form.city,
-      cep: form.cep,
-      complement: form.complement
+      zip_code: form.cep,
+      complement: form.complement,
+      status: true
     }
 
-    dispatch(signUpAction(nform)).then(() => {
+    dispatch(await signUpAction(nform)).then(() => {
       setDisableInit(true)
     })
   }
 
   return (
-    <SForm>
+    <SForm autoComplete="off">
       <STextForm>Cadastre-se</STextForm>
       <Row className="mb-3">
         <Form.Group as={Col}>
-          <Form.Label> Nome:</Form.Label>
+          <Form.Label>Nome:</Form.Label>
           <Form.Control
             autoFocus
             invalid={formValidate.name}
@@ -270,24 +251,48 @@ const SignUp = () => {
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>CPF:</Form.Label>
-          <Form.Control
-            invalid={formValidate.cpf}
-            disabled={loading}
-            type="text"
-            id="cpf"
+          <Form.Label>Cpf:</Form.Label>
+          <InputMask
+            mask="999.999.999-99"
+            disabled={false}
+            maskChar=" "
             value={form.cpf || ''}
             onChange={handleChange}
-            name="cpf"
-            placeholder="000.000.000-00"
-          />
+          >
+            {() => (
+              <Form.Control
+                invalid={formValidate.cpf}
+                disabled={loading}
+                type="text"
+                id="cpf"
+                value={form.cpf || ''}
+                onChange={handleChange}
+                name="cpf"
+                placeholder="Informe o seu cpf"
+              />
+            )}
+          </InputMask>
+          <Form.Control.Feedback type="text">
+            {formValidate.cpf || ''}
+          </Form.Control.Feedback>
         </Form.Group>
+
         <Form.Group as={Col}>
           <Form.Label>Sexo</Form.Label>
-          <Form.Select value={form.gender || ''} defaultValue="Selecione...">
-            <option>M</option>
-            <option>F</option>
-          </Form.Select>
+          <Select
+            fullWidth
+            native
+            value={form.gender || ''}
+            onChange={handleChange}
+            inputProps={{
+              name: 'gender',
+              id: 'outlined-native-simple'
+            }}
+          >
+            <option value="0">selecione</option>
+            <option value="1">M</option>
+            <option value="2">F</option>
+          </Select>
           <Form.Control.Feedback type="text">
             {formValidate.gender || ''}
           </Form.Control.Feedback>
@@ -328,6 +333,9 @@ const SignUp = () => {
             name="password"
             placeholder="Insira a sua senha"
           />
+          <Form.Control.Feedback type="text">
+            {formValidate.password || ''}
+          </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col}>
           <Form.Label>Confirmar senha:</Form.Label>
@@ -407,10 +415,10 @@ const SignUp = () => {
                 {uf}
               </option>
             ))}
-            <Form.Control.Feedback type="text">
-              {formValidate.uf || ''}
-            </Form.Control.Feedback>
           </Select>
+          <Form.Control.Feedback type="text">
+            {formValidate.uf || ''}
+          </Form.Control.Feedback>
         </Form.Group>
       </Row>
       <Row className="mb-3">
@@ -440,19 +448,29 @@ const SignUp = () => {
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>CEP:</Form.Label>
-          <Form.Control
-            invalid={formValidate.cep}
-            disabled={loading}
-            type="text"
-            id="cep"
+          <Form.Label>Cep:</Form.Label>
+          <InputMask
+            mask="99999-999"
+            disabled={false}
+            maskChar=" "
             value={form.cep || ''}
             onChange={handleChange}
-            name="cep"
-            placeholder="Informe o seu cep"
-          />
+          >
+            {() => (
+              <Form.Control
+                invalid={formValidate.cep}
+                disabled={loading}
+                type="text"
+                id="cep"
+                value={form.cep || ''}
+                onChange={handleChange}
+                name="cep"
+                placeholder="Informe o seu cep"
+              />
+            )}
+          </InputMask>
           <Form.Control.Feedback type="text">
-            {formValidate.cep || ''}
+            {formValidate.cpf || ''}
           </Form.Control.Feedback>
         </Form.Group>
 
@@ -468,9 +486,6 @@ const SignUp = () => {
             name="complement"
             placeholder="Informe o seu complemento"
           />
-          <Form.Control.Feedback type="text">
-            {formValidate.complement || ''}
-          </Form.Control.Feedback>
         </Form.Group>
       </Row>
 
@@ -481,7 +496,6 @@ const SignUp = () => {
         }
         disabled={isNotValid()}
         size="md"
-        block
         onClick={insertData}
       >
         {loading ? (
@@ -504,13 +518,6 @@ const SForm = styled(Form)`
   padding: 50px;
   position: center;
   margin: 80px 0px;
-`
-
-const SColFooter = styled(Col)`
-  line-height: 1.5;
-  font-weight: 500;
-  color: #000;
-  padding: 20px 0;
 `
 
 const STextForm = styled.h2`
