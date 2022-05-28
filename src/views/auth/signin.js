@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Alert, Row, Col, Form, Button, Spinner } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
 import { signInAction } from '../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
 const SignIn = (props) => {
   const dispatch = useDispatch()
@@ -24,9 +23,9 @@ const SignIn = (props) => {
     })
   }
 
-  const submitForm = (event) => {
+  const submitForm = async (event) => {
     event.preventDefault()
-    dispatch(signInAction(form))
+    dispatch(await signInAction(form))
   }
 
   const isNotValid = () => form.email.length === 0 || form.password.length === 0
@@ -90,7 +89,7 @@ const SignIn = (props) => {
               <i className="icon-angle-right ml-2" />
             </Button>
             <SColFooter>
-              Não tem Cadastro? <Link to="/signup">Cadastre-se</Link>
+              Não tem Cadastro? <a href="/signup">Cadastre-se</a>
             </SColFooter>
           </SForm>
         </Col>
