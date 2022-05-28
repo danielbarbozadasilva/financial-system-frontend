@@ -25,21 +25,24 @@ export const signInAction = async (data) => {
 }
 
 export const signUpAction = async (data) => {
-  try {
-    const result = await registerService(data)
-    if (result.data) {
+  return async (dispatch) => {
+    try {
+      const result = await registerService(data)
       saveAuth(result.data.data)
       http.defaults.headers.token = result.data.data.token
+
+      dispatch({
+        type: TYPES.SIGN_UP,
+        data: result.data
+      })
+      toastr.success('Usuário', 'cadastrado com sucesso!')
+      navigate('/admin')
+    } catch (error) {
+      const { data } = error.response
+      toastr.error('Erro', ...data.message.details)
+      dispatch({ type: TYPES.SIGN_ERROR, data: error })
+
     }
-    dispatch({
-      type: TYPES.SIGN_UP,
-      data: result.data
-    })
-    toastr.success('Usuário', 'cadastrado com sucesso!')
-    navigate('/admin')
-  } catch (error) {
-    toastr.error('Erro', 'Preencha todos os campos!')
-    dispatch({ type: TYPES.SIGN_ERROR, data: error })
   }
 }
 
