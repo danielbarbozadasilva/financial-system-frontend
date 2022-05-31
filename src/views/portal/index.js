@@ -1,10 +1,10 @@
 import { Router, Redirect } from '@reach/router'
 
-import Layout from '../../components/layout/index'
-import SignIn from '../auth/signin'
-import SignUp from '../auth/signup'
+import Layout from '../../components/layout/main/index'
+import SignIn from '../auth/signin/index'
+import SignUp from '../auth/signup/index'
 import Home from '../portal/home/index'
-import Error404 from '../error/404'
+import Error404 from '../error/404/index'
 
 const Menu = [
   {
