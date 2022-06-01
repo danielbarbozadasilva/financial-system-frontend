@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap'
-import styled from 'styled-components'
-import { signInAction } from '../../store/auth/auth.action'
+import { Container, Row, Col, Form, Spinner } from 'react-bootstrap'
+import { signInAction } from '../../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
+import { SForm, SColFooter, STextForm, SButton, STextLink } from './SigninElements'
 
 const SignIn = (props) => {
   const dispatch = useDispatch()
@@ -68,11 +68,9 @@ const SignIn = (props) => {
             <Form.Group className="mb-3">
               <Form.Check type="checkbox" label="Lembrar credenciais" />
             </Form.Group>
-            <Button
-              data-testing-id="funnel-survey-select_category-next"
+            <SButton
               type="button"
               disabled={isNotValid()}
-              size="sm"
               onClick={submitForm}
             >
               {loading ? (
@@ -87,9 +85,9 @@ const SignIn = (props) => {
               )}
 
               <i className="icon-angle-right ml-2" />
-            </Button>
+            </SButton>
             <SColFooter>
-              Não tem Cadastro? <a href="/signup">Cadastre-se</a>
+              Não tem Cadastro? <STextLink href="/signup">Cadastre-se</STextLink>
             </SColFooter>
           </SForm>
         </Col>
@@ -98,25 +96,3 @@ const SignIn = (props) => {
   )
 }
 export default SignIn
-
-const SForm = styled(Form)`
-  background-color: #fafafa;
-  box-shadow: 0px 2px 15px 6px rgba(0, 0, 0, 0.11);
-  padding: 50px;
-  position: center;
-  margin: 80px 0px;
-`
-
-const SColFooter = styled(Col)`
-  line-height: 1.5;
-  font-weight: 500;
-  color: #000;
-  padding: 20px 0;
-`
-
-const STextForm = styled.h2`
-  line-height: 1.5;
-  font-weight: 500;
-  color: #000;
-  padding: 20px 0;
-`
