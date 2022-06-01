@@ -10,7 +10,7 @@ export const Menu = [
     visibleMenu: true,
     enabled: true,
     component: Home,
-    authorization: [1]
+    authorization: [1, 2]
   }
 ]
 
