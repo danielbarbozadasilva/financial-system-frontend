@@ -3,19 +3,17 @@ import { Navbar } from 'react-bootstrap'
 
 export const SNavbar = styled(Navbar)`
   width: 100%;
-  height: 92px;
-  top: 0;
   font-family: 'Nunito', Helvetica, Arial, Lucida, sans-serif;
-  background-color: #501417;
-  color: white;
+  background-color: #501417 !important;
   font-weight: bold;
-  top: 0;
   z-index: 1;
+  @media screen and (max-width: 990px) {
+    background-color: #501417;
+  }
 `
 
 export const SNavLink = styled.a`
   font-family: 'Montserrat', sans-serif !important;
-  color: #fff;
   text-decoration: none;
   top: 0;
   display: inline-block;
@@ -30,9 +28,22 @@ export const SNavLink = styled.a`
     color: white;
     transition: 0.3s ease-out;
   }
+  @media screen and (max-width: 990px) {
+    padding: 20px;
+    text-align: center;
+    &:hover {
+      text-decoration: underline;
+      background-color: #af9b7c;
+      transition: 0.3s ease-out;
+    }
+  }
 `
 
 export const SNavbarLogo = styled.img`
   width: 13.5rem;
-  margin-left: 50px;
+`
+
+export const SNavbarToggle = styled(Navbar.Toggle)`
+  background-color: #b5a48d;
+  color: #a59174 !important;
 `
