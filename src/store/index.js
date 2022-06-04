@@ -5,9 +5,11 @@ import multi from 'redux-multi'
 
 import { reducer as toastrReducer } from 'react-redux-toastr'
 import SignReducer from './auth/auth.reducer'
+import financialReducer from './financial_assets/financial_assets.reducer'
 
 const reducers = combineReducers({
   auth: SignReducer,
+  financial: financialReducer,
   toastr: toastrReducer
 })
 
