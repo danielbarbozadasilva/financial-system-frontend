@@ -1,12 +1,12 @@
 import { Col, Card } from 'react-bootstrap'
-
+import { SImg } from './ElementsCards'
 const CardFinancial = (props) => {
   const { name, description, bvmf, current_price, quantity, image } = props.item
   return (
     <>
       <Col>
         <Card>
-          <Card.Img variant="top" src={image} />
+          <SImg variant="top" src={image} />
           <Card.Body>
             <Card.Title>Nome: {name}</Card.Title>
             <Card.Text>Descrição: {description}</Card.Text>
