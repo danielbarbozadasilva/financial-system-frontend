@@ -10,7 +10,6 @@ export const listAllAssetAction = () => {
     dispatch({ type: TYPES.FINANCIAL_LOADING, status: true })
     try {
       const result = await listAllAssetService()
-      console.log('result.data.data' + JSON.stringify(result.data.data))
       dispatch({ type: TYPES.FINANCIAL_ALL, data: result.data.data })
     } catch (error) {}
   }
