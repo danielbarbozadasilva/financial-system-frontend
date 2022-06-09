@@ -28,22 +28,25 @@ export const SNavLink = styled.a`
     color: white;
     transition: 0.3s ease-out;
   }
-  @media screen and (max-width: 990px) {
-    padding: 20px;
+  @media screen and (max-width: 1670px) {
     text-align: center;
+    padding: 25px 40px;
     &:hover {
       text-decoration: underline;
-      background-color: #af9b7c;
+      color: white;
       transition: 0.3s ease-out;
+      background-color: #b5a48d;
     }
   }
 `
 
 export const SNavbarLogo = styled.img`
   width: 13.5rem;
+  margin: 5px 40px;
 `
 
 export const SNavbarToggle = styled(Navbar.Toggle)`
+  margin: 0px 30px;
   background-color: #b5a48d;
   color: #a59174 !important;
 `

@@ -22,13 +22,11 @@ const Header = () => {
   return (
     <>
       <SNavbar bg="light" expand="lg">
+        <Link to="/" id="logoMain">
+          <SNavbarLogo src={LogoHeader} alt="logo" />
+        </Link>
+        <SNavbarToggle aria-controls="basic-navbar-nav" />
         <Container>
-          <Navbar.Brand>
-            <Link to="/" id="logoMain">
-              <SNavbarLogo className="logo-img" src={LogoHeader} alt="logo" />
-            </Link>
-          </Navbar.Brand>
-          <SNavbarToggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <SNavLink>
