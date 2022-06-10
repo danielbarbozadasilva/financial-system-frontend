@@ -28,15 +28,14 @@ export const SNavLink = styled.a`
     color: white;
     transition: 0.3s ease-out;
   }
-  @media screen and (max-width: 1670px) {
+  @media screen and (max-width: 990px) {
     text-align: center;
-    padding: 25px 40px;
     &:hover {
-      text-decoration: underline;
-      color: white;
-      transition: 0.3s ease-out;
       background-color: #b5a48d;
     }
+  }
+  @media screen and (max-width: 1670px) {
+    padding: 25px 40px;
   }
 `
 
@@ -47,6 +46,6 @@ export const SNavbarLogo = styled.img`
 
 export const SNavbarToggle = styled(Navbar.Toggle)`
   margin: 0px 30px;
-  background-color: #b5a48d;
+  background-color #b5a48d;
   color: #a59174 !important;
 `
