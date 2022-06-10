@@ -8,7 +8,7 @@ const Layout = (props) => {
   return (
     <>
       <Header />
-      <Main className='container-fluid'>
+      <Main>
         {props.children}
       </Main>
       <Footer />
