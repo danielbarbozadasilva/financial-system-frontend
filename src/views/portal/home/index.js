@@ -1,9 +1,19 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from '../../../components/portal/loading'
-import { Row } from 'react-bootstrap'
+import Loading from '../../../components/loading'
+import { Col } from 'react-bootstrap'
 import CardFinancial from '../../../components/portal/cards/AssetsCard'
+import {
+  SContainer,
+  StyleImg,
+  SText,
+  Sh2,
+  STextInvest
+} from '../../../components/portal/cards/ElementsCards'
+
 import { listAllAssetAction } from '../../../store/financial_assets/financial_assets.action'
+import Image from '../../../assets/img/investimento.webp'
+import Slider from 'react-slick'
 
 function Home() {
   const dispatch = useDispatch()
@@ -17,9 +27,9 @@ function Home() {
   const FinancialList = (financial) => {
     return financial.map((item, i) => {
       return (
-        <Row xs={1} md={2} className="g-4" key={i}>
+        <Col md="6" xl="4" sm="12" xs="12" key={i}>
           <CardFinancial item={{ ...item }} />
-        </Row>
+        </Col>
       )
     })
   }
@@ -27,14 +37,37 @@ function Home() {
   if (loading) {
     return <Loading />
   }
+  var settings = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    pauseOnHover: true
+  }
 
   return (
     <>
-      {!loading && financial.length === 0 ? (
-        <h6>Não há Financiamentos disponiveis</h6>
-      ) : (
-        FinancialList(financial)
-      )}
+      <div>
+        <StyleImg src={Image} />
+      </div>
+      <SText>
+        <Sh2>Acesso instantâneo a investimentos...</Sh2>
+        <Sh2>Invista nos ativos mais populares do mundo</Sh2>
+      </SText>
+      <STextInvest>
+        <h2>
+          Escolha um <strong>investimento</strong>
+        </h2>
+      </STextInvest>
+      <SContainer>
+        {!loading && financial.length === 0 ? (
+          <h6>Não há Financiamentos disponiveis</h6>
+        ) : (
+          <Slider {...settings}>{FinancialList(financial)}</Slider>
+        )}
+      </SContainer>
     </>
   )
 }
