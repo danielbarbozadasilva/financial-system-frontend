@@ -1,43 +1,57 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import 'chart.js/auto';
+import { Chart } from 'react-chartjs-2';
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from '../../../components/portal/loading'
-import { Row } from 'react-bootstrap'
-import CardFinancial from '../../../components/portal/cards/AssetsCard'
+import { Grid } from '@material-ui/core'
+import Title from '../../../components/title/index'
 import { listAllAssetAction } from '../../../store/financial_assets/financial_assets.action'
 
-function Home(props) {
+function Home () {
   const dispatch = useDispatch()
 
-  const loading = useSelector((state) => state.financial.loading)
   const financial = useSelector((state) => state.financial.all)
-
-  useEffect(() => {
+  
+  React.useEffect(() => {
     dispatch(listAllAssetAction())
   }, [dispatch])
 
-  const FinancialList = (props) => {
-    console.log('financial' + JSON.stringify(financial))
-    return financial.map((item, i) => {
-      return (
-        <Row xs={1} md={2} className="g-4">
-          <CardFinancial item={{ ...item }} />
-        </Row>
-      )
-    })
-  }
+  const actions = () => null
 
-  if (loading) {
-    return <Loading />
+  const chartData = {
+    labels: ['financial', 'financial', 'financial'],
+    datasets: [
+      {
+        label: '# of Votes',
+        data: [2, 4, 2],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(153, 102, 255, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 1
+      }
+    ]
   }
 
   return (
     <>
-      {!loading && financial.length === 0 ? (
-        <h6>Não há Financiamentos disponiveis</h6>
-      ) : (
-        FinancialList(props)
-      )}
+    <Title title="Ativos" actions={actions} />
+      <Grid container spacing={2}>
+        <Grid item xs={6}>
+          <Grid container>
+            <Grid item>
+            <Chart type='pie' data={chartData} />
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
     </>
   )
 }
+
 export default Home
