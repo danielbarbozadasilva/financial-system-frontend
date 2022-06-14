@@ -7,6 +7,7 @@ import { Select } from '@material-ui/core'
 import ufCityFile from '../../../util/state-city.json'
 import InputMask from 'react-input-mask'
 import { SForm, STextForm, SButton, SDesabledButton } from './SignupElements'
+import Loading from  '../../../components/loading'
 
 const SignUp = () => {
   const dispatch = useDispatch()
@@ -499,7 +500,7 @@ const SignUp = () => {
         <SButton type="button" disabled={isNotValid()} onClick={insertData}>
           {loading ? (
             <>
-              <Spinner size="sm" color="light" /> Carregando...
+              <Loading />
             </>
           ) : (
             'Cadastrar'
