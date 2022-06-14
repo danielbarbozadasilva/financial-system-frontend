@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col, Form, Spinner } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
 import { signInAction } from '../../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
 import { SForm, SColFooter, STextForm, SButton, STextLink } from './SigninElements'
+import Loading from  '../../../components/loading'
 
 const SignIn = (props) => {
   const dispatch = useDispatch()
@@ -75,10 +76,7 @@ const SignIn = (props) => {
             >
               {loading ? (
                 <>
-                  <Spinner size="sm" animation="border" role="status">
-                    {' '}
-                    <span className="visually-hidden">Carregando...</span>
-                  </Spinner>
+                  <Loading />
                 </>
               ) : (
                 'Entrar'
