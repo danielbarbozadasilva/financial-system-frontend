@@ -5,6 +5,8 @@ import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
 import store from './store'
 import { Helmet } from 'react-helmet'
+import { ThemeProvider } from 'styled-components'
+import theme from './plugins/theme'
 import './assets/css/style.css'
 import ReduxToastr from './components/redux-toastr'
 import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
@@ -15,14 +17,18 @@ const googleFontMontserrat =
   'https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100&display=swap'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+
 root.render(
   <Provider store={store}>
     <ReduxToastr />
-    <Helmet>
-      <link rel="stylesheet" href={googleFontNunito} />
-      <link rel="stylesheet" href={googleFontMontserrat} />
-    </Helmet>
-    <Routers />
+    <ThemeProvider theme={theme}>
+      <Helmet>
+        <link rel="stylesheet" href={googleFontNunito} />
+        <link rel="stylesheet" href={googleFontMontserrat} />
+      </Helmet>
+      <Routers />
+    </ThemeProvider>
   </Provider>
 )
+
 reportWebVitals()
