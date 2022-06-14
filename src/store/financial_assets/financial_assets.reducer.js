@@ -4,7 +4,8 @@ const INITIAL_STATE = {
   loading: false,
   all: [],
   upload: {},
-  selected: {}
+  selected: {},
+  dataById: []
 }
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -21,9 +22,16 @@ const reducer = (state = INITIAL_STATE, action) => {
       state.selected = action.data
       state.loading = false
       return state
-    case TYPES.FINANCIAL_UPDATE:
-      state.upload = action.upload
+    case TYPES.FINANCIAL_REMOVE:
+      state.selected = action.data
       state.loading = false
+      return state
+    case TYPES.FINANCIAL_ID:
+      state.dataById = action.data
+      state.loading = false
+      return state
+    case TYPES.FINANCIAL_UPLOAD:
+      state.upload = action.upload
       return state
     case TYPES.FINANCIAL_CREATE:
       state.loading = false
