@@ -40,6 +40,9 @@ const reducer = (state = INITIAL_STATE, action) => {
       state.user = {}
       state.error = []
 
+    case TYPES.SIGN_UPDATE_REGISTER:
+      state.registered = false
+      return state
     default:
       return state
   }

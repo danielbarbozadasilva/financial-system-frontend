@@ -10,6 +10,7 @@ export const signInAction = async (data) => {
     dispatch({ type: TYPES.SIGN_LOADING, status: true })
     try {
       const result = await authService(data)
+      
       if (result.data) {
         saveAuth(result.data.data)
         http.defaults.headers.token = result.data.data.token
@@ -28,20 +29,18 @@ export const signUpAction = async (data) => {
   return async (dispatch) => {
     try {
       const result = await registerService(data)
-      saveAuth(result.data.data)
-      http.defaults.headers.token = result.data.data.token
 
-      dispatch({
-        type: TYPES.SIGN_UP,
-        data: result.data
-      })
-      toastr.success('Usuário', 'cadastrado com sucesso!')
-      navigate('/admin')
+      if(result.data.data){
+        saveAuth(result.data.data)
+        http.defaults.headers.token = result.data.data.token
+        dispatch({ type: TYPES.SIGN_IN, data: result.data?.data })
+        toastr.success('Usuário', 'cadastrado com sucesso!')
+        navigate('/admin')
+      }
     } catch (error) {
       const { data } = error.response
       toastr.error('Erro', ...data.message.details)
       dispatch({ type: TYPES.SIGN_ERROR, data: error })
-
     }
   }
 }
@@ -50,6 +49,6 @@ export const logoutAction = (data) => {
   return async (dispatch) => {
     removeToken()
     dispatch({ type: TYPES.SIGN_OUT })
-    navigate('/auth')
+    navigate('/')
   }
 }

@@ -39,7 +39,7 @@ const Footer = (props) => {
             <FaInstagramSquare />
           </SocialIconLink>
           <SocialIconLink
-            href="https://api.whatsapp.com/send?phone=+5521992690225"
+            href="https://api.whatsapp.com/send?phone=5521982187814"
             target="_blank"
             rel="noreferrer"
           >
@@ -55,16 +55,13 @@ const Footer = (props) => {
         </Col>
         <ColInfo>
           <WebsiteRights>
-            <MdLocationOn />
-            Endereço: Rua Gomes Yunes, 225
+            <MdLocationOn /> Endereço: Rua Gomes Yunes, 225
           </WebsiteRights>
           <WebsiteRights>
-            <MdMailOutline />
-            E-mail: contato@financial.com
+            <MdMailOutline /> E-mail: contato@financial.com
           </WebsiteRights>
           <WebsiteRights>
-            <MdPhone />
-            Telefone: +55 (21) 2245-0548
+            <MdPhone /> Telefone: +55 (21) 2245-0548
           </WebsiteRights>
         </ColInfo>
       </Row>

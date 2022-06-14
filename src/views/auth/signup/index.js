@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import * as moment from 'moment'
-import { signUpAction } from '../../store/auth/auth.action'
+import { signUpAction } from '../../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Form, Button } from 'react-bootstrap'
+import { Row, Col, Form } from 'react-bootstrap'
 import { Select } from '@material-ui/core'
-import ufCityFile from '../../util/state-city.json'
+import ufCityFile from '../../../util/state-city.json'
 import InputMask from 'react-input-mask'
-import styled from 'styled-components'
+import { SForm, STextForm, SButton, SDesabledButton } from './SignupElements'
+import Loading from  '../../../components/loading'
 
 const SignUp = () => {
   const dispatch = useDispatch()
@@ -298,7 +299,6 @@ const SignUp = () => {
           </Form.Control.Feedback>
         </Form.Group>
       </Row>
-
       <Row className="mb-3">
         <Form.Group as={Col}>
           <Form.Label>Data de nascimento:</Form.Label>
@@ -488,41 +488,27 @@ const SignUp = () => {
           />
         </Form.Group>
       </Row>
-
-      <Button
-        id="buttonFormClient"
-        className={
-          isNotValid() || loading ? 'style-button-disable' : 'style-button'
-        }
-        disabled={isNotValid()}
-        size="md"
-        onClick={insertData}
-      >
-        {loading ? (
-          <>
-            <Spinner size="sm" color="light" /> Carregando...
-          </>
-        ) : (
-          'Cadastrar'
-        )}
-      </Button>
+      {isNotValid() || loading ? (
+        <SDesabledButton
+          type="button"
+          disabled={isNotValid()}
+          onClick={insertData}
+        >
+          Cadastrar
+        </SDesabledButton>
+      ) : (
+        <SButton type="button" disabled={isNotValid()} onClick={insertData}>
+          {loading ? (
+            <>
+              <Loading />
+            </>
+          ) : (
+            'Cadastrar'
+          )}
+        </SButton>
+      )}
     </SForm>
   )
 }
 
 export default SignUp
-
-const SForm = styled(Form)`
-  background-color: #fafafa;
-  box-shadow: 0px 2px 15px 6px rgba(0, 0, 0, 0.11);
-  padding: 50px;
-  position: center;
-  margin: 80px 0px;
-`
-
-const STextForm = styled.h2`
-  line-height: 1.5;
-  font-weight: 500;
-  color: #000;
-  padding: 20px 0;
-`
