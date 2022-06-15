@@ -3,13 +3,12 @@ import {
   TextField,
   Button,
   Grid,
-  Paper,
   LinearProgress
 } from '@material-ui/core'
-import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { getMoney } from '../../../util/validations/price-validation'
+import { getMoney } from '../../../../util/validations/price-validation'
+import { Box, Image, Submit } from './FormElements'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -96,7 +95,6 @@ const Form = ({ submit, ...props }) => {
       ...form,
       current_price: getMoney(form.current_price).replace('R$', '').replace(',', '.')
     }
-    console.log('newForm' + JSON.stringify(newForm))
     submit(newForm)
   }
 
@@ -244,23 +242,3 @@ const Form = ({ submit, ...props }) => {
 }
 
 export default Form
-
-const Box = styled(Paper)`
-  padding: 25px;
-`
-const Image = styled.img`
-  max-width: 170px;
-  max-height: 170px;
-  margin: 10px;
-  border: thin solid #eee;
-  border-radius: 5%;
-  overflow: hidden;
-  object-fit: cover;
-`
-
-const Submit = styled.div`
-  margin: ${({ theme: t }) => t.spacing(0.5)};
-  .buttonSubmit {
-    margin: ${({ theme: t }) => t.spacing(3, 0, 2)};
-  }
-`

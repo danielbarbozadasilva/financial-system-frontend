@@ -11,8 +11,8 @@ import {
 
 import Title from '../../../components/title/index'
 import DialogModal from '../../../components/dialog'
-import Form from '../../../components/admin/financial_assets/form'
-import DataList from '../../../components/admin/financial_assets/datagrid'
+import Form from '../../../components/admin/financial_assets/form/index'
+import DataList from '../../../components/admin/financial_assets/datagrid/index'
 import Remove from '../../../components/admin/financial_assets/remove'
 
 const Financial = () => {
@@ -78,7 +78,7 @@ const Financial = () => {
   return (
     <>
       <Title
-        title='Financial'
+        title='Ativos Financeiros'
         subTitle='Página de Ativos'
         actions={actions}
       />
@@ -89,7 +89,7 @@ const Financial = () => {
       </Grid>
 
       <DialogModal
-        title='Financial'
+        title='Ativo Financeiro'
         open={modal.status || false}
         close={closeModal}
       >
