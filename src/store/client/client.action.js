@@ -30,7 +30,7 @@ export const editClientAction = (id) => {
   }
 }
 
-export const updateClientAction = (id, {...data}) => {
+export const updateClientAction = (id, { ...data }) => {
   return (dispatch) => {
     dispatch({ type: TYPES.CLIENT_LOADING, status: true })
     dispatch({
@@ -59,7 +59,10 @@ export const updateClientAction = (id, {...data}) => {
       .then((result) => {
         dispatch(editClientAction(id))
         dispatch(listAllClientAction())
-        toastr.success(`Cliente ${result.data.data.name}`, 'atualizado com sucesso!')
+        toastr.success(
+          `Cliente ${result.data.data.name}`,
+          'atualizado com sucesso!'
+        )
         return true
       })
       .catch((error) => {
@@ -77,9 +80,10 @@ export const setStatusClient = (id, status) => {
   return async (dispatch, getState) => {
     try {
       const result = await changeStatusService(id, status)
+      var msg = status ? 'Ativado' : 'Desativado'
       toastr.success(
         `Cliente ${result.data.data.name}`,
-        `${status} com sucesso`
+        `${msg} com sucesso`
       )
       const all = getState().client.all
       const index = all.findIndex((item) => item.id === id)

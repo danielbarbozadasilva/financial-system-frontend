@@ -103,7 +103,7 @@ const Client = () => {
       <>
         <Tooltip title={status ? 'Ativar' : 'Desativar'}>
           <IconButton
-            onClick={() => toggleActive(id, status ? 'Desativar' : 'Ativar')}
+            onClick={() => toggleActive(id, status ? 0 : 1)}
             color="primary"
           >
             <>{status ? <BsToggleOn /> : <BsToggleOff />}</>
