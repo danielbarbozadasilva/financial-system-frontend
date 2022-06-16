@@ -10,7 +10,7 @@ const ListFinancialTransaction = ({ transactions, open, close }) => {
   const columnsTransactions = [
     {
       field: 'total_quantity',
-      headerName: 'Quantidade',
+      headerName: 'Quantidade total',
       align: 'center',
       headerAlign: 'center',
       flex: 1,
