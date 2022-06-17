@@ -34,6 +34,7 @@ const FormClient = ({ submit, ...props }) => {
 
   const [form, setForm] = useState({})
   const [isEdit, setEdit] = useState(false)
+  const [button, setButton] = useState(false)
 
   const loading = useSelector((state) => state.financial.loading)
   const percent = useSelector((state) => state.financial.upload?.percent || 0)
@@ -63,7 +64,6 @@ const FormClient = ({ submit, ...props }) => {
       'gender',
       'birth_date',
       'password',
-      'confirmPassword',
       'phone',
       'address',
       'uf',
@@ -142,20 +142,6 @@ const FormClient = ({ submit, ...props }) => {
         }
         break
 
-      case 'password':
-        if (value.length < 6) {
-          message += 'Acima de 6 caracteres!'
-        }
-        break
-
-      case 'confirmPassword':
-        if (value?.length !== form.password?.length) {
-          message += 'Senhas não conferem!'
-        } else if (form.password !== value) {
-          message += 'Senhas não conferem!'
-        }
-        break
-
       case 'phone':
         regex =
           /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
@@ -217,6 +203,15 @@ const FormClient = ({ submit, ...props }) => {
     }
     submit(newForm)
   }
+
+  const changeButton = () => {
+    if (button) {
+      setButton(false)
+    } else {
+      setButton(true)
+    }
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <SignBox>
@@ -318,35 +313,6 @@ const FormClient = ({ submit, ...props }) => {
             }
             onChange={handleChange}
             helperText={formValidate.birth_date || ''}
-            disabled={loading}
-          />
-
-          <TextField
-            required
-            fullWidth
-            size="small"
-            margin="normal"
-            id="standard-error-helper-text"
-            error={!!formValidate.password}
-            label="Senha"
-            name="password"
-            value={form.password || ''}
-            onChange={handleChange}
-            helperText={formValidate.password || ''}
-            disabled={loading}
-          />
-          <TextField
-            required
-            fullWidth
-            size="small"
-            margin="normal"
-            id="standard-error-helper-text"
-            error={!!formValidate.confirmPassword}
-            label="Confirmar Senha"
-            name="confirmPassword"
-            value={form.confirmPassword || ''}
-            onChange={handleChange}
-            helperText={formValidate.confirmPassword || ''}
             disabled={loading}
           />
 
@@ -484,6 +450,33 @@ const FormClient = ({ submit, ...props }) => {
             name="complement"
             placeholder="Informe o seu complemento"
           />
+          <Button
+            variant="contained"
+            fullWidth
+            size="small"
+            margin="normal"
+            onClick={() => changeButton()}
+          >
+            {button ? 'Ocultar campo' : 'Alterar senha'}
+          </Button>
+          {button ? (
+            <>
+              <TextField
+                fullWidth
+                size="small"
+                margin="normal"
+                id="standard-error-helper-text"
+                error={!!formValidate.password}
+                label="Nova senha"
+                name="password"
+                onChange={handleChange}
+                helperText={formValidate.password || ''}
+                disabled={loading}
+              />
+            </>
+          ) : (
+            ''
+          )}
           <Submit>
             <Button
               required
