@@ -52,10 +52,7 @@ export const updateClientAction = (id, { ...data }) => {
       }
     }
 
-    const formData = new FormData()
-    Object.keys(data).map((k) => formData.append(k, data[k]))
-
-    updateClientService(id, formData, config)
+    updateClientService(id, data, config)
       .then((result) => {
         dispatch(editClientAction(id))
         dispatch(listAllClientAction())
@@ -67,8 +64,8 @@ export const updateClientAction = (id, { ...data }) => {
       })
       .catch((error) => {
         dispatch({ type: TYPES.CLIENT_LOADING, status: false })
-        dispatch({ type: TYPES.SIGN_ERROR, data: error })
-        toastr.error('Cliente', error.toString())
+        const { data } = error.response
+        toastr.error('Erro', ...data.message.details)
       })
       .finally(() => {
         dispatch({ type: TYPES.CLIENT_LOADING, status: false })
