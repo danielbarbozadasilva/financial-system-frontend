@@ -4,11 +4,18 @@ import {
   Button,
   Grid,
   LinearProgress,
-  Select
+  Select,
+  Container
 } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { Box, Submit } from './FormElements'
+import {
+  Submit,
+  SignBox,
+  FormStyle,
+  SInputLabel,
+  SFormControl
+} from './FormElements'
 import InputMask from 'react-input-mask'
 import ufCityFile from '../../../../util/state-city.json'
 import * as moment from 'moment'
@@ -197,7 +204,7 @@ const FormClient = ({ submit, ...props }) => {
       name: form.name,
       email: form.email,
       cpf: form.cpf,
-      gender: form.gender === '1' ? 'M' : 'F',
+      gender: form.gender,
       birth_date: form.birth_date,
       password: form.password,
       phone: form.phone,
@@ -211,253 +218,297 @@ const FormClient = ({ submit, ...props }) => {
     submit(newForm)
   }
   return (
-    <Box>
-      <form className={classes.root} noValidate autoComplete="off">
-        <TextField
-          size="small"
-          margin="normal"
-          error={!!formValidate.name}
-          id="standard-error-helper-text"
-          label="Nome"
-          name="name"
-          autoFocus
-          value={form.name || ''}
-          onChange={handleChange}
-          helperText={formValidate.name || ''}
-          disabled={loading}
-        />
-        <TextField
-          size="small"
-          margin="normal"
-          error={!!formValidate.email}
-          id="standard-error-helper-text"
-          label="E-mail"
-          name="email"
-          autoFocus
-          value={form.email || ''}
-          onChange={handleChange}
-          helperText={formValidate.email || ''}
-          disabled={loading}
-        />
-
-        <InputMask
-          mask="999.999.999-99"
-          disabled={false}
-          maskChar=" "
-          value={form.cpf || ''}
-          onChange={handleChange}
-        >
-          {() => (
-            <TextField
-              size="small"
-              margin="normal"
-              id="standard-error-helper-text"
-              invalid={formValidate.cpf}
-              disabled={loading}
-              type="text"
-              value={form.cpf || ''}
-              onChange={handleChange}
-              name="cpf"
-              placeholder="Informe o seu cpf"
-            />
-          )}
-        </InputMask>
-
-        <Select
-          native
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          value={form.gender === 'M' ? '1' : '2'}
-          onChange={handleChange}
-          inputProps={{
-            name: 'gender',
-            id: 'outlined-native-simple'
-          }}
-        >
-          <option value="0">selecione</option>
-          <option value="1">M</option>
-          <option value="2">F</option>
-        </Select>
-
-        <TextField
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          name="birth_date"
-          label="Data de nascimento"
-          InputLabelProps={{ shrink: true, required: true }}
-          type="date"
-          value={
-            form.birth_date
-              ? moment(form.birth_date)
-                  .format('YYYY/MM/DD')
-                  .replaceAll('/', '-')
-              : ''
-          }
-          onChange={handleChange}
-          helperText={formValidate.birth_date || ''}
-          disabled={loading}
-        />
-
-        <TextField
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          error={!!formValidate.password}
-          label="Senha"
-          name="password"
-          autoFocus
-          value={form.password || ''}
-          onChange={handleChange}
-          helperText={formValidate.password || ''}
-          disabled={loading}
-        />
-        <TextField
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          error={!!formValidate.confirmPassword}
-          label="Confirmar senha"
-          name="confirmPassword"
-          autoFocus
-          value={form.confirmPassword || ''}
-          onChange={handleChange}
-          helperText={formValidate.confirmPassword || ''}
-          disabled={loading}
-        />
-
-        <InputMask
-          mask="+55 (99) 9999-9999"
-          disabled={false}
-          maskChar=" "
-          value={form.phone || ''}
-          onChange={handleChange}
-        >
-          {() => (
-            <TextField
-              size="small"
-              margin="normal"
-              id="standard-error-helper-text"
-              error={!!formValidate.phone}
-              name="phone"
-              label="Telefone"
-              type="text"
-              value={form.phone || ''}
-              onChange={handleChange}
-              helperText={formValidate.phone || ''}
-              disabled={loading}
-            />
-          )}
-        </InputMask>
-        <TextField
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          error={!!formValidate.address}
-          label="Endereço"
-          name="address"
-          autoFocus
-          value={form.address || ''}
-          onChange={handleChange}
-          helperText={formValidate.address || ''}
-          disabled={loading}
-        />
-
-        <Select
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          native
-          value={form.uf || ''}
-          onChange={handleChange}
-          inputProps={{
-            name: 'uf',
-            id: 'outlined-native-simple'
-          }}
-        >
-          <option value="">selecione</option>
-          {uf?.map(({ name, uf }, i) => (
-            <option key={i} value={uf}>
-              {uf}
-            </option>
-          ))}
-        </Select>
-
-        <Select
-          native
-          size="small"
-          margin="normal"
-          value={form.city || ''}
-          onChange={handleChange}
-          inputProps={{
-            name: 'city',
-            id: 'outlined-native-simple'
-          }}
-        >
-          <option value="">selecione</option>
-
-          {city?.map((city, i) => (
-            <option key={i} value={city}>
-              {city}
-            </option>
-          ))}
-        </Select>
-
-        <InputMask
-          mask="99999-999"
-          disabled={false}
-          maskChar=" "
-          value={form.zip_code || ''}
-          onChange={handleChange}
-        >
-          {() => (
-            <TextField
-              invalid={formValidate.zip_code}
-              disabled={loading}
-              type="text"
-              id="zip_code"
-              value={form.zip_code || ''}
-              onChange={handleChange}
-              name="zip_code"
-              placeholder="Informe o seu zip_code"
-            />
-          )}
-        </InputMask>
-
-        <TextField
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          invalid={formValidate.complement}
-          disabled={loading}
-          type="text"
-          value={form.complement || ''}
-          onChange={handleChange}
-          name="complement"
-          placeholder="Informe o seu complemento"
-        />
-        <Submit>
-          <Button
+    <Container component="main" maxWidth="xs">
+      <SignBox>
+        <FormStyle noValidate>
+          <TextField
+            required
+            fullWidth
             size="small"
-            className={
-              isNotValid() || loading
-                ? 'buttonSubmit button-style-disable'
-                : 'buttonSubmit button-style'
-            }
-            disabled={isNotValid()}
-            type="submit"
-            variant="contained"
-            onClick={handleSubmit}
+            margin="normal"
+            error={!!formValidate.name}
+            id="standard-error-helper-text"
+            label="Nome"
+            name="name"
+            value={form.name || ''}
+            onChange={handleChange}
+            helperText={formValidate.name || ''}
+            disabled={loading}
+          />
+          <TextField
+            required
+            fullWidth
+            size="small"
+            margin="normal"
+            error={!!formValidate.email}
+            id="standard-error-helper-text"
+            label="E-mail"
+            name="email"
+            value={form.email || ''}
+            onChange={handleChange}
+            helperText={formValidate.email || ''}
+            disabled={loading}
+          />
+
+          <InputMask
+            mask="999.999.999-99"
+            disabled={false}
+            maskChar=" "
+            value={form.cpf || ''}
+            onChange={handleChange}
           >
-            Atualizar
-          </Button>
+            {() => (
+              <TextField
+                required
+                fullWidth
+                label="CPF"
+                size="small"
+                margin="normal"
+                id="standard-error-helper-text"
+                invalid={formValidate.cpf}
+                disabled={loading}
+                type="text"
+                value={form.cpf || ''}
+                onChange={handleChange}
+                name="cpf"
+                placeholder="Informe o seu cpf"
+              />
+            )}
+          </InputMask>
+
+          <SFormControl>
+            <SInputLabel>Sexo</SInputLabel>
+            <Select
+              required
+              fullWidth
+              native
+              variant="outlined"
+              label="Sexo"
+              size="small"
+              margin="normal"
+              id="standard-error-helper-text"
+              value={form.gender}
+              onChange={handleChange}
+              inputProps={{
+                name: 'gender',
+                id: 'outlined-native-simple'
+              }}
+            >
+              <option value="selecione">selecione</option>
+              <option value="M">M</option>
+              <option value="F">F</option>
+            </Select>
+          </SFormControl>
+
+          <TextField
+            required
+            fullWidth
+            margin="normal"
+            id="standard-error-helper-text"
+            name="birth_date"
+            label="Data de nascimento"
+            InputLabelProps={{ shrink: true, required: true }}
+            type="date"
+            value={
+              form.birth_date
+                ? moment(form.birth_date)
+                    .format('YYYY/MM/DD')
+                    .replaceAll('/', '-')
+                : ''
+            }
+            onChange={handleChange}
+            helperText={formValidate.birth_date || ''}
+            disabled={loading}
+          />
+
+          <TextField
+            required
+            fullWidth
+            size="small"
+            margin="normal"
+            id="standard-error-helper-text"
+            error={!!formValidate.password}
+            label="Senha"
+            name="password"
+            value={form.password || ''}
+            onChange={handleChange}
+            helperText={formValidate.password || ''}
+            disabled={loading}
+          />
+          <TextField
+            required
+            fullWidth
+            size="small"
+            margin="normal"
+            id="standard-error-helper-text"
+            error={!!formValidate.confirmPassword}
+            label="Confirmar Senha"
+            name="confirmPassword"
+            value={form.confirmPassword || ''}
+            onChange={handleChange}
+            helperText={formValidate.confirmPassword || ''}
+            disabled={loading}
+          />
+
+          <InputMask
+            mask="+55 (99) 9999-9999"
+            disabled={false}
+            maskChar=" "
+            value={form.phone || ''}
+            onChange={handleChange}
+          >
+            {() => (
+              <TextField
+                required
+                fullWidth
+                size="small"
+                margin="normal"
+                id="standard-error-helper-text"
+                error={!!formValidate.phone}
+                name="phone"
+                label="Telefone"
+                type="text"
+                value={form.phone || ''}
+                onChange={handleChange}
+                helperText={formValidate.phone || ''}
+                disabled={loading}
+              />
+            )}
+          </InputMask>
+          <TextField
+            required
+            fullWidth
+            size="small"
+            margin="normal"
+            id="standard-error-helper-text"
+            error={!!formValidate.address}
+            label="Endereço"
+            name="address"
+            value={form.address || ''}
+            onChange={handleChange}
+            helperText={formValidate.address || ''}
+            disabled={loading}
+          />
+          <SFormControl>
+            <SInputLabel>Uf</SInputLabel>
+            <Select
+              required
+              fullWidth
+              native
+              variant="outlined"
+              size="small"
+              margin="normal"
+              id="standard-error-helper-text"
+              value={form.uf || ''}
+              onChange={handleChange}
+              inputProps={{
+                name: 'uf',
+                id: 'outlined-native-simple'
+              }}
+            >
+              <option value=""></option>
+              {uf?.map(({ name, uf }, i) => (
+                <option key={i} value={uf}>
+                  {uf}
+                </option>
+              ))}
+            </Select>
+          </SFormControl>
+
+          <SFormControl>
+            <SInputLabel>Cidade</SInputLabel>
+            <Select
+              required
+              fullWidth
+              native
+              variant="outlined"
+              label="Cidade"
+              size="small"
+              margin="normal"
+              id="standard-error-helper-text"
+              value={form.city || ''}
+              onChange={handleChange}
+              inputProps={{
+                name: 'city',
+                id: 'outlined-native-simple'
+              }}
+            >
+              <option value=""></option>
+
+              {city?.map((city, i) => (
+                <option key={i} value={city}>
+                  {city}
+                </option>
+              ))}
+            </Select>
+          </SFormControl>
+
+          <InputMask
+            mask="99999-999"
+            disabled={false}
+            maskChar=" "
+            value={form.zip_code || ''}
+            onChange={handleChange}
+          >
+            {() => (
+              <TextField
+                required
+                fullWidth
+                size="small"
+                margin="normal"
+                label="Cep"
+                invalid={formValidate.zip_code}
+                disabled={loading}
+                type="text"
+                id="zip_code"
+                value={form.zip_code || ''}
+                onChange={handleChange}
+                name="zip_code"
+                placeholder="Informe o seu zip_code"
+              />
+            )}
+          </InputMask>
+
+          <TextField
+            required
+            fullWidth
+            size="small"
+            margin="normal"
+            label="Complemento"
+            id="standard-error-helper-text"
+            invalid={formValidate.complement}
+            disabled={loading}
+            type="text"
+            value={form.complement || ''}
+            onChange={handleChange}
+            name="complement"
+            placeholder="Informe o seu complemento"
+          />
+          <Submit>
+            <Button
+              required
+              fullWidth
+              size="small"
+              className={
+                isNotValid() || loading
+                  ? 'buttonSubmit button-style-disable'
+                  : 'buttonSubmit button-style'
+              }
+              disabled={isNotValid()}
+              type="submit"
+              variant="contained"
+              onClick={handleSubmit}
+            >
+              Atualizar
+            </Button>
+          </Submit>
+
           <Grid container direction="column">
             <LinearProgress variant="determinate" value={percent} />
           </Grid>
-        </Submit>
-      </form>
-    </Box>
+        </FormStyle>
+      </SignBox>
+    </Container>
   )
 }
 export default FormClient
