@@ -141,7 +141,7 @@ const SignUp = () => {
         }
         break
 
-      case 'cep':
+      case 'zip_code':
         if (value.trim() === '') {
           message += 'Não pode ser vazio!'
         } else if (value.trim().length !== 9) {
@@ -166,7 +166,7 @@ const SignUp = () => {
       'address',
       'uf',
       'city',
-      'cep'
+      'zip_code'
     ]
     const invalid = (label) =>
       !Object.keys(form).includes(label) || form[label].length === 0
@@ -202,7 +202,7 @@ const SignUp = () => {
       address: form.address,
       uf: form.uf,
       city: form.city,
-      zip_code: form.cep,
+      zip_code: form.zip_code,
       complement: form.complement,
       status: true
     }
@@ -448,24 +448,24 @@ const SignUp = () => {
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>Cep:</Form.Label>
+          <Form.Label>zip_code:</Form.Label>
           <InputMask
             mask="99999-999"
             disabled={false}
             maskChar=" "
-            value={form.cep || ''}
+            value={form.zip_code || ''}
             onChange={handleChange}
           >
             {() => (
               <Form.Control
-                invalid={formValidate.cep}
+                invalid={formValidate.zip_code}
                 disabled={loading}
                 type="text"
-                id="cep"
-                value={form.cep || ''}
+                id="zip_code"
+                value={form.zip_code || ''}
                 onChange={handleChange}
-                name="cep"
-                placeholder="Informe o seu cep"
+                name="zip_code"
+                placeholder="Informe o seu zip_code"
               />
             )}
           </InputMask>

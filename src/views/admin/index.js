@@ -8,6 +8,7 @@ import {
 import PanelLayout from '../../components/layout/layout-panel'
 import Home from '../../views/admin/home/index'
 import Financial from '../../views/admin/financial_assets/index'
+import Client from '../../views/admin/client/index'
 
 export const Menu = [
   {
@@ -20,12 +21,21 @@ export const Menu = [
     authorization: [1, 2]
   },
   {
-    title: 'Ativos financeiros',
+    title: 'Ativos Financeiros',
     icon: <ShoppingCartIcon />,
     route: '/assets',
     visibleMenu: true,
     enabled: true,
     component: Financial,
+    authorization: [1, 2]
+  },
+  {
+    title: 'Clientes',
+    icon: <PeopleIcon />,
+    route: '/clients',
+    visibleMenu: true,
+    enabled: true,
+    component: Client,
     authorization: [1]
   }
 ]

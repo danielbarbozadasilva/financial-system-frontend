@@ -5,3 +5,12 @@
   padding: 0;
   outline: 0;
 }
+
+.iconeStar {
+  font-size: 18px;
+  color: rgb(100, 100, 42);
+}
+
+.doNotShow {
+  display: none !important;
+}
