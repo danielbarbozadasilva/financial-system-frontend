@@ -36,7 +36,7 @@ export const Menu = [
     visibleMenu: true,
     enabled: true,
     component: Client,
-    authorization: [1, 2]
+    authorization: [1]
   }
 ]
 
