@@ -1,14 +1,23 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
 import { FiTrash2, FiEdit } from 'react-icons/fi'
-import { IconButton } from '@material-ui/core'
-import Loading from  '../../../loading/index'
+import { BsFillCartFill } from 'react-icons/bs'
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 import { BoxTable, SImg } from './DatagridElements'
+import { IconButton, Tooltip } from '@material-ui/core'
+import Loading from '../../../loading/index'
+
 
 const DataList = ({ data, modal, loading }) => {
+  const typeUser = useSelector((state) => state.auth.user.type)
 
   const thumb = ({ formattedValue }) => {
     return <SImg src={formattedValue} />
+  }
+
+  const toggleActive = (id, provider, name, statusLike) => {
+    dispatch(updateLikeProduct(id, provider, name, statusLike))
   }
 
   const actionEdit = ({ id, row }) => {
@@ -26,6 +35,16 @@ const DataList = ({ data, modal, loading }) => {
       <>
         <IconButton onClick={() => modal(3, id)} color="primary" size="small">
           <FiTrash2 />
+        </IconButton>
+      </>
+    )
+  }
+
+  const actionBuy = ({ id, row }) => {
+    return (
+      <>
+        <IconButton onClick={() => modal(4, id)} color="primary" size="small">
+          <BsFillCartFill />
         </IconButton>
       </>
     )
@@ -75,17 +94,17 @@ const DataList = ({ data, modal, loading }) => {
     },
     {
       field: 'actionEdit',
-      headerName: 'Editar',
-      renderCell: actionEdit,
+      headerName: typeUser === 1 ? 'Editar' : 'Adiquirir',
+      renderCell: typeUser === 1 ? actionEdit : actionBuy,
       align: 'center',
       flex: 1,
       headerAlign: 'center',
       disableColumnMenu: true
     },
     {
-      field: 'actionRemove',
-      headerName: 'Excluir',
-      renderCell: actionRemove,
+      field: typeUser === 1 ? 'actionRemove' : '',
+      headerName: typeUser === 1 ? 'Excluir' : '',
+      renderCell: typeUser === 1 ? actionRemove : '',
       align: 'center',
       flex: 1,
       headerAlign: 'center',

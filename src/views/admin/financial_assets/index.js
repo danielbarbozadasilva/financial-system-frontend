@@ -2,16 +2,17 @@ import React, { useEffect, useCallback } from 'react'
 import { Grid, Button } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
 import {
-    listAllAssetAction,
-    createAssetAction,
-    editAssetAction,
-    updateAssetAction,
-    deleteAssetAction
+  listAllAssetAction,
+  createAssetAction,
+  editAssetAction,
+  updateAssetAction,
+  deleteAssetAction
 } from '../../../store/financial_assets/financial_assets.action'
 
 import Title from '../../../components/title/index'
 import DialogModal from '../../../components/dialog'
-import Form from '../../../components/admin/financial_assets/form/index'
+import FormAdm from '../../../components/admin/financial_assets/form/index_admin'
+import FormClient from '../../../components/admin/financial_assets/form/index_client'
 import DataList from '../../../components/admin/financial_assets/datagrid/index'
 import Remove from '../../../components/admin/financial_assets/remove'
 
@@ -21,6 +22,7 @@ const Financial = () => {
 
   const financial = useSelector((state) => state.financial.all)
   const selected = useSelector((state) => state.financial.selected)
+  const typeUser = useSelector((state) => state.auth.user.type)
   const loading = useSelector((state) => state.financial.loading)
 
   const callFinancial = useCallback(() => {
@@ -59,27 +61,35 @@ const Financial = () => {
         dispatch(deleteAssetAction(modal.id)).then(() => setModal(false))
         return
 
+      case 4:
+        dispatch(updateAssetAction(modal.id, form))
+        setModal(false)
+        return
+
       default:
         return false
     }
   }
 
-  const actions = () => (
-    <Button
-      onClick={() => toogleModal(1, null)}
-      variant='contained'
-      color='primary'
-      size='small'
-    >
-      Novo
-    </Button>
-  )
+  const actions = () =>
+    typeUser === 1 ? (
+      <Button
+        onClick={() => toogleModal(1, null)}
+        variant="contained"
+        color="primary"
+        size="small"
+      >
+        Novo
+      </Button>
+    ) : (
+      ''
+    )
 
   return (
     <>
       <Title
-        title='Ativos Financeiros'
-        subTitle='Página de Ativos'
+        title="Ativos Financeiros"
+        subTitle="Página de Ativos"
         actions={actions}
       />
       <Grid container spacing={2}>
@@ -89,22 +99,21 @@ const Financial = () => {
       </Grid>
 
       <DialogModal
-        title='Ativo Financeiro'
+        title="Ativo Financeiro"
         open={modal.status || false}
         close={closeModal}
       >
         <>
-          {modal.type === 1 ? <Form submit={submitForm} /> : null}
-          {modal.type === 2
-            ? (
-              <Form submit={submitForm} data={selected} />
-              )
-            : null}
-          {modal.type === 3
-            ? (
-              <Remove close={closeModal} remove={submitForm} />
-              )
-            : null}
+          {modal.type === 1 ? <FormAdm submit={submitForm} /> : null}
+          {modal.type === 2 ? (
+            <FormAdm submit={submitForm} data={selected} />
+          ) : null}
+          {modal.type === 3 ? (
+            <Remove close={closeModal} remove={submitForm} />
+          ) : null}
+          {modal.type === 4 ? (
+            <FormClient submit={submitForm} data={selected} />
+          ) : null}
         </>
       </DialogModal>
     </>
