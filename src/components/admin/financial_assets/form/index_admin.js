@@ -230,7 +230,7 @@ const Form = ({ submit, ...props }) => {
             variant="contained"
             onClick={handleSubmit}
           >
-            {isEdit ? 'Atualizar' : 'Enviar'}
+            {isEdit ? 'Atualizar' : 'Cadastrar'}
           </Button>
           <Grid container direction="column">
             <LinearProgress variant="determinate" value={percent} />
