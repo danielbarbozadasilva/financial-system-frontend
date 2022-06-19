@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { Paper, FormControl, InputLabel } from '@material-ui/core'
+import { Button, Paper, FormControl, InputLabel } from '@material-ui/core'
+
 export const Box = styled(Paper)`
   padding: 25px;
 `
@@ -23,4 +24,7 @@ export const SInputLabel = styled(InputLabel)`
 `
 export const SFormControl = styled(FormControl)`
   margin-top: 20px;
+`
+export const SButton = styled(Button)`
+  margin-top: 35px;
 `

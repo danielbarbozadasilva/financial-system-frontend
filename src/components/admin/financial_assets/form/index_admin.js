@@ -220,11 +220,6 @@ const Form = ({ submit, ...props }) => {
         <Submit>
           <Button
             size="small"
-            className={
-              isNotValid() || loading
-                ? 'buttonSubmit button-style-disable'
-                : 'buttonSubmit button-style'
-            }
             disabled={isNotValid()}
             type="submit"
             variant="contained"

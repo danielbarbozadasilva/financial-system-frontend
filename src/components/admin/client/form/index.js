@@ -14,7 +14,8 @@ import {
   SignBox,
   FormStyle,
   SInputLabel,
-  SFormControl
+  SFormControl,
+  SButton
 } from './FormElements'
 import InputMask from 'react-input-mask'
 import ufCityFile from '../../../../util/state-city.json'
@@ -450,15 +451,6 @@ const FormClient = ({ submit, ...props }) => {
             name="complement"
             placeholder="Informe o seu complemento"
           />
-          <Button
-            variant="contained"
-            fullWidth
-            size="small"
-            margin="normal"
-            onClick={() => changeButton()}
-          >
-            {button ? 'Ocultar campo' : 'Alterar senha'}
-          </Button>
           {button ? (
             <>
               <TextField
@@ -477,23 +469,28 @@ const FormClient = ({ submit, ...props }) => {
           ) : (
             ''
           )}
+          <SButton
+            variant="contained"
+            fullWidth
+            size="small"
+            margin="normal"
+            onClick={() => changeButton()}
+          >
+            {button ? 'Ocultar campo' : 'Alterar senha'}
+          </SButton>
+
           <Submit>
-            <Button
+            <SButton
               required
               fullWidth
               size="small"
-              className={
-                isNotValid() || loading
-                  ? 'buttonSubmit button-style-disable'
-                  : 'buttonSubmit button-style'
-              }
               disabled={isNotValid()}
               type="submit"
               variant="contained"
               onClick={handleSubmit}
             >
               Atualizar
-            </Button>
+            </SButton>
           </Submit>
 
           <Grid container direction="column">
