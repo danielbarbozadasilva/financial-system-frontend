@@ -102,7 +102,7 @@ const DataList = ({ data, modal, loading }) => {
       disableColumnMenu: true
     },
     {
-      field: typeUser === 1 ? 'actionRemove' : '',
+      field: '',
       headerName: typeUser === 1 ? 'Excluir' : '',
       renderCell: typeUser === 1 ? actionRemove : '',
       align: 'center',
