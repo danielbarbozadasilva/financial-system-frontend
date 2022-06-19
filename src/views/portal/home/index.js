@@ -8,7 +8,8 @@ import {
   StyleImg,
   SText,
   Sh2,
-  STextInvest
+  STextInvest,
+  settings
 } from '../../../components/portal/cards/ElementsCards'
 
 import { listAllAssetAction } from '../../../store/financial_assets/financial_assets.action'
@@ -37,15 +38,6 @@ function Home() {
   if (loading) {
     return <Loading />
   }
-  var settings = {
-    dots: true,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    pauseOnHover: true
-  }
 
   return (
     <>
@@ -61,13 +53,13 @@ function Home() {
           Escolha um <strong>investimento</strong>
         </h2>
       </STextInvest>
-      <SContainer>
-        {!loading && financial.length === 0 ? (
-          <h6>Não há Financiamentos disponiveis</h6>
-        ) : (
+      {!loading && financial.length === 0 ? (
+        <h6>Não há Financiamentos disponiveis</h6>
+      ) : (
+        <SContainer>
           <Slider {...settings}>{FinancialList(financial)}</Slider>
-        )}
-      </SContainer>
+        </SContainer>
+      )}
     </>
   )
 }
