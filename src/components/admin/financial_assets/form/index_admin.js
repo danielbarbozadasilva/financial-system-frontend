@@ -1,10 +1,5 @@
 import React, { useState } from 'react'
-import {
-  TextField,
-  Button,
-  Grid,
-  LinearProgress
-} from '@material-ui/core'
+import { TextField, Button, Grid, LinearProgress } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { getMoney } from '../../../../util/validations/price-validation'
@@ -93,7 +88,9 @@ const Form = ({ submit, ...props }) => {
   const handleSubmit = () => {
     const newForm = {
       ...form,
-      current_price: getMoney(form.current_price).replace('R$', '').replace(',', '.')
+      current_price: getMoney(form.current_price)
+        .replace('R$', '')
+        .replace(',', '.')
     }
     submit(newForm)
   }
@@ -218,7 +215,7 @@ const Form = ({ submit, ...props }) => {
         />
 
         <Submit>
-          <Button
+          <SButton
             size="small"
             disabled={isNotValid()}
             type="submit"
@@ -226,7 +223,7 @@ const Form = ({ submit, ...props }) => {
             onClick={handleSubmit}
           >
             {isEdit ? 'Atualizar' : 'Cadastrar'}
-          </Button>
+          </SButton>
           <Grid container direction="column">
             <LinearProgress variant="determinate" value={percent} />
           </Grid>
