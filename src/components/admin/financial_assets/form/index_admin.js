@@ -215,7 +215,7 @@ const Form = ({ submit, ...props }) => {
         />
 
         <Submit>
-          <SButton
+          <Button
             size="small"
             disabled={isNotValid()}
             type="submit"
@@ -223,7 +223,7 @@ const Form = ({ submit, ...props }) => {
             onClick={handleSubmit}
           >
             {isEdit ? 'Atualizar' : 'Cadastrar'}
-          </SButton>
+          </Button>
           <Grid container direction="column">
             <LinearProgress variant="determinate" value={percent} />
           </Grid>
