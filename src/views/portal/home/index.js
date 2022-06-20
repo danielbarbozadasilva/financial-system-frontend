@@ -53,13 +53,13 @@ function Home() {
           Escolha um <strong>investimento</strong>
         </h2>
       </STextInvest>
-      {!loading && financial.length === 0 ? (
-        <h6>Não há Financiamentos disponiveis</h6>
-      ) : (
-        <SContainer>
+      <SContainer>
+        {!loading && financial.length === 0 ? (
+          <h6>Não há Financiamentos disponiveis</h6>
+        ) : (
           <Slider {...settings}>{FinancialList(financial)}</Slider>
-        </SContainer>
-      )}
+        )}
+      </SContainer>
     </>
   )
 }
