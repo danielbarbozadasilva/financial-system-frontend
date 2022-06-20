@@ -24,8 +24,14 @@ export const SInput = styled.input`
   background-color: white;
 `
 
-export const Input = styled.input`
-  text-align: left;
-  border: none;
+export const STable = styled.div`
+  padding-top: 45px;
+  padding-left: 45%;
   background-color: white;
+  border: none;
+`
+
+export const SBox = styled.div`
+  padding: 20px 0px;
+  padding-left: 65%;
 `
