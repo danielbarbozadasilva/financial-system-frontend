@@ -15,8 +15,17 @@ export const Image = styled.img`
 `
 
 export const Submit = styled.div`
-  margin: ${({ theme: t }) => t.spacing(0.5)};
-  .buttonSubmit {
-    margin: ${({ theme: t }) => t.spacing(3, 0, 2)};
-  }
+  margin: 25px 7px;
+`
+
+export const SInput = styled.input`
+  text-align: right;
+  border: none;
+  background-color: white;
+`
+
+export const Input = styled.input`
+  text-align: left;
+  border: none;
+  background-color: white;
 `
