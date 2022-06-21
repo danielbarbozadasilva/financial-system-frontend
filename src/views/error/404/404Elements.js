@@ -5,7 +5,7 @@ export const SForm = styled(Form)`
   background-color: #fafafa;
   box-shadow: 0px 2px 15px 6px rgba(0, 0, 0, 0.11);
   padding: 100px;
-  margin: 70px 0px;
+  margin: 115px 0px;
   position: center;
 `
 export const STextForm = styled.h2`
