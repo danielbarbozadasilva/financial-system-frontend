@@ -10,7 +10,8 @@ import Paper from '@mui/material/Paper'
 import { LinearProgress, Button } from '@material-ui/core'
 import {
   calcSubTotal,
-  calcTotal
+  calcTotal,
+  formatPrice
 } from '../../../../util/validations/price-validation'
 import { SInput, SBox, STable } from './FormElements'
 
@@ -21,8 +22,14 @@ const FormClient = ({ submit, ...props }) => {
   const percent = useSelector((state) => state.financial.upload?.percent || 0)
 
   const handleSubmit = () => {
+    let value = 1
+    var subTotal = calcSubTotal(value, current_price)
+    var total = calcTotal(subTotal)
     const newForm = {
-      ...form
+      current_price: formatPrice(form.current_price || current_price),
+      subtotal_price: formatPrice(form.subtotal_price || subTotal),
+      total_price: formatPrice(form.total_price || total),
+      quantity: Number(form.quantity) || value
     }
     submit(newForm)
   }

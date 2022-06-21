@@ -1,6 +1,7 @@
 import React, { useEffect, useCallback } from 'react'
 import { Grid, Button } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
+import { createTransaction } from '../../../store/transaction/transaction.action'
 import {
   listAllAssetAction,
   createAssetAction,
@@ -62,7 +63,7 @@ const Financial = () => {
         return
 
       case 4:
-        dispatch(updateAssetAction(modal.id, form))
+        dispatch(createTransaction(modal.id, form))
         setModal(false)
         return
 
