@@ -11,7 +11,6 @@ const http = axios.create({
   baseURL: urlApi
 })
 
-
 http.defaults.headers['content-type'] = 'application/json'
 if (getToken()) {
   http.defaults.headers.token = getToken()
@@ -27,6 +26,9 @@ http.interceptors.response.use(
           navigate('/signin')
           toastr.info('Token temporário expirado!')
         }
+        return Promise.reject(error)
+      case 403:
+        navigate('/error403')
         return Promise.reject(error)
       default:
         return Promise.reject(error)
