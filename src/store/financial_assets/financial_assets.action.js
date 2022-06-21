@@ -43,7 +43,10 @@ export const createAssetAction = (data) => {
       const result = await createAssetService(formData, config)
       dispatch({ type: TYPES.FINANCIAL_CREATE, data: result.data })
       dispatch(listAllAssetAction())
-      toastr.success(`Ativo ${result.data.data.name}`, 'cadastrado com sucesso!')
+      toastr.success(
+        `Ativo ${result.data.data.name}`,
+        'cadastrado com sucesso!'
+      )
     } catch (error) {
       toastr.error('Ativo', 'preencha todos os campos!')
     }
@@ -63,7 +66,7 @@ export const editAssetAction = (id) => {
   }
 }
 
-export const updateAssetAction = (id, {...data}) => {
+export const updateAssetAction = (id, { ...data }) => {
   return (dispatch) => {
     dispatch({ type: TYPES.FINANCIAL_LOADING, status: true })
     dispatch({
@@ -92,7 +95,10 @@ export const updateAssetAction = (id, {...data}) => {
       .then((result) => {
         dispatch(editAssetAction(id))
         dispatch(listAllAssetAction())
-        toastr.success(`Ativo ${result.data.data.name}`, 'atualizado com sucesso!')
+        toastr.success(
+          `Ativo ${result.data.data.name}`,
+          'atualizado com sucesso!'
+        )
         return true
       })
       .catch((error) => {
