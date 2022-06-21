@@ -3,9 +3,9 @@ export function getMoney(str) {
   return formatReal(parseInt(result?.replace(/[\D]+/g, '')))
 }
 
-export function calcSubTotal(value, current_price){
+export function calcSubTotal(value, current_price) {
   var resp = parseFloat(
-    getMoney(current_price).replace('R$', '').replace(',', '.') * value
+    formatPrice(getMoney(current_price)) * value
   ).toLocaleString('pt-br', {
     style: 'currency',
     currency: 'BRL'
@@ -15,13 +15,17 @@ export function calcSubTotal(value, current_price){
 
 export function calcTotal(subtotal) {
   const TAX_RATE = 5
-  var price = parseFloat(getMoney(subtotal).replace('R$', '').replace(',', '.'))
+  var price = parseFloat(formatPrice(subtotal))
   var resp = price + (price / 100) * TAX_RATE
   var convert = resp.toLocaleString('pt-br', {
     style: 'currency',
     currency: 'BRL'
   })
   return convert
+}
+
+export function formatPrice(num) {
+  return parseFloat(num.replace('R$', '').replace(',', '.'))
 }
 
 function formatReal(int) {
