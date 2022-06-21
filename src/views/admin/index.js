@@ -9,6 +9,7 @@ import PanelLayout from '../../components/layout/layout-panel'
 import Home from '../../views/admin/home/index'
 import Financial from '../../views/admin/financial_assets/index'
 import Client from '../../views/admin/client/index'
+import Error404 from '../error/404/index'
 
 export const Menu = [
   {
@@ -46,15 +47,13 @@ const Admin = (props) => {
     route.authorization.includes(typeUser)
   )
 
-  const NotFound = () => <h2>Não autorizado</h2>
-
   return (
     <Router>
       <PanelLayout path="/">
         {authorizedRoutes.map(({ component: Component, route }, i) => (
           <Component key={i} path={route} />
         ))}
-        <NotFound default />
+        <Error404 default/>
       </PanelLayout>
     </Router>
   )
