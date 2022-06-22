@@ -19,7 +19,7 @@ import {
   AccountCircle as AccountCircleIcon,
   ChevronLeft as ChevronLeftIcon,
   PowerSettingsNew
-} from '@material-ui/icons/'
+} from '@mui/icons-material'
 import ListMenu from './item-panel'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '@material-ui/core'
@@ -27,7 +27,7 @@ import { Button } from '@material-ui/core'
 const drawerWidth = 240
 
 export default function Dashboard(props) {
-  const { name, typeUser } = useSelector((state) => state.auth.user)
+  const { name, cpf, type } = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
 
   const userDefinition = {
@@ -47,7 +47,7 @@ export default function Dashboard(props) {
     },
     toolbar: {
       paddingRight: 24,
-      backgroundColor: typeUser ? userDefinition[typeUser].color : '#666',
+      backgroundColor: type ? userDefinition[type].color : '#666',
       color: '#fff'
     },
     toolbarText: {
@@ -89,6 +89,9 @@ export default function Dashboard(props) {
     },
     title: {
       flexGrow: 1
+    },
+    details: {
+      paddingTop: theme.spacing(1)
     },
     drawerPaper: {
       position: 'relative',
@@ -141,8 +144,18 @@ export default function Dashboard(props) {
       alignItems: 'center'
     },
     userIcon: {
-      margin: theme.spacing(1),
-      color: '#fff'
+      marginLeft: '77%',
+      margin: theme.spacing(2),
+      color: '#fff',
+      '@media (max-width: 1700px)': {
+        marginLeft: '70%'
+      },
+      '@media (max-width: 1500px)': {
+        marginLeft: '65%'
+      },
+      '@media (max-width: 1330px)': {
+        marginLeft: '55%'
+      }
     }
   }))
 
@@ -175,28 +188,16 @@ export default function Dashboard(props) {
           >
             {!open ? <MenuIcon /> : <MenuOpenIcon />}
           </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.title}
-          >
-            {typeUser ? userDefinition[typeUser].title : ''}
-          </Typography>
-          <Typography
-            component="h4"
-            variant="h6"
-            color="inherit"
-            noWrap
-            className={classes.user}
-          >
-            <AccountCircleIcon className={classes.userIcon} />
-            {name}
-            <Button onClick={handleLogout}>
-              <PowerSettingsNew className={classes.userIcon} />
-            </Button>
-          </Typography>
+
+          <AccountCircleIcon className={classes.userIcon} />
+          <div className={classes.details}>
+            <h6> Nome: {name}</h6>
+            <h6> Cpf: {cpf}</h6>
+          </div>
+
+          <Button onClick={handleLogout}>
+            <PowerSettingsNew className={classes.userIcon} />
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
