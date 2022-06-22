@@ -9,7 +9,7 @@ import {
   updateAssetAction,
   deleteAssetAction
 } from '../../../store/financial_assets/financial_assets.action'
-
+import { checkBalanceAction } from '../../../store/account/account.action'
 import Title from '../../../components/title/index'
 import DialogModal from '../../../components/dialog'
 import FormAdm from '../../../components/admin/financial_assets/form/index_admin'
@@ -22,12 +22,19 @@ const Financial = () => {
   const [modal, setModal] = React.useState({})
 
   const financial = useSelector((state) => state.financial.all)
+  const account = useSelector((state) => state.account.balance)
+
   const selected = useSelector((state) => state.financial.selected)
   const typeUser = useSelector((state) => state.auth.user.type)
   const loading = useSelector((state) => state.financial.loading)
 
   const callFinancial = useCallback(() => {
-    dispatch(listAllAssetAction())
+    if (typeUser === 1) {
+      dispatch(listAllAssetAction())
+    } else {
+      dispatch(listAllAssetAction())
+      dispatch(checkBalanceAction())
+    }
   }, [dispatch])
 
   useEffect(() => {
@@ -83,7 +90,7 @@ const Financial = () => {
         Novo
       </Button>
     ) : (
-      ''
+      <h5>Saldo em C/C: {account.balance}</h5>
     )
 
   return (
