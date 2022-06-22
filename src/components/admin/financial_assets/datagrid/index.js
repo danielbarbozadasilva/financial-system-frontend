@@ -3,9 +3,8 @@ import { useSelector } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
 import { FiTrash2, FiEdit } from 'react-icons/fi'
 import { BsFillCartFill } from 'react-icons/bs'
-import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 import { BoxTable, SImg } from './DatagridElements'
-import { IconButton, Tooltip } from '@material-ui/core'
+import { IconButton } from '@material-ui/core'
 import Loading from '../../../loading/index'
 
 
