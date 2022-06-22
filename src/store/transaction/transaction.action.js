@@ -1,6 +1,10 @@
 import TYPES from '../types'
 import { toastr } from 'react-redux-toastr'
-import { createTransactionService } from '../../services/transaction.service'
+import {
+  createTransactionService,
+  listAllUserTransactionService,
+  listByIdUserTransactionService
+} from '../../services/transaction.service'
 import { getUser } from '../../config/auth'
 
 export const createTransaction = (asset_id, data) => {
@@ -11,7 +15,28 @@ export const createTransaction = (asset_id, data) => {
       dispatch({ type: TYPES.TRANSACTION_CREATE, data: result.data?.data })
       toastr.success('Transação', 'realizada com sucesso!')
     } catch (error) {
-      toastr.error('Ocorreu um erro', error)
+      const { data } = error.response
+      toastr.error('Transação', data.message.details)
     }
+  }
+}
+
+export const listAllUserAssetAction = () => {
+  return async (dispatch) => {
+    dispatch({ type: TYPES.TRANSACTION_LOADING, status: true })
+    try {
+      const result = await listAllUserTransactionService()
+      dispatch({ type: TYPES.TRANSACTION_ALL_USER, data: result.data.data })
+    } catch (error) {}
+  }
+}
+
+export const listByIdUserAssetAction = (clientid) => {
+  return async (dispatch) => {
+    dispatch({ type: TYPES.TRANSACTION_LOADING, status: true })
+    try {
+      const result = await listByIdUserTransactionService(clientid)
+      dispatch({ type: TYPES.TRANSACTION_USER_ID, data: result.data.data })
+    } catch (error) {}
   }
 }

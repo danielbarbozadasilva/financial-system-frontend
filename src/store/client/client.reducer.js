@@ -18,6 +18,10 @@ const reducer = (state = INITIAL_STATE, action) => {
       state.all = action.data
       state.loading = false
       return state
+    case TYPES.LIST_CLIENT_ASSET:
+      state.selected = action.data
+      state.loading = false
+      return state
     case TYPES.CLIENT_EDIT:
       state.selected = action.data
       state.loading = false

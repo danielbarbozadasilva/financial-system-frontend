@@ -7,11 +7,15 @@ import { reducer as toastrReducer } from 'react-redux-toastr'
 import SignReducer from './auth/auth.reducer'
 import financialReducer from './financial_assets/financial_assets.reducer'
 import clientReducer from './client/client.reducer'
+import transactionReducer from './transaction/transaction.reducer'
+import accountReducer from './account/account.reducer'
 
 const reducers = combineReducers({
   auth: SignReducer,
   financial: financialReducer,
   client: clientReducer,
+  transaction: transactionReducer,
+  account: accountReducer,
   toastr: toastrReducer
 })
 

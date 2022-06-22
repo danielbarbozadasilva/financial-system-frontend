@@ -11,7 +11,11 @@ const reducer = (state = INITIAL_STATE, action) => {
       state.error = []
       state.loading = action.status
       return state
-    case TYPES.TRANSACTION_ALL:
+    case TYPES.TRANSACTION_ALL_USER:
+      state.all = action.data
+      state.loading = false
+      return state
+    case TYPES.TRANSACTION_USER_ID:
       state.all = action.data
       state.loading = false
       return state
