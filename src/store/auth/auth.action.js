@@ -16,7 +16,7 @@ export const signInAction = async (data) => {
         http.defaults.headers.token = result.data.data.token
         dispatch({ type: TYPES.SIGN_IN, data: result.data?.data })
         navigate('/admin')
-        toastr.success('Seja Bem-vindo!', result.data.data.userDTO.name)
+        toastr.success('Seja Bem-vindo(a)!', result.data.data.userDTO.name)
       }
     } catch (error) {
       toastr.error('Usuário ou senha incorretos!')
