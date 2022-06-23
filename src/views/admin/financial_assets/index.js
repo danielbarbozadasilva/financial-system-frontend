@@ -10,12 +10,12 @@ import {
   deleteAssetAction
 } from '../../../store/financial_assets/financial_assets.action'
 import { checkBalanceAction } from '../../../store/account/account.action'
-import Title from '../../../components/title/index'
 import DialogModal from '../../../components/dialog'
 import FormAdm from '../../../components/admin/financial_assets/form/index_admin'
 import FormClient from '../../../components/admin/financial_assets/form/index_client'
 import DataList from '../../../components/admin/financial_assets/datagrid/index'
 import Remove from '../../../components/admin/financial_assets/remove'
+import Title from '../../../components/title/index'
 
 const Financial = () => {
   const dispatch = useDispatch()
@@ -90,7 +90,23 @@ const Financial = () => {
         Novo
       </Button>
     ) : (
-      <h5>Saldo em C/C: {account.balance}</h5>
+      <div class="container">
+        <div class="row">
+          <div>
+            <h6>Saldo em C/C: {account.balance}</h6>
+            <h6>Patrimônio Investido: {account.total_assets}</h6>
+            <h6>Patrimônio Total: {account.consolidated}</h6>
+            <Button
+              onClick={() => toogleModal(1, null)}
+              variant="contained"
+              color="primary"
+              size="small"
+            >
+              Realizar transaferência
+            </Button>
+          </div>
+        </div>
+      </div>
     )
 
   return (
