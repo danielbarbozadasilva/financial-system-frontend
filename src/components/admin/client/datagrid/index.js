@@ -1,13 +1,12 @@
 import React from 'react'
 import { IconButton, Tooltip } from '@material-ui/core'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
 import { More as MoreIcon } from '@mui/icons-material'
 import { FiEdit } from 'react-icons/fi'
 import { BsToggleOff, BsToggleOn } from 'react-icons/bs'
-import {
-  setStatusClient
-} from '../../../../store/client/client.action'
+import { setStatusClient } from '../../../../store/client/client.action'
+import { listByIdUserAssetAction } from '../../../../store/transaction/transaction.action'
 import Loading from '../../../loading/index'
 import { BoxTable } from './DatagridElements'
 import ListFinancialAssets from '../../../admin/client/financial_assets'
@@ -16,6 +15,8 @@ import ListClientDetails from '../../../admin/client/clients_details'
 
 const DataList = ({ data, modal, loading }) => {
   const dispatch = useDispatch()
+  const transactions = useSelector((state) => state.transaction.all)
+
   const [modalTransaction, setModalTransaction] = React.useState({})
   const [modalAssets, setModalAssets] = React.useState(false, {})
   const [modalDetails, setModalDetails] = React.useState(false, {})
@@ -25,7 +26,8 @@ const DataList = ({ data, modal, loading }) => {
   }
 
   function openTransaction(row) {
-    setModalTransaction({ open: true, data: row })
+    dispatch(listByIdUserAssetAction(row))
+    setModalTransaction({ open: true, data: transactions })
   }
 
   function openClientDetails(row) {
@@ -33,17 +35,18 @@ const DataList = ({ data, modal, loading }) => {
   }
 
   function openAssetsClient(row) {
-    setModalAssets({ open: true, data: row })
+    dispatch(listByIdUserAssetAction(row))
+    setModalAssets({ open: true, data: transactions })
   }
 
-  const actionModalAssets = ({ row }) => {
-    const assets = row?.transaction_details !== 0
+  const actionModalAssets = ({ id, row }) => {
+    const assets = row?.transaction_details.length !== 0
     return (
       <>
         <Tooltip title="Ativos">
           <IconButton
+            onClick={() => openAssetsClient(id)}
             className={assets ? 'iconeStar' : 'doNotShow'}
-            onClick={() => openAssetsClient(row?.transaction_details)}
             color="primary"
           >
             <MoreIcon />
@@ -53,14 +56,14 @@ const DataList = ({ data, modal, loading }) => {
     )
   }
 
-  const actionModalTransaction = ({ row }) => {
-    const transactions = row?.total_quantity !== 0
+  const actionModalTransaction = ({ id, row }) => {
+    const transaction = Number(row?.transaction[0].total_quantity) !== 0
     return (
       <>
         <Tooltip title="Listar ativos">
           <IconButton
-            className={transactions ? 'iconeStar' : 'doNotShow'}
-            onClick={() => openTransaction(row?.transaction)}
+            onClick={() => openTransaction(id)}
+            className={transaction ? 'iconeStar' : 'doNotShow'}
             color="primary"
           >
             <MoreIcon />
