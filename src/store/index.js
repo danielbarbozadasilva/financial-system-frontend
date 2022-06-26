@@ -9,6 +9,7 @@ import financialReducer from './financial_assets/financial_assets.reducer'
 import clientReducer from './client/client.reducer'
 import transactionReducer from './transaction/transaction.reducer'
 import accountReducer from './account/account.reducer'
+import bankReducer from './bank/bank.reducer'
 
 const reducers = combineReducers({
   auth: SignReducer,
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   client: clientReducer,
   transaction: transactionReducer,
   account: accountReducer,
+  bank: bankReducer,
   toastr: toastrReducer
 })
 

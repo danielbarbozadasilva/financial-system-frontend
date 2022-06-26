@@ -22,6 +22,9 @@ const reducer = (state = INITIAL_STATE, action) => {
     case TYPES.TRANSACTION_CREATE:
       state.loading = false
       return state
+    case TYPES.TRANSACTION_BANK_DEPOSIT:
+      state.loading = false
+      return state
     default:
       return state
   }

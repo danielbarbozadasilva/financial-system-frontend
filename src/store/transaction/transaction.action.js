@@ -3,7 +3,8 @@ import { toastr } from 'react-redux-toastr'
 import {
   createTransactionService,
   listAllUserTransactionService,
-  listByIdUserTransactionService
+  listByIdUserTransactionService,
+  createDepositService
 } from '../../services/transaction.service'
 import { getUser } from '../../config/auth'
 
@@ -17,6 +18,20 @@ export const createTransaction = (asset_id, data) => {
     } catch (error) {
       const { data } = error.response
       toastr.error('Transação', data.message.details)
+    }
+  }
+}
+
+export const createDepositAction = (data) => {
+  return async (dispatch) => {
+    dispatch({ type: TYPES.BANK_LOADING, status: true })
+    try {
+      const result = await createDepositService(data.user_id, data)
+      dispatch({ type: TYPES.TRANSACTION_BANK_DEPOSIT, data: result.data.data })
+      toastr.success('Depósito', 'realizado com sucesso!')
+    } catch (error) {
+      const { data } = error.response
+      toastr.error('Depósito', data.message.details)
     }
   }
 }
