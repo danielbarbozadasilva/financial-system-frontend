@@ -11,11 +11,12 @@ import {
 } from '../../../store/financial_assets/financial_assets.action'
 import { checkBalanceAction } from '../../../store/account/account.action'
 import DialogModal from '../../../components/dialog'
-import FormAdm from '../../../components/admin/financial_assets/form/index_admin'
-import FormClient from '../../../components/admin/financial_assets/form/index_client'
 import DataList from '../../../components/admin/financial_assets/datagrid/index'
 import Remove from '../../../components/admin/financial_assets/remove'
 import Title from '../../../components/title/index'
+
+import FormAdm from '../../../components/admin/financial_assets/form/index_admin'
+import FormClient from '../../../components/admin/financial_assets/form/index_client'
 
 const Financial = () => {
   const dispatch = useDispatch()
@@ -23,8 +24,9 @@ const Financial = () => {
 
   const financial = useSelector((state) => state.financial.all)
   const account = useSelector((state) => state.account.balance)
-
+  const banks = useSelector((state) => state.bank.all)
   const selected = useSelector((state) => state.financial.selected)
+
   const typeUser = useSelector((state) => state.auth.user.type)
   const loading = useSelector((state) => state.financial.loading)
 
@@ -90,20 +92,12 @@ const Financial = () => {
         Novo
       </Button>
     ) : (
-      <div class="container">
-        <div class="row">
+      <div className="container">
+        <div className="row">
           <div>
             <h6>Saldo em C/C: {account.balance}</h6>
             <h6>Patrimônio Investido: {account.total_assets}</h6>
             <h6>Patrimônio Total: {account.consolidated}</h6>
-            <Button
-              onClick={() => toogleModal(1, null)}
-              variant="contained"
-              color="primary"
-              size="small"
-            >
-              Realizar transaferência
-            </Button>
           </div>
         </div>
       </div>
@@ -123,7 +117,7 @@ const Financial = () => {
       </Grid>
 
       <DialogModal
-        title="Ativo Financeiro"
+        title={modal.type !== 5 ? 'Ativo Financeiro' : 'Realizar depósito'}
         open={modal.status || false}
         close={closeModal}
       >
@@ -137,6 +131,9 @@ const Financial = () => {
           ) : null}
           {modal.type === 4 ? (
             <FormClient submit={submitForm} data={selected} />
+          ) : null}
+          {modal.type === 5 ? (
+            <FormClientDeposit submit={submitForm} data={banks} />
           ) : null}
         </>
       </DialogModal>
