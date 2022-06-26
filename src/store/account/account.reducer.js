@@ -3,6 +3,7 @@ import TYPES from '../types'
 const INITIAL_STATE = {
   loading: false,
   balance: [],
+  all: [],
   upload: {},
   selected: {}
 }
@@ -17,8 +18,16 @@ const reducer = (state = INITIAL_STATE, action) => {
       state.balance = action.data
       state.loading = false
       return state
+    case TYPES.ACCOUNT_ALL:
+      state.all = action.data
+      state.loading = false
+      return state
     case TYPES.ACCOUNT_ID:
-      state.dataById = action.data
+      state.selected = action.data
+      state.loading = false
+      return state
+    case TYPES.ACCOUNT_EDIT:
+      state.selected = action.data
       state.loading = false
       return state
     case TYPES.ACCOUNT_UPLOAD:
