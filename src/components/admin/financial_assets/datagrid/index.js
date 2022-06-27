@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
 import { FiTrash2, FiEdit } from 'react-icons/fi'
 import { BsFillCartFill } from 'react-icons/bs'
@@ -7,16 +7,12 @@ import { BoxTable, SImg } from './DatagridElements'
 import { IconButton } from '@material-ui/core'
 import Loading from '../../../loading/index'
 
-
 const DataList = ({ data, modal, loading }) => {
+  
   const typeUser = useSelector((state) => state.auth.user.type)
 
   const thumb = ({ formattedValue }) => {
     return <SImg src={formattedValue} />
-  }
-
-  const toggleActive = (id, provider, name, statusLike) => {
-    dispatch(updateLikeProduct(id, provider, name, statusLike))
   }
 
   const actionEdit = ({ id, row }) => {
