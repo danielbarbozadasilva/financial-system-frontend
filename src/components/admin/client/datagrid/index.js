@@ -9,9 +9,9 @@ import { setStatusClient } from '../../../../store/client/client.action'
 import { listByIdUserAssetAction } from '../../../../store/transaction/transaction.action'
 import Loading from '../../../loading/index'
 import { BoxTable } from './DatagridElements'
-import ListFinancialAssets from '../../../admin/client/financial_assets'
-import ListFinancialTransaction from '../../../admin/client/financial_transaction'
-import ListClientDetails from '../../../admin/client/clients_details'
+import ListFinancialAssets from '../financial_assets'
+import ListFinancialTransaction from '../financial_transaction'
+import ListClientDetails from '../clients_details'
 
 const DataList = ({ data, modal, loading }) => {
   const dispatch = useDispatch()
