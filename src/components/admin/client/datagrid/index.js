@@ -46,7 +46,7 @@ const DataList = ({ data, modal, loading }) => {
         <Tooltip title="Ativos">
           <IconButton
             onClick={() => openAssetsClient(id)}
-            className={assets ? 'iconeStar' : 'doNotShow'}
+            disabled={assets ? false : true}
             color="primary"
           >
             <MoreIcon />
@@ -63,7 +63,7 @@ const DataList = ({ data, modal, loading }) => {
         <Tooltip title="Listar ativos">
           <IconButton
             onClick={() => openTransaction(id)}
-            className={transaction ? 'iconeStar' : 'doNotShow'}
+            disabled={transaction ? false : true}
             color="primary"
           >
             <MoreIcon />
@@ -79,7 +79,7 @@ const DataList = ({ data, modal, loading }) => {
       <>
         <Tooltip title="Listar Endereço">
           <IconButton
-            className={details ? 'iconeStar' : 'doNotShow'}
+            disabled={details ? false : true}
             onClick={() => openClientDetails(row?.address)}
             color="primary"
           >
