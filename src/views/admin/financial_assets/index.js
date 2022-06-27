@@ -132,9 +132,6 @@ const Financial = () => {
           {modal.type === 4 ? (
             <FormClient submit={submitForm} data={selected} />
           ) : null}
-          {modal.type === 5 ? (
-            <FormClientDeposit submit={submitForm} data={banks} />
-          ) : null}
         </>
       </DialogModal>
     </>
