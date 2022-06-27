@@ -11,6 +11,7 @@ import Title from '../../../components/title/index'
 import DialogModal from '../../../components/dialog'
 import FormDeposit from '../../../components/admin/deposit/form/index'
 import DataList from '../../../components/admin/deposit/datagrid/index'
+import Form from '../../../components/admin/deposit/deposit'
 
 const Account = () => {
   const dispatch = useDispatch()
@@ -63,7 +64,10 @@ const Account = () => {
         close={closeModal}
       >
         <>
-          <FormDeposit submit={submitForm} data={selected} banks={banks} />
+          {modal.type === 1 ? (
+            <FormDeposit submit={submitForm} data={selected} banks={banks} />
+          ) : null}
+          {modal.type === 2 ? <Form data={selected} /> : null}
         </>
       </DialogModal>
     </>

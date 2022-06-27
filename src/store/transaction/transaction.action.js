@@ -4,7 +4,8 @@ import {
   createTransactionService,
   listAllUserTransactionService,
   listByIdUserTransactionService,
-  createDepositService
+  createDepositService,
+  listByIdDepositTransactionService
 } from '../../services/transaction.service'
 import { getUser } from '../../config/auth'
 
@@ -51,6 +52,16 @@ export const listByIdUserAssetAction = (clientid) => {
     dispatch({ type: TYPES.TRANSACTION_LOADING, status: true })
     try {
       const result = await listByIdUserTransactionService(clientid)
+      dispatch({ type: TYPES.TRANSACTION_USER_ID, data: result.data.data })
+    } catch (error) {}
+  }
+}
+
+export const listByIdUserDepositAction = (clientid) => {
+  return async (dispatch) => {
+    dispatch({ type: TYPES.TRANSACTION_LOADING, status: true })
+    try {
+      const result = await listByIdDepositTransactionService(clientid)
       dispatch({ type: TYPES.TRANSACTION_USER_ID, data: result.data.data })
     } catch (error) {}
   }

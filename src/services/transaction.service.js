@@ -11,3 +11,6 @@ export const listAllUserTransactionService = () => http.get(`${baseUrl}/client`)
 
 export const listByIdUserTransactionService = (clientid) =>
   http.get(`${baseUrl}/client/${clientid}`)
+
+export const listByIdDepositTransactionService = (user_id, data) =>
+  http.get(`${baseUrl}/deposit/client/${user_id}`)
