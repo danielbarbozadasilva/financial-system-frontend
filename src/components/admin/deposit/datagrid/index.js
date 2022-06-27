@@ -12,7 +12,7 @@ import { listByIdUserDepositAction } from '../../../../store/transaction/transac
 const DataList = ({ data, modal, loading }) => {
   const dispatch = useDispatch()
   
-  const transactions = useSelector((state) => state.transaction.all)
+  const transactions = useSelector((state) => state.transaction.deposit)
   const [modalTransaction, setModalTransaction] = React.useState({})
   
   function openTransaction(row) {
