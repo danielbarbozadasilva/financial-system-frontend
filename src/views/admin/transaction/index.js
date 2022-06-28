@@ -12,6 +12,8 @@ const TransactionDetails = () => {
   const dispatch = useDispatch()
 
   const data = useSelector((state) => state.transaction.all)
+  const selected = useSelector((state) => state.transaction.selected)
+
   const loading = useSelector((state) => state.transaction.loading)
   const idUser = useSelector((state) => state.auth.user.id)
   const typeUser = useSelector((state) => state.auth.user.type)
@@ -39,7 +41,7 @@ const TransactionDetails = () => {
       />
       <Grid container spacing={2}>
         <Grid item md={12} xl={12}>
-          <DataList data={data} loading={loading} />
+          <DataList data={data || selected} loading={loading} />
         </Grid>
       </Grid>
     </>

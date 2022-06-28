@@ -3,6 +3,7 @@ import TYPES from '../types'
 const INITIAL_STATE = {
   loading: false,
   deposit: [],
+  selected: [],
   all: []
 }
 
@@ -17,7 +18,7 @@ const reducer = (state = INITIAL_STATE, action) => {
       state.loading = false
       return state
     case TYPES.TRANSACTION_USER_ID:
-      state.all = action.data
+      state.selected = action.data
       state.loading = false
       return state
     case TYPES.TRANSACTION_BANK_USER_DEPOSIT:

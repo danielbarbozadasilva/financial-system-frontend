@@ -15,7 +15,7 @@ import ListClientDetails from '../clients_details'
 
 const DataList = ({ data, modal, loading }) => {
   const dispatch = useDispatch()
-  const transactions = useSelector((state) => state.transaction.all)
+  const transactions = useSelector((state) => state.transaction.selected)
 
   const [modalTransaction, setModalTransaction] = React.useState({})
   const [modalAssets, setModalAssets] = React.useState(false, {})
@@ -44,13 +44,15 @@ const DataList = ({ data, modal, loading }) => {
     return (
       <>
         <Tooltip title="Ativos">
-          <IconButton
-            onClick={() => openAssetsClient(id)}
-            disabled={assets ? false : true}
-            color="primary"
-          >
-            <MoreIcon />
-          </IconButton>
+          <span>
+            <IconButton
+              onClick={() => openAssetsClient(id)}
+              disabled={assets ? false : true}
+              color="primary"
+            >
+              <MoreIcon />
+            </IconButton>
+          </span>
         </Tooltip>
       </>
     )
@@ -61,13 +63,15 @@ const DataList = ({ data, modal, loading }) => {
     return (
       <>
         <Tooltip title="Listar ativos">
-          <IconButton
-            onClick={() => openTransaction(id)}
-            disabled={transaction ? false : true}
-            color="primary"
-          >
-            <MoreIcon />
-          </IconButton>
+          <span>
+            <IconButton
+              onClick={() => openTransaction(id)}
+              disabled={transaction ? false : true}
+              color="primary"
+            >
+              <MoreIcon />
+            </IconButton>
+          </span>
         </Tooltip>
       </>
     )
