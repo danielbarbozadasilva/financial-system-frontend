@@ -3,7 +3,7 @@ import { TextField, Button, Grid, LinearProgress } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { getMoney } from '../../../../util/validations/price-validation'
-import { Box, Submit } from './FormElements'
+import { Box, Submit } from './styled'
 import { Select } from '@material-ui/core'
 import InputMask from 'react-input-mask'
 

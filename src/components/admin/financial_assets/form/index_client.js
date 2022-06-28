@@ -13,7 +13,7 @@ import {
   calcTotal,
   formatPrice
 } from '../../../../util/validations/price-validation'
-import { SInput, SBox, STable } from './FormElements'
+import { SInput, SBox, STable } from './styled'
 
 const FormClient = ({ submit, ...props }) => {
   const [form, setForm] = useState({})

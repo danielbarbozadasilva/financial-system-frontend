@@ -1,5 +1,5 @@
 import { Card } from 'react-bootstrap'
-import { SCardImg, SCard, SButton } from './ElementsCards'
+import { SCardImg, SCard, SButton } from './styled'
 import { navigate } from '@reach/router'
 
 const CardFinancial = (props) => {

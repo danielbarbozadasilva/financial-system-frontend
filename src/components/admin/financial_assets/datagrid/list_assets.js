@@ -1,6 +1,6 @@
 import React from 'react'
 import { DataGrid } from '@material-ui/data-grid'
-import { BoxTable, SImg } from './DatagridElements'
+import { BoxTable, SImg } from '../../../datagrid/styled'
 import Loading from '../../../loading/index'
 
 const DataList = ({ data, modal, loading }) => {

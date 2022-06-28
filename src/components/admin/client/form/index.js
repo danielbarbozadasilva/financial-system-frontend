@@ -16,7 +16,7 @@ import {
   SInputLabel,
   SFormControl,
   SButton
-} from './FormElements'
+} from './styled'
 import InputMask from 'react-input-mask'
 import ufCityFile from '../../../../util/state-city.json'
 import * as moment from 'moment'

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/loading'
 import { Col } from 'react-bootstrap'
-import CardFinancial from '../../../components/portal/cards/AssetsCard'
+import CardFinancial from '../../../components/portal/cards/index'
 import {
   SContainer,
   StyleImg,
@@ -10,7 +10,7 @@ import {
   Sh2,
   STextInvest,
   settings
-} from '../../../components/portal/cards/ElementsCards'
+} from '../../../components/portal/cards/styled'
 
 import { listAllAssetAction } from '../../../store/financial_assets/financial_assets.action'
 import Image from '../../../assets/img/investimento.webp'

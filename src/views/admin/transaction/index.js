@@ -7,7 +7,6 @@ import {
 } from '../../../store/transaction/transaction.action'
 import Title from '../../../components/title/index'
 import DataList from '../../../components/admin/transaction/datagrid/index'
-import DataListDetails from '../../../components/admin/transaction/datagrid/user_transaction_details'
 
 const TransactionDetails = () => {
   const dispatch = useDispatch()
@@ -40,11 +39,7 @@ const TransactionDetails = () => {
       />
       <Grid container spacing={2}>
         <Grid item md={12} xl={12}>
-          {typeUser === 2? (
-            <DataList data={data} loading={loading} />
-          ):(
-            <DataListDetails data={data} loading={loading} />
-          )}
+          <DataList data={data} loading={loading} />
         </Grid>
       </Grid>
     </>

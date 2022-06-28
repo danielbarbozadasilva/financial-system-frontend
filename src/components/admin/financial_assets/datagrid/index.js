@@ -1,9 +1,9 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
 import { FiTrash2, FiEdit } from 'react-icons/fi'
 import { BsFillCartFill } from 'react-icons/bs'
-import { BoxTable, SImg } from './DatagridElements'
+import { BoxTable, SImg } from '../../../datagrid/styled'
 import { IconButton } from '@material-ui/core'
 import Loading from '../../../loading/index'
 
