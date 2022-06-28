@@ -1,5 +1,5 @@
 import { Container, Row, Col } from 'react-bootstrap'
-import { SForm, STextForm } from './403Elements'
+import { SForm, STextForm } from '../styled'
 
 const Error403 = () => {
   return (

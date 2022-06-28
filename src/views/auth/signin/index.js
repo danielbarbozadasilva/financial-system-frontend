@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import { signInAction } from '../../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
-import { SForm, SColFooter, STextForm, SButton, STextLink } from './SigninElements'
+import { SForm, SColFooter, STextForm, SButtonSignIn, STextLink } from '../styled'
 import Loading from  '../../../components/loading'
 
 const SignIn = (props) => {
@@ -69,7 +69,7 @@ const SignIn = (props) => {
             <Form.Group className="mb-3">
               <Form.Check type="checkbox" label="Lembrar credenciais" />
             </Form.Group>
-            <SButton
+            <SButtonSignIn
               type="button"
               disabled={isNotValid()}
               onClick={submitForm}
@@ -83,7 +83,7 @@ const SignIn = (props) => {
               )}
 
               <i className="icon-angle-right ml-2" />
-            </SButton>
+            </SButtonSignIn>
             <SColFooter>
               Não tem Cadastro? <STextLink href="/signup">Cadastre-se</STextLink>
             </SColFooter>

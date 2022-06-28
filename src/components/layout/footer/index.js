@@ -15,7 +15,7 @@ import {
   FooterLinkTitle,
   FooterName,
   FooterImg
-} from './FooterElements'
+} from '../styled'
 import { Row, Col } from 'react-bootstrap'
 
 const Footer = (props) => {

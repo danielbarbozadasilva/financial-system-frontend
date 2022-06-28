@@ -6,7 +6,7 @@ import { Row, Col, Form } from 'react-bootstrap'
 import { Select } from '@material-ui/core'
 import ufCityFile from '../../../util/state-city.json'
 import InputMask from 'react-input-mask'
-import { SForm, STextForm, SButton, SDesabledButton } from './SignupElements'
+import { SForm, STextForm, SButton, SDesabledButton } from '../styled'
 import Loading from  '../../../components/loading'
 
 const SignUp = () => {

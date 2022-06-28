@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
-import { SNavbar, SNavLink, SNavbarLogo, SNavbarToggle } from './HeaderElements'
+import { SNavbar, SNavLink, SNavbarLogo, SNavbarToggle } from '../styled'
 import LogoHeader from '../../../assets/img/header-image.png'
 import { Link } from '@reach/router'
 
