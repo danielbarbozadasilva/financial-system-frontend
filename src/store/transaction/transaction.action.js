@@ -62,7 +62,10 @@ export const listByIdUserDepositAction = (clientid) => {
     dispatch({ type: TYPES.TRANSACTION_LOADING, status: true })
     try {
       const result = await listByIdDepositTransactionService(clientid)
-      dispatch({ type: TYPES.TRANSACTION_BANK_USER_DEPOSIT, data: result.data.data })
+      dispatch({
+        type: TYPES.TRANSACTION_BANK_USER_DEPOSIT,
+        data: result.data.data
+      })
     } catch (error) {}
   }
 }
