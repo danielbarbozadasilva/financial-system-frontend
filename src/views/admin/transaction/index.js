@@ -18,17 +18,17 @@ const TransactionDetails = () => {
   const idUser = useSelector((state) => state.auth.user.id)
   const typeUser = useSelector((state) => state.auth.user.type)
 
-  const callFinancial = useCallback(() => {
-    if (typeUser === 2) {
-      dispatch(listByIdUserAssetAction(idUser))
-    } else {
+  const callTransaction = useCallback(() => {
+    if (typeUser === 1) {
       dispatch(listAllUserAssetAction())
+    } else {
+      dispatch(listByIdUserAssetAction(idUser))
     }
   }, [dispatch])
 
   useEffect(() => {
-    callFinancial()
-  }, [callFinancial])
+    callTransaction()
+  }, [callTransaction])
 
   const actions = () => null
 
@@ -41,7 +41,7 @@ const TransactionDetails = () => {
       />
       <Grid container spacing={2}>
         <Grid item md={12} xl={12}>
-          <DataList data={data || selected} loading={loading} />
+          <DataList data={typeUser === 1 ? data : selected} loading={loading} />
         </Grid>
       </Grid>
     </>
