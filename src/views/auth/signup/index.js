@@ -448,7 +448,7 @@ const SignUp = () => {
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>zip_code:</Form.Label>
+          <Form.Label>Cep:</Form.Label>
           <InputMask
             mask="99999-999"
             disabled={false}

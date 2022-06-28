@@ -431,7 +431,7 @@ const FormClient = ({ submit, ...props }) => {
                 value={form.zip_code || ''}
                 onChange={handleChange}
                 name="zip_code"
-                placeholder="Informe o seu zip_code"
+                placeholder="Informe o seu Cep"
               />
             )}
           </InputMask>
