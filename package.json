@@ -48,12 +48,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
+
   "browserslist": {
     "production": [
       ">0.2%",
@@ -67,6 +62,7 @@
     ]
   },
   "devDependencies": {
-    "customize-cra": "^1.0.0"
+    "customize-cra": "^1.0.0",
+    "redux-devtools-extension": "^2.13.9"
   }
 }
