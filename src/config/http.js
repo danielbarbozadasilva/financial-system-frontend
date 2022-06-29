@@ -3,6 +3,7 @@ import { getToken } from './auth'
 import store from '../store'
 import { logoutAction } from '../store/auth/auth.action'
 import { navigate } from '@reach/router'
+import { toastr } from 'react-redux-toastr'
 
 const { REACT_APP_VERSION: version, REACT_APP_API: api } = process.env
 const urlApi = api + version
