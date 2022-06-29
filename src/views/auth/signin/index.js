@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import { signInAction } from '../../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
-import { SForm, SColFooter, STextForm, SButtonSignIn, STextLink } from '../styled'
-import Loading from  '../../../components/loading'
+import {
+  SForm,
+  SColFooter,
+  STextForm,
+  SButtonSignIn,
+  STextLink
+} from '../styled'
+import Loading from '../../../components/loading'
+import InputMask from 'react-input-mask'
 
 const SignIn = (props) => {
   const dispatch = useDispatch()
@@ -12,7 +19,7 @@ const SignIn = (props) => {
   const loading = useSelector((state) => state.auth.loading)
 
   const [form, setForm] = useState({
-    email: '',
+    cpf: '',
     password: ''
   })
 
@@ -29,7 +36,7 @@ const SignIn = (props) => {
     dispatch(await signInAction(form))
   }
 
-  const isNotValid = () => form.email.length === 0 || form.password.length === 0
+  const isNotValid = () => form.cpf.length === 0 || form.password.length === 0
 
   useEffect(() => {
     setHasError(error.length > 0)
@@ -42,16 +49,26 @@ const SignIn = (props) => {
           <SForm>
             <STextForm>Login</STextForm>
             <Form.Group className="mb-3">
-              <Form.Label>E-mail</Form.Label>
-              <Form.Control
-                disabled={loading}
-                type="email"
-                name="email"
-                id="email"
+              <Form.Label>CPF:</Form.Label>
+              <InputMask
+                mask="999.999.999-99"
+                disabled={false}
+                maskChar=" "
+                value={form.cpf || ''}
                 onChange={handleChange}
-                value={form.email || ''}
-                placeholder="Informe o seu E-mail"
-              />
+              >
+                {() => (
+                  <Form.Control
+                    disabled={loading}
+                    type="text"
+                    id="cpf"
+                    value={form.cpf || ''}
+                    onChange={handleChange}
+                    name="cpf"
+                    placeholder="Informe o seu cpf"
+                  />
+                )}
+              </InputMask>
             </Form.Group>
 
             <Form.Group className="mb-3">
@@ -85,7 +102,8 @@ const SignIn = (props) => {
               <i className="icon-angle-right ml-2" />
             </SButtonSignIn>
             <SColFooter>
-              Não tem Cadastro? <STextLink href="/signup">Cadastre-se</STextLink>
+              Não tem Cadastro?{' '}
+              <STextLink href="/signup">Cadastre-se</STextLink>
             </SColFooter>
           </SForm>
         </Col>
