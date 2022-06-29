@@ -3,6 +3,7 @@ import { toastr } from 'react-redux-toastr'
 import {
   listAllAssetService,
   listByIdAssetService,
+  listTop05AssetService,
   createAssetService,
   updateAssetService,
   deleteAssetService
@@ -14,6 +15,16 @@ export const listAllAssetAction = () => {
     try {
       const result = await listAllAssetService()
       dispatch({ type: TYPES.FINANCIAL_ALL, data: result.data.data })
+    } catch (error) {}
+  }
+}
+
+export const listTop05AssetAction = () => {
+  return async (dispatch) => {
+    dispatch({ type: TYPES.FINANCIAL_LOADING, status: true })
+    try {
+      const result = await listTop05AssetService()
+      dispatch({ type: TYPES.FINANCIAL_TOP5_USER, data: result.data.data })
     } catch (error) {}
   }
 }
