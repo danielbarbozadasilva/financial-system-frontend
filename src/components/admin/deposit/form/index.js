@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { TextField, Button, Grid, LinearProgress } from '@material-ui/core'
+import { TextField, Grid, LinearProgress } from '@material-ui/core'
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { getMoney } from '../../../../util/validations/price-validation'
-import { Box, Submit } from './styled'
+import { Box, Submit, SButton} from './styled'
 import { Select } from '@material-ui/core'
 import InputMask from 'react-input-mask'
 
@@ -172,7 +172,7 @@ const FormDeposit = ({ submit, ...props }) => {
         />
 
         <Submit>
-          <Button
+          <SButton
             size="small"
             disabled={isNotValid()}
             type="submit"
@@ -180,7 +180,7 @@ const FormDeposit = ({ submit, ...props }) => {
             onClick={handleSubmit}
           >
             Confirmar
-          </Button>
+          </SButton>
           <Grid container direction="column">
             <LinearProgress variant="determinate" value={percent} />
           </Grid>
