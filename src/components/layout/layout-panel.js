@@ -6,7 +6,6 @@ import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List'
-import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import Container from '@material-ui/core/Container'
@@ -27,7 +26,7 @@ import { Button } from '@material-ui/core'
 const drawerWidth = 240
 
 export default function Dashboard(props) {
-  const { name, cpf, type } = useSelector((state) => state.auth.user)
+  const { name, cpf, number, type } = useSelector((state) => state.auth.user)
   const dispatch = useDispatch()
 
   const userDefinition = {
@@ -192,7 +191,7 @@ export default function Dashboard(props) {
           <AccountCircleIcon className={classes.userIcon} />
           <div className={classes.details}>
             <h6> Nome: {name}</h6>
-            <h6> Cpf: {cpf}</h6>
+            {type === 1 ? <h6> Cpf: {cpf}</h6> : <h6> C/C: {number}</h6>}
           </div>
 
           <Button onClick={handleLogout}>
