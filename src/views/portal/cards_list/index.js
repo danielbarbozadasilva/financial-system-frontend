@@ -2,14 +2,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../../../components/loading'
 import { Col } from 'react-bootstrap'
-import CardFinancial from '../../../components/portal/cards_top05/index'
+import CardFinancial from '../../../components/portal/cards_list/index'
 import {
   SContainer,
   SText,
   Sh2,
   STextInvest,
   StyleImg
-} from '../../../components/portal/cards_top05/styled'
+} from '../../../components/portal/cards_list/styled'
 import { listTop05AssetAction } from '../../../store/financial_assets/financial_assets.action'
 import Image from '../../../assets/img/investment.jpg'
 
