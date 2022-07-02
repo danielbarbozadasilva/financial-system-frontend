@@ -1,5 +1,6 @@
 import React from 'react'
-import { Pie } from 'react-chartjs-2'
+import 'chart.js/auto'
+import { Chart } from 'react-chartjs-2'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid } from '@material-ui/core'
 import Title from '../../../components/title/index'
@@ -39,7 +40,7 @@ function Home() {
         <Grid item xs={6}>
           <Grid container>
             <Grid item>
-              <Pie data={chartData} />
+            <Chart type='pie' data={chartData} />
             </Grid>
           </Grid>
         </Grid>
