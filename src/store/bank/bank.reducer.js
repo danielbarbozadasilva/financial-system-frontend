@@ -5,7 +5,7 @@ const INITIAL_STATE = {
   all: []
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = ({...state} = INITIAL_STATE, action) => {
   switch (action.type) {
     case TYPES.BANK_LOADING:
       state.error = []

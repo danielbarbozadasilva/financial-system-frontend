@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   selected: {}
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = ({...state} = INITIAL_STATE, action) => {
   switch (action.type) {
     case TYPES.ACCOUNT_LOADING:
       state.error = []

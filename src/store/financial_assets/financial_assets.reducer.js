@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   dataById: []
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = ({...state} = INITIAL_STATE, action) => {
   switch (action.type) {
     case TYPES.FINANCIAL_LOADING:
       state.error = []
