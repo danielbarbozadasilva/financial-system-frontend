@@ -3,11 +3,11 @@ import * as moment from 'moment'
 import { signUpAction } from '../../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Form } from 'react-bootstrap'
+import InputMask from 'react-input-mask'
 import { Select } from '@material-ui/core'
 import ufCityFile from '../../../util/state-city.json'
-import InputMask from 'react-input-mask'
 import { SForm, STextForm, SButton, SDesabledButton } from '../styled'
-import Loading from  '../../../components/loading'
+import Loading from '../../../components/loading'
 
 const SignUp = () => {
   const dispatch = useDispatch()
@@ -72,7 +72,12 @@ const SignUp = () => {
         break
 
       case 'cpf':
-        if (value.trim().length < 14) {
+        let cpf = value
+          .trim()
+          .replaceAll('-', '')
+          .replaceAll('_', '')
+          .replaceAll('.', '')
+        if (cpf.length < 11) {
           message += 'CPF inválido!'
         }
         break
@@ -111,13 +116,13 @@ const SignUp = () => {
         break
 
       case 'phone':
+        let phone = value.trim().replaceAll('-', '').replaceAll('_', '')
+
         regex =
           /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
 
-        if (!regex.test(value)) {
+        if (!regex.test(phone)) {
           message += 'Número de telefone inválido!'
-        } else if (value.trim() === '') {
-          message += 'Campo em branco!'
         }
         break
 
@@ -142,10 +147,9 @@ const SignUp = () => {
         break
 
       case 'zip_code':
-        if (value.trim() === '') {
-          message += 'Não pode ser vazio!'
-        } else if (value.trim().length !== 9) {
-          message += 'Precisa ter 9 caracteres!'
+        let zip_code = value.trim().replaceAll('-', '').replaceAll('_', '')
+        if (zip_code.length < 8) {
+          message += 'Cep inválido!'
         }
         break
     }
@@ -217,7 +221,7 @@ const SignUp = () => {
       <STextForm>Cadastre-se</STextForm>
       <Row className="mb-3">
         <Form.Group as={Col}>
-          <Form.Label>Nome:</Form.Label>
+          <Form.Label>*Nome:</Form.Label>
           <Form.Control
             autoFocus
             invalid={formValidate.name}
@@ -235,7 +239,7 @@ const SignUp = () => {
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>E-mail:</Form.Label>
+          <Form.Label>*E-mail:</Form.Label>
           <Form.Control
             invalid={formValidate.email}
             disabled={loading}
@@ -252,34 +256,26 @@ const SignUp = () => {
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>Cpf:</Form.Label>
+          <Form.Label>*Cpf:</Form.Label>
           <InputMask
             mask="999.999.999-99"
-            disabled={false}
-            maskChar=" "
-            value={form.cpf || ''}
+            className="form-control"
+            type="text"
+            id="cpf"
             onChange={handleChange}
-          >
-            {() => (
-              <Form.Control
-                invalid={formValidate.cpf}
-                disabled={loading}
-                type="text"
-                id="cpf"
-                value={form.cpf || ''}
-                onChange={handleChange}
-                name="cpf"
-                placeholder="Informe o seu cpf"
-              />
-            )}
-          </InputMask>
+            name="cpf"
+            value={form.cpf || ''}
+            placeholder="Informe o seu cpf"
+            invalid={formValidate.cpf}
+            disabled={loading}
+          />
           <Form.Control.Feedback type="text">
             {formValidate.cpf || ''}
           </Form.Control.Feedback>
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>Sexo</Form.Label>
+          <Form.Label>*Sexo</Form.Label>
           <Select
             fullWidth
             native
@@ -301,7 +297,7 @@ const SignUp = () => {
       </Row>
       <Row className="mb-3">
         <Form.Group as={Col}>
-          <Form.Label>Data de nascimento:</Form.Label>
+          <Form.Label>*Data de nascimento:</Form.Label>
           <Form.Control
             invalid={formValidate.birthDate}
             disabled={loading}
@@ -322,7 +318,7 @@ const SignUp = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col}>
-          <Form.Label>Senha:</Form.Label>
+          <Form.Label>*Senha:</Form.Label>
           <Form.Control
             invalid={formValidate.password}
             disabled={loading}
@@ -338,7 +334,7 @@ const SignUp = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col}>
-          <Form.Label>Confirmar senha:</Form.Label>
+          <Form.Label>*Confirmar senha:</Form.Label>
           <Form.Control
             invalid={formValidate.confirmPassword}
             disabled={loading}
@@ -356,33 +352,25 @@ const SignUp = () => {
       </Row>
       <Row className="mb-3">
         <Form.Group as={Col}>
-          <Form.Label>Telefone:</Form.Label>
+          <Form.Label>*Telefone:</Form.Label>
           <InputMask
-            mask="+55 (99) 9999-9999"
-            disabled={false}
-            maskChar=" "
-            value={form.phone || ''}
+            mask="(99)9999-9999"
+            className="form-control"
+            type="text"
+            id="phone"
             onChange={handleChange}
-          >
-            {() => (
-              <Form.Control
-                invalid={formValidate.phone}
-                disabled={loading}
-                type="text"
-                id="phone"
-                value={form.phone || ''}
-                onChange={handleChange}
-                name="phone"
-                placeholder="Informe o seu telefone"
-              />
-            )}
-          </InputMask>
+            name="phone"
+            value={form.phone || ''}
+            placeholder="Informe o seu telefone"
+            invalid={formValidate.phone}
+            disabled={loading}
+          />
           <Form.Control.Feedback type="text">
             {formValidate.phone || ''}
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col}>
-          <Form.Label>Endereço:</Form.Label>
+          <Form.Label>*Endereço:</Form.Label>
           <Form.Control
             invalid={formValidate.address}
             disabled={loading}
@@ -398,7 +386,7 @@ const SignUp = () => {
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col}>
-          <Form.Label>Uf:</Form.Label>
+          <Form.Label>*Uf:</Form.Label>
           <Select
             fullWidth
             native
@@ -423,7 +411,7 @@ const SignUp = () => {
       </Row>
       <Row className="mb-3">
         <Form.Group as={Col}>
-          <Form.Label>Cidade:</Form.Label>
+          <Form.Label>*Cidade:</Form.Label>
           <Select
             fullWidth
             native
@@ -448,29 +436,21 @@ const SignUp = () => {
         </Form.Group>
 
         <Form.Group as={Col}>
-          <Form.Label>Cep:</Form.Label>
+          <Form.Label>*Cep:</Form.Label>
           <InputMask
             mask="99999-999"
-            disabled={false}
-            maskChar=" "
-            value={form.zip_code || ''}
+            className="form-control"
+            type="text"
+            id="zip_code"
             onChange={handleChange}
-          >
-            {() => (
-              <Form.Control
-                invalid={formValidate.zip_code}
-                disabled={loading}
-                type="text"
-                id="zip_code"
-                value={form.zip_code || ''}
-                onChange={handleChange}
-                name="zip_code"
-                placeholder="Informe o seu zip_code"
-              />
-            )}
-          </InputMask>
+            name="zip_code"
+            value={form.zip_code || ''}
+            placeholder="Informe o seu telefone"
+            invalid={formValidate.zip_code}
+            disabled={loading}
+          />
           <Form.Control.Feedback type="text">
-            {formValidate.cpf || ''}
+            {formValidate.zip_code || ''}
           </Form.Control.Feedback>
         </Form.Group>
 

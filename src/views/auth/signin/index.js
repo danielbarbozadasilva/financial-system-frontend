@@ -52,23 +52,15 @@ const SignIn = (props) => {
               <Form.Label>CPF:</Form.Label>
               <InputMask
                 mask="999.999.999-99"
-                disabled={false}
-                maskChar=" "
-                value={form.cpf || ''}
+                className="form-control"
+                type="text"
+                id="cpf"
                 onChange={handleChange}
-              >
-                {() => (
-                  <Form.Control
-                    disabled={loading}
-                    type="text"
-                    id="cpf"
-                    value={form.cpf || ''}
-                    onChange={handleChange}
-                    name="cpf"
-                    placeholder="Informe o seu cpf"
-                  />
-                )}
-              </InputMask>
+                name="cpf"
+                value={form.cpf || ''}
+                placeholder="Informe o seu cpf"
+                disabled={loading}
+              />
             </Form.Group>
 
             <Form.Group className="mb-3">

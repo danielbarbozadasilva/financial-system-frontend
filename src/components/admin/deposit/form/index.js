@@ -1,28 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { TextField, Grid, LinearProgress } from '@material-ui/core'
+import { Grid, LinearProgress, Select } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
 import { getMoney } from '../../../../util/validations/price-validation'
-import { Box, Submit, SButton} from './styled'
-import { Select } from '@material-ui/core'
+import { Box, Submit, SButton, SInputLabel } from './styled'
 import InputMask from 'react-input-mask'
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: 200
-    }
-  }
-}))
-
 const FormDeposit = ({ submit, ...props }) => {
-  const classes = useStyles()
-  
-  const banks = props.banks
-  const user = props.data.id_user
-  const [bank, setBank] = useState([])
   const [form, setForm] = useState({})
+  const user = props.data.id_user
+  const listBanks = props.banks.map((item) => item.name)
   const percent = useSelector((state) => state.financial.upload?.percent || 0)
   const loading = useSelector((state) => state.financial.loading)
   const [formValidate, setFormValidate] = useState({})
@@ -36,34 +22,34 @@ const FormDeposit = ({ submit, ...props }) => {
     })
   }
 
-  useEffect(() => {
-    const listBanks = banks.map((item) => item.name)
-    setBank(listBanks)
-  }, [])
-
   const fieldValidate = (nome, value) => {
-    let menssage = ''
+    let message = ''
 
     switch (nome) {
       case 'bank':
-        if (value.trim() === '') {
-          menssage += 'Não pode ser vazio!'
+        if (value === 'selecione') {
+          message += 'Não pode ser vazio!'
         }
         break
 
       case 'branch':
         if (value.trim() === '') {
-          menssage += 'Agência não pode ser vazio!'
+          message += 'Agência não pode ser vazio!'
         }
         break
 
       case 'cpf':
-        if (value.trim().length < 14) {
-          menssage += 'Cpf inválido!'
+        let cpf = value
+          .trim()
+          .replaceAll('-', '')
+          .replaceAll('_', '')
+          .replaceAll('.', '')
+        if (cpf.length < 11) {
+          message += 'CPF inválido!'
         }
         break
     }
-    setFormValidate({ ...formValidate, [nome]: menssage })
+    setFormValidate({ ...formValidate, [nome]: message })
   }
 
   const isNotValid = () => {
@@ -83,93 +69,87 @@ const FormDeposit = ({ submit, ...props }) => {
       origin_cpf: form.cpf,
       user_id: user,
       value: getMoney(form.value).replace('R$', '').replace(',', '.'),
-      bank_id: banks.find((banks) => banks.name === form.bank).cod_bank
+      bank_id: props.banks.find((banks) => banks.name === form.bank).cod_bank
     }
     submit(newForm)
   }
 
   return (
     <Box>
-      <form className={classes.root} noValidate autoComplete="off">
-        <Select
-          required
-          fullWidth
-          native
-          variant="outlined"
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          value={form.bank || ''}
-          onChange={handleChange}
-          inputProps={{
-            name: 'bank',
-            id: 'outlined-native-simple'
-          }}
-        >
-          <option value="">Selecione um Banco</option>
-          {bank?.map((item, i) => (
-            <option key={i} value={item}>
-              {item}
-            </option>
-          ))}
-        </Select>
+      <form noValidate autoComplete="off">
+        <div>
+          <SInputLabel>Banco</SInputLabel>
+          <Select
+            fullWidth
+            native
+            id="standard-error-helper-text"
+            margin="normal"
+            size="small"
+            value={form.bank || ''}
+            onChange={handleChange}
+            inputProps={{
+              name: 'bank',
+              id: 'outlined-native-simple'
+            }}
+          >
+            <option value="selecione">selecione</option>
+            {listBanks?.map((item, i) => (
+              <option key={i} value={item}>
+                {item}
+              </option>
+            ))}
+          </Select>
+          <div className="mt-1">
+            <p className="text-danger">{formValidate.bank}</p>
+          </div>
+        </div>
 
-        <TextField
-          required
-          size="small"
-          error={!!formValidate.branch}
-          margin="normal"
-          name="branch"
-          label="Agência"
-          type="text"
-          id="standard-error-helper-text"
-          value={form.branch || ''}
-          onChange={handleChange}
-          helperText={formValidate.branch || ''}
-          placeholder="Informe a agência"
-          disabled={loading}
-        />
+        <div>
+          <SInputLabel>Agência</SInputLabel>
+          <input
+            className="form-control"
+            name="branch"
+            type="text"
+            value={form.branch || ''}
+            onChange={handleChange}
+            placeholder="Informe a agência"
+            disabled={loading}
+          />
+          <div className="mt-1">
+            <p className="text-danger">{formValidate.branch}</p>
+          </div>
+        </div>
 
-        <InputMask
-          mask="999.999.999-99"
-          disabled={false}
-          maskChar=" "
-          value={form.cpf || ''}
-          onChange={handleChange}
-        >
-          {() => (
-            <TextField
-              required
-              size="small"
-              error={!!formValidate.cpf}
-              margin="normal"
-              name="cpf"
-              label="Cpf"
-              type="text"
-              id="standard-error-helper-text"
-              value={form.cpf || ''}
-              onChange={handleChange}
-              helperText={formValidate.cpf || ''}
-              placeholder="Informe o cpf"
-              disabled={loading}
-            />
-          )}
-        </InputMask>
+        <div>
+          <SInputLabel>Cpf</SInputLabel>
+          <InputMask
+            mask="999.999.999-99"
+            className="form-control"
+            name="cpf"
+            value={form.cpf || ''}
+            onChange={handleChange}
+            disabled={loading}
+          />
+          <div className="mt-1">
+            <p className="text-danger">{formValidate.cpf}</p>
+          </div>
+        </div>
 
-        <TextField
-          required
-          label="Valor"
-          size="small"
-          margin="normal"
-          id="standard-error-helper-text"
-          invalid={formValidate.value}
-          disabled={loading}
-          type="text"
-          value={getMoney(form.value) || ''}
-          onChange={handleChange}
-          name="value"
-          placeholder="Informe o valor"
-        />
+        <div>
+          <SInputLabel>Valor</SInputLabel>
+          <input
+            className="form-control"
+            disabled={loading}
+            type="text"
+            value={getMoney(form.value) || ''}
+            onChange={handleChange}
+            name="value"
+            placeholder="Informe o valor"
+          />
+          <div className="mt-1">
+            <p className="text-danger">{formValidate.value}</p>
+          </div>
+        </div>
 
         <Submit>
           <SButton

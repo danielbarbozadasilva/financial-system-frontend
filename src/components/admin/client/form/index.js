@@ -1,38 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import {
   TextField,
-  Button,
   Grid,
   LinearProgress,
   Select,
   Container
 } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import { makeStyles } from '@material-ui/core/styles'
-import {
-  Submit,
-  SignBox,
-  FormStyle,
-  SInputLabel,
-  SFormControl,
-  SButton
-} from './styled'
-import InputMask from 'react-input-mask'
+import { Submit, SignBox, FormStyle, SInputLabel, SButton } from './styled'
 import ufCityFile from '../../../../util/state-city.json'
 import * as moment from 'moment'
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& .MuiTextField-root': {
-      margin: theme.spacing(1),
-      width: 200
-    }
-  }
-}))
+import InputMask from 'react-input-mask'
 
 const FormClient = ({ submit, ...props }) => {
-  const classes = useStyles()
-
   const [form, setForm] = useState({})
   const [isEdit, setEdit] = useState(false)
   const [button, setButton] = useState(false)
@@ -119,13 +99,18 @@ const FormClient = ({ submit, ...props }) => {
         break
 
       case 'cpf':
-        if (value.trim().length < 14) {
+        let cpf = value
+          .trim()
+          .replaceAll('-', '')
+          .replaceAll('_', '')
+          .replaceAll('.', '')
+        if (cpf.length < 11) {
           message += 'CPF inválido!'
         }
         break
 
       case 'gender':
-        if (value === '0') {
+        if (value === 'selecione') {
           message += 'Selecione um sexo!'
         }
         break
@@ -144,13 +129,13 @@ const FormClient = ({ submit, ...props }) => {
         break
 
       case 'phone':
+        let phone = value.trim().replaceAll('-', '').replaceAll('_', '')
+
         regex =
           /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
 
-        if (!regex.test(value)) {
+        if (!regex.test(phone)) {
           message += 'Número de telefone inválido!'
-        } else if (value.trim() === '') {
-          message += 'Campo em branco!'
         }
         break
 
@@ -163,22 +148,21 @@ const FormClient = ({ submit, ...props }) => {
         break
 
       case 'uf':
-        if (value === '') {
+        if (value === 'selecione') {
           message += 'Selecione uma uf!'
         }
         break
 
       case 'city':
-        if (value === '') {
+        if (value === 'selecione') {
           message += 'Selecione uma cidade!'
         }
         break
 
       case 'zip_code':
-        if (value.trim() === '') {
-          message += 'Não pode ser vazio!'
-        } else if (value.trim().length !== 9) {
-          message += 'Precisa ter 9 caracteres!'
+        let zip_code = value.trim().replaceAll('-', '').replaceAll('_', '')
+        if (zip_code.length < 8) {
+          message += 'Cep inválido!'
         }
         break
     }
@@ -217,71 +201,58 @@ const FormClient = ({ submit, ...props }) => {
     <Container component="main" maxWidth="xs">
       <SignBox>
         <FormStyle noValidate>
-          <TextField
-            required
-            fullWidth
-            size="small"
-            margin="normal"
-            error={!!formValidate.name}
-            id="standard-error-helper-text"
-            label="Nome"
-            name="name"
-            value={form.name || ''}
-            onChange={handleChange}
-            helperText={formValidate.name || ''}
-            disabled={loading}
-          />
-          <TextField
-            required
-            fullWidth
-            size="small"
-            margin="normal"
-            error={!!formValidate.email}
-            id="standard-error-helper-text"
-            label="E-mail"
-            name="email"
-            value={form.email || ''}
-            onChange={handleChange}
-            helperText={formValidate.email || ''}
-            disabled={loading}
-          />
+          <div>
+            <SInputLabel>Nome</SInputLabel>
+            <TextField
+              fullWidth
+              size="small"
+              error={!!formValidate.name}
+              id="standard-error-helper-text"
+              name="name"
+              value={form.name || ''}
+              onChange={handleChange}
+              helperText={formValidate.name || ''}
+              disabled={loading}
+              variant="outlined"
+            />
+          </div>
 
-          <InputMask
-            mask="999.999.999-99"
-            disabled={false}
-            maskChar=" "
-            value={form.cpf || ''}
-            onChange={handleChange}
-          >
-            {() => (
-              <TextField
-                required
-                fullWidth
-                label="CPF"
-                size="small"
-                margin="normal"
-                id="standard-error-helper-text"
-                invalid={formValidate.cpf}
-                disabled={loading}
-                type="text"
-                value={form.cpf || ''}
-                onChange={handleChange}
-                name="cpf"
-                placeholder="Informe o seu cpf"
-              />
-            )}
-          </InputMask>
+          <div>
+            <SInputLabel>E-mail</SInputLabel>
+            <TextField
+              fullWidth
+              size="small"
+              error={!!formValidate.email}
+              id="standard-error-helper-text"
+              name="email"
+              value={form.email || ''}
+              onChange={handleChange}
+              helperText={formValidate.email || ''}
+              disabled={loading}
+              variant="outlined"
+            />
+          </div>
 
-          <SFormControl>
+          <div>
+            <SInputLabel>Cpf</SInputLabel>
+            <InputMask
+              mask="999.999.999-99"
+              className="form-control"
+              name="cpf"
+              value={form.cpf || ''}
+              onChange={handleChange}
+              disabled={loading}
+            />
+            <div className="mt-1">
+              <p className="text-danger">{formValidate.cpf}</p>
+            </div>
+          </div>
+
+          <div>
             <SInputLabel>Sexo</SInputLabel>
             <Select
-              required
-              fullWidth
               native
-              variant="outlined"
-              label="Sexo"
               size="small"
-              margin="normal"
               id="standard-error-helper-text"
               value={form.gender}
               onChange={handleChange}
@@ -294,78 +265,71 @@ const FormClient = ({ submit, ...props }) => {
               <option value="M">M</option>
               <option value="F">F</option>
             </Select>
-          </SFormControl>
+            <div className="mt-1">
+              <p className="text-danger">{formValidate.gender}</p>
+            </div>
+          </div>
 
-          <TextField
-            required
-            fullWidth
-            margin="normal"
-            id="standard-error-helper-text"
-            name="birth_date"
-            label="Data de nascimento"
-            InputLabelProps={{ shrink: true, required: true }}
-            type="date"
-            value={
-              form.birth_date
-                ? moment(form.birth_date)
-                    .format('YYYY/MM/DD')
-                    .replaceAll('/', '-')
-                : ''
-            }
-            onChange={handleChange}
-            helperText={formValidate.birth_date || ''}
-            disabled={loading}
-          />
+          <div>
+            <SInputLabel>Data de nascimento</SInputLabel>
+            <TextField
+              fullWidth
+              id="standard-error-helper-text"
+              name="birth_date"
+              SInputLabelProps={{ shrink: true, required: true }}
+              type="date"
+              value={
+                form.birth_date
+                  ? moment(form.birth_date)
+                      .format('YYYY/MM/DD')
+                      .replaceAll('/', '-')
+                  : ''
+              }
+              onChange={handleChange}
+              helperText={formValidate.birth_date || ''}
+              disabled={loading}
+              variant="outlined"
+            />
+          </div>
 
-          <InputMask
-            mask="+55 (99) 9999-9999"
-            disabled={false}
-            maskChar=" "
-            value={form.phone || ''}
-            onChange={handleChange}
-          >
-            {() => (
-              <TextField
-                required
-                fullWidth
-                size="small"
-                margin="normal"
-                id="standard-error-helper-text"
-                error={!!formValidate.phone}
-                name="phone"
-                label="Telefone"
-                type="text"
-                value={form.phone || ''}
-                onChange={handleChange}
-                helperText={formValidate.phone || ''}
-                disabled={loading}
-              />
-            )}
-          </InputMask>
-          <TextField
-            required
-            fullWidth
-            size="small"
-            margin="normal"
-            id="standard-error-helper-text"
-            error={!!formValidate.address}
-            label="Endereço"
-            name="address"
-            value={form.address || ''}
-            onChange={handleChange}
-            helperText={formValidate.address || ''}
-            disabled={loading}
-          />
-          <SFormControl>
+          <div>
+            <SInputLabel>Telefone</SInputLabel>
+            <InputMask
+              mask="(99)9999-9999"
+              className="form-control"
+              name="phone"
+              value={form.phone || ''}
+              onChange={handleChange}
+              disabled={loading}
+            />
+            <div className="mt-1">
+              <p className="text-danger">{formValidate.phone}</p>
+            </div>
+          </div>
+
+          <div>
+            <SInputLabel>Endereço</SInputLabel>
+            <TextField
+              fullWidth
+              size="small"
+              id="standard-error-helper-text"
+              error={!!formValidate.address}
+              name="address"
+              value={form.address || ''}
+              onChange={handleChange}
+              helperText={formValidate.address || ''}
+              disabled={loading}
+              variant="outlined"
+            />
+          </div>
+
+          <div>
             <SInputLabel>Uf</SInputLabel>
             <Select
-              required
-              fullWidth
               native
+              id="standard-error-helper-text"
               variant="outlined"
               size="small"
-              margin="normal"
-              id="standard-error-helper-text"
               value={form.uf || ''}
               onChange={handleChange}
               inputProps={{
@@ -373,26 +337,26 @@ const FormClient = ({ submit, ...props }) => {
                 id: 'outlined-native-simple'
               }}
             >
-              <option value=""></option>
+              <option value="selecione">selecione</option>
               {uf?.map(({ name, uf }, i) => (
                 <option key={i} value={uf}>
                   {uf}
                 </option>
               ))}
             </Select>
-          </SFormControl>
+            <div className="mt-1">
+              <p className="text-danger">{formValidate.uf}</p>
+            </div>
+          </div>
 
-          <SFormControl>
+          <div>
             <SInputLabel>Cidade</SInputLabel>
             <Select
-              required
               fullWidth
               native
-              variant="outlined"
-              label="Cidade"
-              size="small"
-              margin="normal"
               id="standard-error-helper-text"
+              variant="outlined"
+              size="small"
               value={form.city || ''}
               onChange={handleChange}
               inputProps={{
@@ -400,72 +364,65 @@ const FormClient = ({ submit, ...props }) => {
                 id: 'outlined-native-simple'
               }}
             >
-              <option value=""></option>
-
+              <option value="selecione">selecione</option>
               {city?.map((city, i) => (
                 <option key={i} value={city}>
                   {city}
                 </option>
               ))}
             </Select>
-          </SFormControl>
+            <div className="mt-1">
+              <p className="text-danger">{formValidate.city}</p>
+            </div>
+          </div>
+          
+          <div>
+            <SInputLabel>Cep</SInputLabel>
+            <InputMask
+              mask="99999-999"
+              className="form-control"
+              name="zip_code"
+              value={form.zip_code || ''}
+              onChange={handleChange}
+              disabled={loading}
+            />
+            <div className="mt-1">
+              <p className="text-danger">{formValidate.zip_code}</p>
+            </div>
+          </div>
 
-          <InputMask
-            mask="99999-999"
-            disabled={false}
-            maskChar=" "
-            value={form.zip_code || ''}
-            onChange={handleChange}
-          >
-            {() => (
-              <TextField
-                required
-                fullWidth
-                size="small"
-                margin="normal"
-                label="Cep"
-                invalid={formValidate.zip_code}
-                disabled={loading}
-                type="text"
-                id="zip_code"
-                value={form.zip_code || ''}
-                onChange={handleChange}
-                name="zip_code"
-                placeholder="Informe o seu Cep"
-              />
-            )}
-          </InputMask>
+          <div>
+            <SInputLabel>Complemento</SInputLabel>
+            <TextField
+              fullWidth
+              size="small"
+              id="standard-error-helper-text"
+              invalid={formValidate.complement}
+              disabled={loading}
+              type="text"
+              value={form.complement || ''}
+              onChange={handleChange}
+              name="complement"
+              placeholder="Informe o seu complemento"
+              variant="outlined"
+            />
+          </div>
 
-          <TextField
-            required
-            fullWidth
-            size="small"
-            margin="normal"
-            label="Complemento"
-            id="standard-error-helper-text"
-            invalid={formValidate.complement}
-            disabled={loading}
-            type="text"
-            value={form.complement || ''}
-            onChange={handleChange}
-            name="complement"
-            placeholder="Informe o seu complemento"
-          />
           {button ? (
-            <>
+            <div>
+              <SInputLabel>Nova senha</SInputLabel>
               <TextField
                 fullWidth
                 size="small"
-                margin="normal"
                 id="standard-error-helper-text"
                 error={!!formValidate.password}
-                label="Nova senha"
                 name="password"
                 onChange={handleChange}
                 helperText={formValidate.password || ''}
                 disabled={loading}
+                variant="outlined"
               />
-            </>
+            </div>
           ) : (
             ''
           )}
