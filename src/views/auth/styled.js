@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const SForm = styled(Form)`
   width: 85%;
-  margin: 60px auto;
+  margin: 140px auto;
   background-color: #fafafa;
   box-shadow: 0px 2px 15px 6px rgba(0, 0, 0, 0.11);
   padding: 50px;

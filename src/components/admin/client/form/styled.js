@@ -20,7 +20,7 @@ export const FormStyle = styled.div`
   margin-top: ${({ theme: t }) => t.spacing(1)};
 `
 export const SInputLabel = styled(InputLabel)`
-  padding: 0px 10px;
+  padding: 15px 0px 10px 0px;
 `
 export const SFormControl = styled(FormControl)`
   margin-top: 20px;
