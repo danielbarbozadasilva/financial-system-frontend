@@ -60,6 +60,7 @@ export const Main = styled.div`
   position: relative;
   text-align: justify;
   color: #771700;
+  min-height: 100vh;
 `
 
 export const SContainer = styled(Container)`
