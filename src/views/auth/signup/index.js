@@ -83,7 +83,7 @@ const SignUp = () => {
         break
 
       case 'gender':
-        if (value === '0') {
+        if (value === 'selecione') {
           message += 'Selecione um sexo!'
         }
         break
@@ -135,13 +135,13 @@ const SignUp = () => {
         break
 
       case 'uf':
-        if (value === '') {
+        if (value === 'selecione') {
           message += 'Selecione uma uf!'
         }
         break
 
       case 'city':
-        if (value === '') {
+        if (value === 'selecione') {
           message += 'Selecione uma cidade!'
         }
         break
@@ -208,7 +208,8 @@ const SignUp = () => {
       city: form.city,
       zip_code: form.zip_code,
       complement: form.complement,
-      status: true
+      status: true,      
+      auth: true
     }
 
     dispatch(await signUpAction(nform)).then(() => {
@@ -286,9 +287,9 @@ const SignUp = () => {
               id: 'outlined-native-simple'
             }}
           >
-            <option value="0">selecione</option>
-            <option value="1">M</option>
-            <option value="2">F</option>
+            <option value="selecione">selecione</option>
+            <option value="M">M</option>
+            <option value="F">F</option>
           </Select>
           <Form.Control.Feedback type="text">
             {formValidate.gender || ''}
@@ -397,7 +398,7 @@ const SignUp = () => {
               id: 'outlined-native-simple'
             }}
           >
-            <option value="">selecione</option>
+            <option value="selecione">selecione</option>
             {uf?.map(({ name, uf }, i) => (
               <option key={i} value={uf}>
                 {uf}
@@ -422,8 +423,7 @@ const SignUp = () => {
               id: 'outlined-native-simple'
             }}
           >
-            <option value="">selecione</option>
-
+            <option value="selecione">selecione</option>
             {city?.map((city, i) => (
               <option key={i} value={city}>
                 {city}
