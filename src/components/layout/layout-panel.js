@@ -191,9 +191,8 @@ export default function Dashboard(props) {
           <AccountCircleIcon className={classes.userIcon} />
           <div className={classes.details}>
             <h6> Nome: {name}</h6>
-            {type === 1 ? <h6> Cpf: {cpf}</h6> : <h6> C/C: {number}</h6>}
+            <h6> Cpf: {cpf}</h6>
           </div>
-
           <Button onClick={handleLogout}>
             <PowerSettingsNew className={classes.userIcon} />
           </Button>
