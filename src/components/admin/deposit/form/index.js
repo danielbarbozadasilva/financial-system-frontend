@@ -24,7 +24,6 @@ const FormDeposit = ({ submit, ...props }) => {
 
   const fieldValidate = (nome, value) => {
     let message = ''
-
     switch (nome) {
       case 'bank':
         if (value === 'selecione') {
@@ -68,7 +67,7 @@ const FormDeposit = ({ submit, ...props }) => {
       branch: form.branch,
       origin_cpf: form.cpf,
       user_id: user,
-      value: getMoney(form.value).replace('R$', '').replace(',', '.'),
+      value: getMoney(form.value).replace('R$', '').replace('.', '').replace(',','.'),
       bank_id: props.banks.find((banks) => banks.name === form.bank).cod_bank
     }
     submit(newForm)
@@ -139,6 +138,7 @@ const FormDeposit = ({ submit, ...props }) => {
           <SInputLabel>Valor</SInputLabel>
           <input
             className="form-control"
+            maxlength="10"
             disabled={loading}
             type="text"
             value={getMoney(form.value) || ''}
