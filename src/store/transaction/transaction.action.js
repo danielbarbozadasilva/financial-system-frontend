@@ -8,6 +8,7 @@ import {
   listByIdDepositTransactionService
 } from '../../services/transaction.service'
 import { getUser } from '../../config/auth'
+import { listAllAccountAction, checkBalanceAction } from '../../store/account/account.action'
 
 export const createTransaction = (asset_id, data) => {
   return async (dispatch) => {
@@ -16,6 +17,7 @@ export const createTransaction = (asset_id, data) => {
       const result = await createTransactionService(user_id, asset_id, data)
       dispatch({ type: TYPES.TRANSACTION_CREATE, data: result.data?.data })
       toastr.success('Transação', 'realizada com sucesso!')
+      dispatch(checkBalanceAction())
     } catch (error) {
       const { data } = error.response
       toastr.error('Transação', data.message.details)
@@ -30,6 +32,7 @@ export const createDepositAction = (data) => {
       const result = await createDepositService(data.user_id, data)
       dispatch({ type: TYPES.TRANSACTION_BANK_DEPOSIT, data: result.data.data })
       toastr.success('Depósito', 'realizado com sucesso!')
+      dispatch(listAllAccountAction())
     } catch (error) {
       const { data } = error.response
       toastr.error('Depósito', data.message.details)

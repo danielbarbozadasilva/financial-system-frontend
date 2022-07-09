@@ -22,10 +22,6 @@ const reducer = ({...state} = INITIAL_STATE, action) => {
       state.all = action.data
       state.loading = false
       return state
-    case TYPES.ACCOUNT_ID:
-      state.selected = action.data
-      state.loading = false
-      return state
     case TYPES.ACCOUNT_EDIT:
       state.selected = action.data
       state.loading = false
