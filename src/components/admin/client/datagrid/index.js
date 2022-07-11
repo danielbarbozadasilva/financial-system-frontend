@@ -1,6 +1,6 @@
 import React from 'react'
 import { IconButton, Tooltip } from '@material-ui/core'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
 import { More as MoreIcon } from '@mui/icons-material'
 import { FiEdit } from 'react-icons/fi'
@@ -15,7 +15,6 @@ import ListClientDetails from '../clients_details'
 
 const DataList = ({ data, modal, loading }) => {
   const dispatch = useDispatch()
-  const transactions = useSelector((state) => state.transaction.selected)
 
   const [modalTransaction, setModalTransaction] = React.useState({})
   const [modalAssets, setModalAssets] = React.useState(false, {})
@@ -27,7 +26,7 @@ const DataList = ({ data, modal, loading }) => {
 
   function openTransaction(row) {
     dispatch(listByIdUserAssetAction(row))
-    setModalTransaction({ open: true, data: transactions })
+    setModalTransaction({ open: true })
   }
 
   function openClientDetails(row) {
@@ -35,8 +34,9 @@ const DataList = ({ data, modal, loading }) => {
   }
 
   function openAssetsClient(row) {
-    dispatch(listByIdUserAssetAction(row))
-    setModalAssets({ open: true, data: transactions })
+    dispatch(listByIdUserAssetAction(row)).then(
+      setModalAssets({ open: true })
+    )
   }
 
   const actionModalAssets = ({ id, row }) => {
@@ -212,7 +212,7 @@ const DataList = ({ data, modal, loading }) => {
         close={() => setModalDetails({ ...modalDetails, open: false })}
       />
       <ListFinancialAssets
-        assets={modalAssets.data}
+        data={modalAssets.data}
         open={modalAssets.open}
         close={() => setModalAssets({ ...modalAssets, open: false })}
       />
