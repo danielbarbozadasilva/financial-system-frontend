@@ -29,13 +29,9 @@ const Client = () => {
   }, [callClient])
 
   const toogleModal = (type = 1, id = null) => {
-    if (id) {
       dispatch(editClientAction(id)).then(() =>
         setModal({ type, id, status: true })
       )
-    } else {
-      setModal({ type, id, status: true })
-    }
   }
 
   const closeModal = () => setModal({ status: false, type: 1 })
