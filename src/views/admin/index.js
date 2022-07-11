@@ -10,7 +10,8 @@ import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 
 import PanelLayout from '../../components/layout/layout-panel'
 import Home from '../../views/admin/home/index'
-import Financial from '../../views/admin/financial_assets/index'
+import Financial from './financial_assets/admin/index'
+import FinancialClient from './financial_assets/client/index'
 import Client from '../../views/admin/client/index'
 import TransactionsDetails from '../../views/admin/transaction/index'
 import Account from '../../views/admin/deposit/index'
@@ -28,13 +29,22 @@ export const Menu = [
     authorization: [1, 2]
   },
   {
-    title: 'Ativos Financeiros',
+    title: 'Ativos Clientes',
     icon: <ShoppingCartIcon />,
     route: '/assets',
     visibleMenu: true,
     enabled: true,
     component: Financial,
-    authorization: [1, 2]
+    authorization: [1]
+  },
+  {
+    title: 'Ativos Financeiros',
+    icon: <ShoppingCartIcon />,
+    route: '/clientassets',
+    visibleMenu: true,
+    enabled: true,
+    component: FinancialClient,
+    authorization: [2]
   },
   {
     title: 'Clientes',

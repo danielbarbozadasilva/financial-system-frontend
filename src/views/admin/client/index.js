@@ -29,9 +29,9 @@ const Client = () => {
   }, [callClient])
 
   const toogleModal = (type = 1, id = null) => {
-      dispatch(editClientAction(id)).then(() =>
-        setModal({ type, id, status: true })
-      )
+    dispatch(editClientAction(id)).then(() =>
+      setModal({ type, id, status: true })
+    )
   }
 
   const closeModal = () => setModal({ status: false, type: 1 })
@@ -56,11 +56,7 @@ const Client = () => {
         open={modal.status || false}
         close={closeModal}
       >
-        <>
-          {modal.type === 1 ? (
-            <FormClient submit={submitForm} data={selected} />
-          ) : null}
-        </>
+        <FormClient submit={submitForm} data={selected} />
       </DialogModal>
     </>
   )

@@ -1,16 +1,12 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
 import { FiTrash2, FiEdit } from 'react-icons/fi'
-import { BsFillCartFill } from 'react-icons/bs'
 import { BoxTable, SImg } from '../../../datagrid/styled'
 import { IconButton } from '@material-ui/core'
 import Loading from '../../../loading/index'
 
 const DataList = ({ data, modal, loading }) => {
   
-  const typeUser = useSelector((state) => state.auth.user.type)
-
   const thumb = ({ formattedValue }) => {
     return <SImg src={formattedValue} />
   }
@@ -35,15 +31,6 @@ const DataList = ({ data, modal, loading }) => {
     )
   }
 
-  const actionBuy = ({ id, row }) => {
-    return (
-      <>
-        <IconButton onClick={() => modal(4, id)} color="primary" size="small">
-          <BsFillCartFill />
-        </IconButton>
-      </>
-    )
-  }
 
   const columns = [
     {
@@ -89,17 +76,17 @@ const DataList = ({ data, modal, loading }) => {
     },
     {
       field: 'actionEdit',
-      headerName: typeUser === 1 ? 'Editar' : 'Adiquirir',
-      renderCell: typeUser === 1 ? actionEdit : actionBuy,
+      headerName: 'Editar',
+      renderCell: actionEdit,
       align: 'center',
       flex: 1,
       headerAlign: 'center',
       disableColumnMenu: true
     },
     {
-      field: '',
-      headerName: typeUser === 1 ? 'Excluir' : '',
-      renderCell: typeUser === 1 ? actionRemove : '',
+      field: 'actionRemove',
+      headerName: 'Excluir',
+      renderCell: actionRemove,
       align: 'center',
       flex: 1,
       headerAlign: 'center',

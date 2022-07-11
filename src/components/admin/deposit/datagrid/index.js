@@ -1,23 +1,23 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { useDispatch } from 'react-redux'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { BsFillCartFill } from 'react-icons/bs'
 import { More as MoreIcon } from '@mui/icons-material'
 import { IconButton, Tooltip } from '@material-ui/core'
 import { BoxTable } from '../../../datagrid/styled'
 import Loading from '../../../loading/index'
-import Form from '../deposit'
 import { listByIdUserDepositAction } from '../../../../store/transaction/transaction.action'
+import Form from '../deposit'
 
 const DataList = ({ data, modal, loading }) => {
   const dispatch = useDispatch()
-  
-  const transactions = useSelector((state) => state.transaction.deposit)
+
   const [modalTransaction, setModalTransaction] = React.useState({})
-  
+
   function openTransaction(row) {
-    dispatch(listByIdUserDepositAction(row))
-    setModalTransaction({ open: true, data: transactions })
+    dispatch(listByIdUserDepositAction(row)).then(
+      setModalTransaction({ open: true })
+    )
   }
 
   const actionDeposit = ({ id, row }) => {
@@ -30,14 +30,11 @@ const DataList = ({ data, modal, loading }) => {
     )
   }
 
-  const actionListDeposit = ({ id, row }) => {
-     return (
+  const actionListDeposit = ({ id }) => {
+    return (
       <>
-        <Tooltip title="Listar ativos">
-          <IconButton
-            onClick={() => openTransaction(id)}
-            color="primary"
-          >
+        <Tooltip title="Listar depósitos">
+          <IconButton onClick={() => openTransaction(id)} color="primary">
             <MoreIcon />
           </IconButton>
         </Tooltip>
@@ -129,19 +126,22 @@ const DataList = ({ data, modal, loading }) => {
   return (
     <>
       <BoxTable>
-        <DataGrid rows={data} columns={columns} pageSize={10}   
-        disableColumnSelector
-        disableDensitySelector
-        components={{ Toolbar: GridToolbar }}
-        componentsProps={{
-          toolbar: {
-            showQuickFilter: true,
-            quickFilterProps: { debounceMs: 500 },
-          },
-        }}/>
+        <DataGrid
+          rows={data}
+          columns={columns}
+          pageSize={10}
+          disableColumnSelector
+          disableDensitySelector
+          components={{ Toolbar: GridToolbar }}
+          componentsProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 }
+            }
+          }}
+        />
       </BoxTable>
       <Form
-        data={modalTransaction.data}
         open={modalTransaction.open}
         close={() => setModalTransaction({ ...modalTransaction, open: false })}
       />

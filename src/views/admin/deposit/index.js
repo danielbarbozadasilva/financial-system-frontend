@@ -66,8 +66,9 @@ const Account = () => {
         <>
           {modal.type === 1 ? (
             <FormDeposit submit={submitForm} data={selected} banks={banks} />
-          ) : null}
-          {modal.type === 2 ? <Form data={selected} /> : null}
+          ) : (
+            <Form data={selected} />
+          )}
         </>
       </DialogModal>
     </>

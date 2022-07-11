@@ -1,42 +1,29 @@
 import React, { useEffect, useCallback } from 'react'
 import { Grid, Button } from '@material-ui/core'
 import { useDispatch, useSelector } from 'react-redux'
-import { createTransaction } from '../../../store/transaction/transaction.action'
 import {
   listAllAssetAction,
   createAssetAction,
   editAssetAction,
   updateAssetAction,
   deleteAssetAction
-} from '../../../store/financial_assets/financial_assets.action'
-import { checkBalanceAction } from '../../../store/account/account.action'
-import DialogModal from '../../../components/dialog'
-import DataList from '../../../components/admin/financial_assets/datagrid/index'
-import Remove from '../../../components/admin/financial_assets/remove'
-import Title from '../../../components/title/index'
-
-import FormAdm from '../../../components/admin/financial_assets/form/index_admin'
-import FormClient from '../../../components/admin/financial_assets/form/index_client'
+} from '../../../../store/financial_assets/financial_assets.action'
+import DialogModal from '../../../../components/dialog'
+import DataList from '../../../../components/admin/financial_assets/datagrid/index'
+import Remove from '../../../../components/admin/financial_assets/remove'
+import Title from '../../../../components/title/index'
+import FormAdm from '../../../../components/admin/financial_assets/form/index'
 
 const Financial = () => {
   const dispatch = useDispatch()
   const [modal, setModal] = React.useState({})
 
   const financial = useSelector((state) => state.financial.all)
-  const account = useSelector((state) => state.account.balance)
-  const banks = useSelector((state) => state.bank.all)
   const selected = useSelector((state) => state.financial.selected)
-
-  const typeUser = useSelector((state) => state.auth.user.type)
   const loading = useSelector((state) => state.financial.loading)
 
   const callFinancial = useCallback(() => {
-    if (typeUser === 1) {
-      dispatch(listAllAssetAction())
-    } else {
-      dispatch(listAllAssetAction())
-      dispatch(checkBalanceAction())
-    }
+    dispatch(listAllAssetAction())
   }, [dispatch])
 
   useEffect(() => {
@@ -71,37 +58,21 @@ const Financial = () => {
         dispatch(deleteAssetAction(modal.id)).then(() => setModal(false))
         return
 
-      case 4:
-        dispatch(createTransaction(modal.id, form))
-        setModal(false)
-        return
-
       default:
         return false
     }
   }
 
-  const actions = () =>
-    typeUser === 1 ? (
-      <Button
-        onClick={() => toogleModal(1, null)}
-        variant="contained"
-        color="primary"
-        size="small"
-      >
-        Novo
-      </Button>
-    ) : (
-      <div className="container">
-        <div className="row">
-          <div>
-            <h6>Saldo em C/C: {account.balance}</h6>
-            <h6>Patrimônio Investido: {account.total_assets}</h6>
-            <h6>Patrimônio Total: {account.consolidated}</h6>
-          </div>
-        </div>
-      </div>
-    )
+  const actions = () => (
+    <Button
+      onClick={() => toogleModal(1, null)}
+      variant="contained"
+      color="primary"
+      size="small"
+    >
+      Novo
+    </Button>
+  )
 
   return (
     <>
@@ -117,7 +88,7 @@ const Financial = () => {
       </Grid>
 
       <DialogModal
-        title={modal.type !== 5 ? 'Ativo Financeiro' : 'Realizar depósito'}
+        title={'Ativo Financeiro'}
         open={modal.status || false}
         close={closeModal}
       >
@@ -128,9 +99,6 @@ const Financial = () => {
           ) : null}
           {modal.type === 3 ? (
             <Remove close={closeModal} remove={submitForm} />
-          ) : null}
-          {modal.type === 4 ? (
-            <FormClient submit={submitForm} data={selected} />
           ) : null}
         </>
       </DialogModal>

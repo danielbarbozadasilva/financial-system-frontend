@@ -34,9 +34,7 @@ const DataList = ({ data, modal, loading }) => {
   }
 
   function openAssetsClient(row) {
-    dispatch(listByIdUserAssetAction(row)).then(
-      setModalAssets({ open: true })
-    )
+    dispatch(listByIdUserAssetAction(row)).then(setModalAssets({ open: true }))
   }
 
   const actionModalAssets = ({ id, row }) => {
@@ -203,16 +201,13 @@ const DataList = ({ data, modal, loading }) => {
       </BoxTable>
       <ListFinancialTransaction
         open={modalTransaction.open}
-        transactions={modalTransaction.data}
         close={() => setModalTransaction({ ...modalTransaction, open: false })}
       />
       <ListClientDetails
         open={modalDetails.open}
-        details={modalDetails.data}
         close={() => setModalDetails({ ...modalDetails, open: false })}
       />
       <ListFinancialAssets
-        data={modalAssets.data}
         open={modalAssets.open}
         close={() => setModalAssets({ ...modalAssets, open: false })}
       />

@@ -1,11 +1,24 @@
 import React from 'react'
 import { DataGrid } from '@material-ui/data-grid'
 import { BoxTable, SImg } from '../../../datagrid/styled'
+import { IconButton } from '@material-ui/core'
 import Loading from '../../../loading/index'
+import { BsFillCartFill } from 'react-icons/bs'
 
 const DataList = ({ data, modal, loading }) => {
+  
   const thumb = ({ formattedValue }) => {
     return <SImg src={formattedValue} />
+  }
+
+  const actionBuy = ({ id, row }) => {
+    return (
+      <>
+        <IconButton onClick={() => modal(4, id)} color="primary" size="small">
+          <BsFillCartFill />
+        </IconButton>
+      </>
+    )
   }
 
   const columns = [
@@ -47,6 +60,15 @@ const DataList = ({ data, modal, loading }) => {
       headerName: 'Preço Atual',
       flex: 1,
       align: 'center',
+      headerAlign: 'center',
+      disableColumnMenu: true
+    },
+    {
+      field: 'actionEdit',
+      headerName: 'Adiquirir',
+      renderCell: actionBuy,
+      align: 'center',
+      flex: 1,
       headerAlign: 'center',
       disableColumnMenu: true
     }
