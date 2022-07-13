@@ -17,18 +17,17 @@ export function calcTotal(subtotal) {
   const TAX_RATE = 5
   var price = parseFloat(formatPrice(subtotal))
   var resp = price + (price / 100) * TAX_RATE
-  var convert = resp.toLocaleString('pt-br', {
+  return resp.toLocaleString('pt-br', {
     style: 'currency',
     currency: 'BRL'
   })
-  return convert
 }
 
 export function formatPrice(num) {
-  return parseFloat(num.replace('R$', '').replace(',', '.'))
+  return parseFloat(num?.replace(".","").replace(",",".").replaceAll(/\s+/g, '').replace("R$", ""))
 }
 
-function formatReal(int) {
+export function formatReal(int) {
   let tmp = int + ''
   let neg = false
   if (tmp.indexOf('-') == 0) {
