@@ -14,7 +14,7 @@ const DataList = ({ data, modal, loading }) => {
   const actionBuy = ({ id, row }) => {
     return (
       <>
-        <IconButton onClick={() => modal(4, id)} color="primary" size="small">
+        <IconButton onClick={() => modal(1, id)} color="primary" size="small">
           <BsFillCartFill />
         </IconButton>
       </>

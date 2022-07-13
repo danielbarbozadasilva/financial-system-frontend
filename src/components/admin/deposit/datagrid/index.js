@@ -142,7 +142,7 @@ const DataList = ({ data, modal, loading }) => {
         />
       </BoxTable>
       <Form
-        open={modalTransaction.open}
+        open={modalTransaction.open || false}
         close={() => setModalTransaction({ ...modalTransaction, open: false })}
       />
     </>

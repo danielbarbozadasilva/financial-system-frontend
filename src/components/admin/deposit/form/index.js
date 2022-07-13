@@ -82,7 +82,7 @@ const FormDeposit = ({ submit, ...props }) => {
             fullWidth
             native
             id="standard-error-helper-text"
-            margin="normal"
+            margin="none"
             size="small"
             value={form.bank || ''}
             onChange={handleChange}
@@ -138,7 +138,7 @@ const FormDeposit = ({ submit, ...props }) => {
           <SInputLabel>Valor</SInputLabel>
           <input
             className="form-control"
-            maxlength="10"
+            maxLength="10"
             disabled={loading}
             type="text"
             value={getMoney(form.value) || ''}

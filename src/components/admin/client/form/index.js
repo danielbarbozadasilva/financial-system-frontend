@@ -276,7 +276,6 @@ const FormClient = ({ submit, ...props }) => {
               fullWidth
               id="standard-error-helper-text"
               name="birth_date"
-              SInputLabelProps={{ shrink: true, required: true }}
               type="date"
               value={
                 form.birth_date

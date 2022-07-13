@@ -47,14 +47,19 @@ const ListClientDetails = ({ details, open, close }) => {
     <Dialog
       open={open}
       onClose={close}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'>
-      <DialogTitle id='alert-dialog-title'>Endereço</DialogTitle>
-      <DialogContent style={{ width: '600px'}}>
-        <DataList data={details} columns={columnsDetails} loading={false} />
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
+    >
+      <DialogTitle id="alert-dialog-title">Endereço</DialogTitle>
+      <DialogContent style={{ width: '600px' }}>
+        <DataList
+          data={details}
+          columns={columnsDetails}
+          loading={false}
+        />
       </DialogContent>
       <DialogActions>
-        <Button onClick={close} color='primary' autoFocus>
+        <Button onClick={close} color="primary" autoFocus>
           fechar
         </Button>
       </DialogActions>

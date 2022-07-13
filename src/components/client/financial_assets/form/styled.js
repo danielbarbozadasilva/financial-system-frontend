@@ -4,6 +4,7 @@ import { Paper } from '@material-ui/core'
 export const Box = styled(Paper)`
   padding: 25px;
 `
+
 export const Image = styled.img`
   max-width: 170px;
   max-height: 170px;
@@ -25,13 +26,13 @@ export const SInput = styled.input`
 `
 
 export const STable = styled.div`
-  padding-top: 45px;
-  padding-left: 45%;
+  padding-top: 25px;
+  margin-left: 45%;
   background-color: white;
   border: none;
 `
 
 export const SBox = styled.div`
-  padding: 20px 0px;
-  padding-left: 65%;
+  padding: 30px 0px;
+  padding-left: 80%;
 `

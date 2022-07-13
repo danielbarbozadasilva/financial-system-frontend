@@ -200,15 +200,16 @@ const DataList = ({ data, modal, loading }) => {
         <DataGrid rows={data} columns={columns} pageSize={10} />
       </BoxTable>
       <ListFinancialTransaction
-        open={modalTransaction.open}
+        open={modalTransaction.open || false}
         close={() => setModalTransaction({ ...modalTransaction, open: false })}
       />
       <ListClientDetails
-        open={modalDetails.open}
+        details={modalDetails.data}
+        open={modalDetails.open || false}
         close={() => setModalDetails({ ...modalDetails, open: false })}
       />
       <ListFinancialAssets
-        open={modalAssets.open}
+        open={modalAssets.open || false}
         close={() => setModalAssets({ ...modalAssets, open: false })}
       />
     </>
