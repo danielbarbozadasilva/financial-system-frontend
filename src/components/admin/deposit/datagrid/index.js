@@ -20,7 +20,7 @@ const DataList = ({ data, modal, loading }) => {
     )
   }
 
-  const actionDeposit = ({ id, row }) => {
+  const actionDeposit = ({ id }) => {
     return (
       <>
         <IconButton onClick={() => modal(1, id)} color="primary" size="small">
@@ -30,11 +30,14 @@ const DataList = ({ data, modal, loading }) => {
     )
   }
 
-  const actionListDeposit = ({ id }) => {
+  const actionListDeposit = ({ row }) => {
     return (
       <>
         <Tooltip title="Listar depósitos">
-          <IconButton onClick={() => openTransaction(id)} color="primary">
+          <IconButton
+            onClick={() => openTransaction(row.id_user)}
+            color="primary"
+          >
             <MoreIcon />
           </IconButton>
         </Tooltip>
