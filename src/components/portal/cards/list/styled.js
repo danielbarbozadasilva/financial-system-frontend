@@ -77,26 +77,47 @@ export const SContainer = styled.div`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 50px;
 `
 
-export const SText = styled.div`
-  width: 100%;
-  top: 18%;
-  position: absolute;
-  z-index: 100;
-`
-
-export const Sh2 = styled.h2`
+export const TextTitle = styled.div`
   font-weight: 500;
-  font-family: 'Great Vibes', handwriting;
   word-wrap: break-word;
-  margin-top: 0;
-  font-size: 65px;
+  margin-bottom: 50px;
   color: #ebebeb;
   text-align: center;
 `
 
+export const SButtonTitle = styled.button`
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  background-color: #c79c60;
+  line-height: 38px;
+  padding: 0 18px;
+  border: none;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+
+  :hover {
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
+    transition: 1s;
+    opacity: 0.5;
+  }
+`
+
+export const ContainerTitle = styled.div`
+  width: 100%;
+  top: 14%;
+  position: absolute;
+  z-index: 100;
+`
+
 export const STextInvest = styled.div`
-  margin-left: 45px;
-  margin-bottom: 50px;
+  text-align: center;
 `
