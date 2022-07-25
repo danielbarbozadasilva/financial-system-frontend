@@ -8,7 +8,7 @@ const INITIAL_STATE = {
   dataById: []
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = ({...state} = INITIAL_STATE, action) => {
   switch (action.type) {
     case TYPES.CLIENT_LOADING:
       state.error = []
@@ -16,6 +16,10 @@ const reducer = (state = INITIAL_STATE, action) => {
       return state
     case TYPES.CLIENT_ALL:
       state.all = action.data
+      state.loading = false
+      return state
+    case TYPES.LIST_CLIENT_ASSET:
+      state.selected = action.data
       state.loading = false
       return state
     case TYPES.CLIENT_EDIT:

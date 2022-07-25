@@ -4,9 +4,12 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import { useSelector } from 'react-redux'
 import DataList from '../../datagrid/index'
 
-const ListFinancialTransaction = ({ transactions, open, close }) => {
+const ListFinancialTransaction = ({ ...props }) => {
+  const transactions = useSelector((state) => state.transaction.selected)
+
   const columnsTransactions = [
     {
       field: 'total_quantity',
@@ -30,17 +33,21 @@ const ListFinancialTransaction = ({ transactions, open, close }) => {
 
   return (
     <Dialog
-      open={open}
-      onClose={close}
-      aria-labelledby='alert-dialog-title'
-      aria-describedby='alert-dialog-description'
+      open={props.open}
+      onClose={props.close}
+      aria-labelledby="alert-dialog-title"
+      aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id='alert-dialog-title'>Lista de Transações</DialogTitle>
+      <DialogTitle id="alert-dialog-title">Lista de Transações</DialogTitle>
       <DialogContent style={{ width: '500px' }}>
-        <DataList data={transactions} columns={columnsTransactions} loading={false} />
+        <DataList
+          data={transactions}
+          columns={columnsTransactions}
+          loading={false}
+        />
       </DialogContent>
       <DialogActions>
-        <Button onClick={close} color='primary' autoFocus>
+        <Button onClick={props.close} color="primary" autoFocus>
           fechar
         </Button>
       </DialogActions>

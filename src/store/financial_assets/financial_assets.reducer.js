@@ -5,10 +5,11 @@ const INITIAL_STATE = {
   all: [],
   upload: {},
   selected: {},
+  top05: [],
   dataById: []
 }
 
-const reducer = (state = INITIAL_STATE, action) => {
+const reducer = ({...state} = INITIAL_STATE, action) => {
   switch (action.type) {
     case TYPES.FINANCIAL_LOADING:
       state.error = []
@@ -16,6 +17,10 @@ const reducer = (state = INITIAL_STATE, action) => {
       return state
     case TYPES.FINANCIAL_ALL:
       state.all = action.data
+      state.loading = false
+      return state
+    case TYPES.FINANCIAL_TOP5_USER:
+      state.top05 = action.data
       state.loading = false
       return state
     case TYPES.FINANCIAL_EDIT:

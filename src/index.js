@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import ReactDOM from 'react-dom'
 import Routers from './routers.js'
 import reportWebVitals from './reportWebVitals'
 import { Provider } from 'react-redux'
@@ -16,9 +16,7 @@ const googleFontNunito =
 const googleFontMontserrat =
   'https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@100&display=swap'
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
-
-root.render(
+ReactDOM.render(
   <Provider store={store}>
     <ReduxToastr />
     <ThemeProvider theme={theme}>
@@ -28,7 +26,7 @@ root.render(
       </Helmet>
       <Routers />
     </ThemeProvider>
-  </Provider>
+  </Provider>,
+  document.getElementById('root')
 )
-
 reportWebVitals()

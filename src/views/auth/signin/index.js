@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import { signInAction } from '../../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
-import { SForm, SColFooter, STextForm, SButton, STextLink } from './SigninElements'
-import Loading from  '../../../components/loading'
+import {
+  SForm,
+  SColFooter,
+  STextForm,
+  SButtonSignIn,
+  STextLink
+} from '../styled'
+import Loading from '../../../components/loading'
+import InputMask from 'react-input-mask'
 
 const SignIn = (props) => {
   const dispatch = useDispatch()
@@ -12,7 +19,7 @@ const SignIn = (props) => {
   const loading = useSelector((state) => state.auth.loading)
 
   const [form, setForm] = useState({
-    email: '',
+    cpf: '',
     password: ''
   })
 
@@ -29,7 +36,7 @@ const SignIn = (props) => {
     dispatch(await signInAction(form))
   }
 
-  const isNotValid = () => form.email.length === 0 || form.password.length === 0
+  const isNotValid = () => form.cpf.length === 0 || form.password.length === 0
 
   useEffect(() => {
     setHasError(error.length > 0)
@@ -42,15 +49,17 @@ const SignIn = (props) => {
           <SForm>
             <STextForm>Login</STextForm>
             <Form.Group className="mb-3">
-              <Form.Label>E-mail</Form.Label>
-              <Form.Control
-                disabled={loading}
-                type="email"
-                name="email"
-                id="email"
+              <Form.Label>CPF:</Form.Label>
+              <InputMask
+                mask="999.999.999-99"
+                className="form-control"
+                type="text"
+                id="cpf"
                 onChange={handleChange}
-                value={form.email || ''}
-                placeholder="Informe o seu E-mail"
+                name="cpf"
+                value={form.cpf || ''}
+                placeholder="Informe o seu cpf"
+                disabled={loading}
               />
             </Form.Group>
 
@@ -69,7 +78,7 @@ const SignIn = (props) => {
             <Form.Group className="mb-3">
               <Form.Check type="checkbox" label="Lembrar credenciais" />
             </Form.Group>
-            <SButton
+            <SButtonSignIn
               type="button"
               disabled={isNotValid()}
               onClick={submitForm}
@@ -83,9 +92,10 @@ const SignIn = (props) => {
               )}
 
               <i className="icon-angle-right ml-2" />
-            </SButton>
+            </SButtonSignIn>
             <SColFooter>
-              Não tem Cadastro? <STextLink href="/signup">Cadastre-se</STextLink>
+              Não tem Cadastro?{' '}
+              <STextLink href="/signup">Cadastre-se</STextLink>
             </SColFooter>
           </SForm>
         </Col>

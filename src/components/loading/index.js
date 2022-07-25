@@ -1,4 +1,4 @@
-import { SLoading, LoadingBox } from './LoadingElements'
+import { SLoading, LoadingBox } from './styled'
 
 const Loading = () => {
   return (

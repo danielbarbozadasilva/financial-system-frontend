@@ -74,7 +74,7 @@ export const updateClientAction = (id, { ...data }) => {
 }
 
 export const setStatusClient = (id, status) => {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     try {
       const result = await changeStatusService(id, status)
       var msg = status ? 'Ativado' : 'Desativado'
@@ -82,10 +82,7 @@ export const setStatusClient = (id, status) => {
         `Cliente ${result.data.data.name}`,
         `${msg} com sucesso`
       )
-      const all = getState().client.all
-      const index = all.findIndex((item) => item.id === id)
-      all[index].status = result.data.data.status
-      dispatch({ type: TYPES.CLIENT_ALL, data: [...all] })
+      dispatch(listAllClientAction())
     } catch (err) {}
   }
 }

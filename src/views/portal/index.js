@@ -4,7 +4,11 @@ import Layout from '../../components/layout/main/index'
 import SignIn from '../auth/signin/index'
 import SignUp from '../auth/signup/index'
 import Home from '../portal/home/index'
+import Top05 from './top/index'
+
+import Error403 from '../error/403/index'
 import Error404 from '../error/404/index'
+import Error500 from '../error/500/index'
 
 const Menu = [
   {
@@ -14,6 +18,14 @@ const Menu = [
     visibleMenu: true,
     enabled: true,
     component: Home
+  },
+  {
+    title: 'Top05',
+    icons: '',
+    route: '/top05',
+    visibleMenu: true,
+    enabled: true,
+    component: Top05
   },
   {
     title: 'SignIn',
@@ -32,12 +44,28 @@ const Menu = [
     component: SignUp
   },
   {
+    title: 'NotAuthorized',
+    icons: '',
+    route: '/error403',
+    visibleMenu: true,
+    enabled: true,
+    component: Error403
+  },
+  {
     title: 'NotFound',
     icons: '',
     route: '/error404',
     visibleMenu: true,
     enabled: true,
     component: Error404
+  },
+  {
+    title: 'InternalServerError',
+    icons: '',
+    route: '/error500',
+    visibleMenu: true,
+    enabled: true,
+    component: Error500
   }
 ]
 

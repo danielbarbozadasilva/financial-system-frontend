@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../header/index'
 import Footer from '../footer/index'
 import '../../../assets/css/style.css'
-import { Main } from './MainElement'
+import { Main } from '../styled'
 
 const Layout = (props) => {
   return (

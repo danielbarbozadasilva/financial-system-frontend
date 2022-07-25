@@ -4,11 +4,21 @@ import {
   Dashboard as DashboardIcon,
   ShoppingCart as ShoppingCartIcon,
   People as PeopleIcon
-} from '@material-ui/icons'
+} from '@mui/icons-material'
+import LocalAtmIcon from '@mui/icons-material/LocalAtm'
+import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
+
 import PanelLayout from '../../components/layout/layout-panel'
-import Home from '../../views/admin/home/index'
-import Financial from '../../views/admin/financial_assets/index'
+import HomeAdmin from './home/admin/index'
+import HomeClient from './home/client/index'
+
+import Financial from './financial_assets/admin/index'
+import FinancialClient from './financial_assets/client/index'
 import Client from '../../views/admin/client/index'
+import TransactionsDetails from '../../views/admin/transaction/index'
+import Account from '../../views/admin/deposit/index'
+
+import Error404 from '../error/404/index'
 
 export const Menu = [
   {
@@ -17,17 +27,35 @@ export const Menu = [
     route: '/',
     visibleMenu: true,
     enabled: true,
-    component: Home,
-    authorization: [1, 2]
+    component: HomeAdmin,
+    authorization: [1]
   },
   {
-    title: 'Ativos Financeiros',
+    title: 'Início',
+    icon: <DashboardIcon />,
+    route: '/',
+    visibleMenu: true,
+    enabled: true,
+    component: HomeClient,
+    authorization: [2]
+  },
+  {
+    title: 'Ativos Clientes',
     icon: <ShoppingCartIcon />,
     route: '/assets',
     visibleMenu: true,
     enabled: true,
     component: Financial,
-    authorization: [1, 2]
+    authorization: [1]
+  },
+  {
+    title: 'Ativos Financeiros',
+    icon: <ShoppingCartIcon />,
+    route: '/clientassets',
+    visibleMenu: true,
+    enabled: true,
+    component: FinancialClient,
+    authorization: [2]
   },
   {
     title: 'Clientes',
@@ -36,6 +64,24 @@ export const Menu = [
     visibleMenu: true,
     enabled: true,
     component: Client,
+    authorization: [1]
+  },
+  {
+    title: 'Transações',
+    icon: <CurrencyExchangeIcon />,
+    route: '/transactions',
+    visibleMenu: true,
+    enabled: true,
+    component: TransactionsDetails,
+    authorization: [1, 2]
+  },
+  {
+    title: 'Depositar',
+    icon: <LocalAtmIcon />,
+    route: '/deposit',
+    visibleMenu: true,
+    enabled: true,
+    component: Account,
     authorization: [1]
   }
 ]
@@ -46,15 +92,13 @@ const Admin = (props) => {
     route.authorization.includes(typeUser)
   )
 
-  const NotFound = () => <h2>Não autorizado</h2>
-
   return (
     <Router>
       <PanelLayout path="/">
         {authorizedRoutes.map(({ component: Component, route }, i) => (
           <Component key={i} path={route} />
         ))}
-        <NotFound default />
+        <Error404 default />
       </PanelLayout>
     </Router>
   )

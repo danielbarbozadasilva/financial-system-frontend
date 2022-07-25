@@ -2,20 +2,20 @@ import React from 'react'
 import { IconButton, Tooltip } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
 import { DataGrid } from '@material-ui/data-grid'
-import { More as MoreIcon } from '@material-ui/icons'
+import { More as MoreIcon } from '@mui/icons-material'
 import { FiEdit } from 'react-icons/fi'
 import { BsToggleOff, BsToggleOn } from 'react-icons/bs'
-import {
-  setStatusClient
-} from '../../../../store/client/client.action'
+import { setStatusClient } from '../../../../store/client/client.action'
+import { listByIdUserAssetAction } from '../../../../store/transaction/transaction.action'
 import Loading from '../../../loading/index'
-import { BoxTable } from './DatagridElements'
-import ListFinancialAssets from '../../../admin/client/financial_assets'
-import ListFinancialTransaction from '../../../admin/client/financial_transaction'
-import ListClientDetails from '../../../admin/client/clients_details'
+import { BoxTable } from '../../../datagrid/styled'
+import ListFinancialAssets from '../financial_assets'
+import ListFinancialTransaction from '../financial_transaction'
+import ListClientDetails from '../clients_details'
 
 const DataList = ({ data, modal, loading }) => {
   const dispatch = useDispatch()
+
   const [modalTransaction, setModalTransaction] = React.useState({})
   const [modalAssets, setModalAssets] = React.useState(false, {})
   const [modalDetails, setModalDetails] = React.useState(false, {})
@@ -25,7 +25,8 @@ const DataList = ({ data, modal, loading }) => {
   }
 
   function openTransaction(row) {
-    setModalTransaction({ open: true, data: row })
+    dispatch(listByIdUserAssetAction(row))
+    setModalTransaction({ open: true })
   }
 
   function openClientDetails(row) {
@@ -33,38 +34,42 @@ const DataList = ({ data, modal, loading }) => {
   }
 
   function openAssetsClient(row) {
-    setModalAssets({ open: true, data: row })
+    dispatch(listByIdUserAssetAction(row)).then(setModalAssets({ open: true }))
   }
 
-  const actionModalAssets = ({ row }) => {
-    const assets = row?.transaction_details !== 0
+  const actionModalAssets = ({ id, row }) => {
+    const assets = row?.transaction_details.length !== 0
     return (
       <>
         <Tooltip title="Ativos">
-          <IconButton
-            className={assets ? 'iconeStar' : 'doNotShow'}
-            onClick={() => openAssetsClient(row?.transaction_details)}
-            color="primary"
-          >
-            <MoreIcon />
-          </IconButton>
+          <span>
+            <IconButton
+              onClick={() => openAssetsClient(id)}
+              disabled={assets ? false : true}
+              color="primary"
+            >
+              <MoreIcon />
+            </IconButton>
+          </span>
         </Tooltip>
       </>
     )
   }
 
-  const actionModalTransaction = ({ row }) => {
-    const transactions = row?.total_quantity !== 0
+  const actionModalTransaction = ({ id, row }) => {
+    const transaction = Number(row?.transaction[0].total_quantity) !== 0
     return (
       <>
         <Tooltip title="Listar ativos">
-          <IconButton
-            className={transactions ? 'iconeStar' : 'doNotShow'}
-            onClick={() => openTransaction(row?.transaction)}
-            color="primary"
-          >
-            <MoreIcon />
-          </IconButton>
+          <span>
+            <IconButton
+              onClick={() => openTransaction(id)}
+              disabled={transaction ? false : true}
+              color="primary"
+            >
+              <MoreIcon />
+            </IconButton>
+          </span>
         </Tooltip>
       </>
     )
@@ -76,7 +81,7 @@ const DataList = ({ data, modal, loading }) => {
       <>
         <Tooltip title="Listar Endereço">
           <IconButton
-            className={details ? 'iconeStar' : 'doNotShow'}
+            disabled={details ? false : true}
             onClick={() => openClientDetails(row?.address)}
             color="primary"
           >
@@ -195,18 +200,16 @@ const DataList = ({ data, modal, loading }) => {
         <DataGrid rows={data} columns={columns} pageSize={10} />
       </BoxTable>
       <ListFinancialTransaction
-        open={modalTransaction.open}
-        transactions={modalTransaction.data}
+        open={modalTransaction.open || false}
         close={() => setModalTransaction({ ...modalTransaction, open: false })}
       />
       <ListClientDetails
-        open={modalDetails.open}
         details={modalDetails.data}
+        open={modalDetails.open || false}
         close={() => setModalDetails({ ...modalDetails, open: false })}
       />
       <ListFinancialAssets
-        assets={modalAssets.data}
-        open={modalAssets.open}
+        open={modalAssets.open || false}
         close={() => setModalAssets({ ...modalAssets, open: false })}
       />
     </>
