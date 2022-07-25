@@ -9,7 +9,9 @@ import LocalAtmIcon from '@mui/icons-material/LocalAtm'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 
 import PanelLayout from '../../components/layout/layout-panel'
-import Home from '../../views/admin/home/index'
+import HomeAdmin from './home/admin/index'
+import HomeClient from './home/client/index'
+
 import Financial from './financial_assets/admin/index'
 import FinancialClient from './financial_assets/client/index'
 import Client from '../../views/admin/client/index'
@@ -25,8 +27,17 @@ export const Menu = [
     route: '/',
     visibleMenu: true,
     enabled: true,
-    component: Home,
-    authorization: [1, 2]
+    component: HomeAdmin,
+    authorization: [1]
+  },
+  {
+    title: 'Início',
+    icon: <DashboardIcon />,
+    route: '/',
+    visibleMenu: true,
+    enabled: true,
+    component: HomeClient,
+    authorization: [2]
   },
   {
     title: 'Ativos Clientes',
