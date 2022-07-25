@@ -31,6 +31,9 @@ http.interceptors.response.use(
       case 403:
         navigate('/error403')
         return Promise.reject(error)
+      case 500:
+        navigate('/error500')
+        return Promise.reject(error)
       default:
         return Promise.reject(error)
     }
