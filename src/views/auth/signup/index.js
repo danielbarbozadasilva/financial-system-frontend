@@ -208,7 +208,6 @@ const SignUp = () => {
       city: form.city,
       zip_code: form.zip_code,
       complement: form.complement,
-      status: true,      
       auth: true
     }
 
