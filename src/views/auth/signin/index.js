@@ -9,19 +9,24 @@ import {
   SButtonSignIn,
   STextLink
 } from '../styled'
-import Loading from '../../../components/loading'
+import Loading from '../../../components/loading/form'
 import InputMask from 'react-input-mask'
 
 const SignIn = (props) => {
   const dispatch = useDispatch()
-  const [hasError, setHasError] = useState(false)
-  const error = useSelector((state) => state.auth.error)
-  const loading = useSelector((state) => state.auth.loading)
 
+  const registered = useSelector((state) => state.auth.registered)
+  const loading = useSelector((state) => state.auth.loading)
   const [form, setForm] = useState({
     cpf: '',
     password: ''
   })
+
+  useEffect(() => {
+    if (registered) {
+      setForm({})
+    }
+  }, [registered])
 
   const handleChange = (props) => {
     const { value, name } = props.target
@@ -31,16 +36,11 @@ const SignIn = (props) => {
     })
   }
 
-  const submitForm = async (event) => {
-    event.preventDefault()
+  const submitForm = async () => {
     dispatch(await signInAction(form))
   }
 
-  const isNotValid = () => form.cpf.length === 0 || form.password.length === 0
-
-  useEffect(() => {
-    setHasError(error.length > 0)
-  }, [error])
+  const isNotValid = () => form?.cpf?.length === 0 || form?.password?.length === 0
 
   return (
     <Container>
@@ -78,21 +78,17 @@ const SignIn = (props) => {
             <Form.Group className="mb-3">
               <Form.Check type="checkbox" label="Lembrar credenciais" />
             </Form.Group>
-            <SButtonSignIn
-              type="button"
-              disabled={isNotValid()}
-              onClick={submitForm}
-            >
-              {loading ? (
-                <>
-                  <Loading />
-                </>
-              ) : (
-                'Entrar'
-              )}
-
-              <i className="icon-angle-right ml-2" />
-            </SButtonSignIn>
+            {loading ? (
+              <Loading />
+            ) : (
+              <SButtonSignIn
+                type="button"
+                disabled={isNotValid()}
+                onClick={submitForm}
+              >
+                Entrar
+              </SButtonSignIn>
+            )}
             <SColFooter>
               Não tem Cadastro?{' '}
               <STextLink href="/signup">Cadastre-se</STextLink>

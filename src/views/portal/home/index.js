@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from '../../../components/loading'
+import Loading from '../../../components/loading/page/index'
 import { Col } from 'react-bootstrap'
 import CardFinancial from '../../../components/portal/cards/financial/index'
 import CardAbout from '../../../components/portal/cards/about/index'

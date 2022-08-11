@@ -3,7 +3,7 @@ import { DataGrid } from '@material-ui/data-grid'
 import { FiTrash2, FiEdit } from 'react-icons/fi'
 import { BoxTable, SImg } from '../../../datagrid/styled'
 import { IconButton } from '@material-ui/core'
-import Loading from '../../../loading/index'
+import Loading from '../../../loading/page/index'
 
 const DataList = ({ data, modal, loading }) => {
   

@@ -7,24 +7,19 @@ import InputMask from 'react-input-mask'
 import { Select } from '@material-ui/core'
 import ufCityFile from '../../../util/state-city.json'
 import { SForm, STextForm, SButton, SDesabledButton } from '../styled'
-import Loading from '../../../components/loading'
+import Loading from '../../../components/loading/form'
 
 const SignUp = () => {
   const dispatch = useDispatch()
 
-  const [hasError, setHasError] = useState(false)
-  const [success, setSuccess] = useState(false)
-  const error = useSelector((state) => state.auth.error)
   const registered = useSelector((state) => state.auth.registered)
   const loading = useSelector((state) => state.auth.loading)
   const [uf, setUf] = useState([])
   const [city, setCity] = useState([])
   const [formValidate, setFormValidate] = useState({})
   const [form, setForm] = useState({})
-  const [disableInit, setDisableInit] = useState(true)
 
   const handleChange = (props) => {
-    setDisableInit(false)
     const { value, name } = props.target
     setForm({
       ...form,
@@ -182,17 +177,10 @@ const SignUp = () => {
   }
 
   useEffect(() => {
-    if (error.length > 0) {
-      setHasError(true)
-    } else {
-      setHasError(false)
-    }
-
     if (registered) {
-      setSuccess(true)
       setForm({})
     }
-  }, [error, registered])
+  }, [registered])
 
   const insertData = async () => {
     const nform = {
@@ -211,9 +199,7 @@ const SignUp = () => {
       auth: true
     }
 
-    dispatch(await signUpAction(nform)).then(() => {
-      setDisableInit(true)
-    })
+    dispatch(await signUpAction(nform))
   }
 
   return (
@@ -467,23 +453,15 @@ const SignUp = () => {
           />
         </Form.Group>
       </Row>
-      {isNotValid() || loading ? (
-        <SDesabledButton
-          type="button"
-          disabled={isNotValid()}
-          onClick={insertData}
-        >
+      {isNotValid() ? (
+        <SDesabledButton type="button" disabled={true} onClick={insertData}>
           Cadastrar
         </SDesabledButton>
+      ) : loading ? (
+        <Loading />
       ) : (
-        <SButton type="button" disabled={isNotValid()} onClick={insertData}>
-          {loading ? (
-            <>
-              <Loading />
-            </>
-          ) : (
-            'Cadastrar'
-          )}
+        <SButton type="button" onClick={insertData}>
+          Cadastrar
         </SButton>
       )}
     </SForm>
