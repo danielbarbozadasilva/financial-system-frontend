@@ -22,15 +22,7 @@ const ListDeposits = ({ ...props }) => {
     {
       field: 'origin_cpf',
       headerName: 'Cpf',
-      width: 130,
-      align: 'center',
-      headerAlign: 'center',
-      disableColumnMenu: true
-    },
-    {
-      field: 'branch',
-      headerName: 'Agência',
-      width: 120,
+      flex: 1,
       align: 'center',
       headerAlign: 'center',
       disableColumnMenu: true
@@ -38,7 +30,7 @@ const ListDeposits = ({ ...props }) => {
     {
       field: 'deposit_value',
       headerName: 'Valor',
-      width: 100,
+      flex: 1,
       align: 'center',
       headerAlign: 'center',
       disableColumnMenu: true
