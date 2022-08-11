@@ -5,7 +5,7 @@ import { BsFillCartFill } from 'react-icons/bs'
 import { More as MoreIcon } from '@mui/icons-material'
 import { IconButton, Tooltip } from '@material-ui/core'
 import { BoxTable } from '../../../datagrid/styled'
-import Loading from '../../../loading/index'
+import Loading from '../../../loading/page/index'
 import { listByIdUserDepositAction } from '../../../../store/transaction/transaction.action'
 import Form from '../deposit'
 

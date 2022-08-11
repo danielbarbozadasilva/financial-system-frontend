@@ -7,7 +7,7 @@ import { FiEdit } from 'react-icons/fi'
 import { BsToggleOff, BsToggleOn } from 'react-icons/bs'
 import { setStatusClient } from '../../../../store/client/client.action'
 import { listByIdUserAssetAction } from '../../../../store/transaction/transaction.action'
-import Loading from '../../../loading/index'
+import Loading from '../../../loading/page/index'
 import { BoxTable } from '../../../datagrid/styled'
 import ListFinancialAssets from '../financial_assets'
 import ListFinancialTransaction from '../financial_transaction'
@@ -38,7 +38,7 @@ const DataList = ({ data, modal, loading }) => {
   }
 
   const actionModalAssets = ({ id, row }) => {
-    const assets = row?.transaction_details.length !== 0
+    const assets = row?.transactiondetails?.length !== 0
     return (
       <>
         <Tooltip title="Ativos">
@@ -204,8 +204,8 @@ const DataList = ({ data, modal, loading }) => {
         close={() => setModalTransaction({ ...modalTransaction, open: false })}
       />
       <ListClientDetails
-        details={modalDetails.data}
         open={modalDetails.open || false}
+        details={modalDetails.data}
         close={() => setModalDetails({ ...modalDetails, open: false })}
       />
       <ListFinancialAssets

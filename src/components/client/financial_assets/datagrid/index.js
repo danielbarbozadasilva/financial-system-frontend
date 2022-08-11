@@ -2,7 +2,7 @@ import React from 'react'
 import { DataGrid } from '@material-ui/data-grid'
 import { BoxTable, SImg } from '../../../datagrid/styled'
 import { IconButton } from '@material-ui/core'
-import Loading from '../../../loading/index'
+import Loading from '../../../loading/page/index'
 import { BsFillCartFill } from 'react-icons/bs'
 
 const DataList = ({ data, modal, loading }) => {

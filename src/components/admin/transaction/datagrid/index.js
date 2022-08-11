@@ -1,7 +1,7 @@
 import React from 'react'
 import { DataGrid } from '@material-ui/data-grid'
 import { BoxTable } from '../../../datagrid/styled'
-import Loading from '../../../loading/index'
+import Loading from '../../../loading/page/index'
 
 const DataList = ({ data, modal, loading }) => {
   const columns = [
