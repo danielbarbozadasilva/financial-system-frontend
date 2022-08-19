@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 export const SCard = styled.div`
   border: 1px solid #dcdcdc;
-  padding: 7px 7px 45px;
+  padding: 7px 7px 20px;
   position: relative;
   background-color: #fff;
   box-shadow: -1px 1px 0 #dcdcdc;
-  text-align: center;
+  text-align: justify;
   margin: 50px 160px;
   :hover {
     box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
@@ -69,15 +69,18 @@ export const StyleImg = styled.img`
   background-size: cover;
   width: 100%;
   height: 550px;
-  margin-bottom: 100px;
 `
 
-export const SContainer = styled.div`
+export const ContainerCards = styled.div`
   font-family: 'Nunito', Helvetica, Arial, Lucida, sans-serif;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 50px;
+`
+
+export const ContainerImage = styled.div`
+  margin-bottom: 100px;
 `
 
 export const TextTitle = styled.div`

@@ -127,6 +127,9 @@ export const StyleImg = styled.img`
   background-size: cover;
   width: 100%;
   height: 550px;
+`
+
+export const ContainerImage = styled.div`
   margin-bottom: 100px;
 `
 
@@ -179,7 +182,7 @@ export const TextInvestiment = styled.div`
 
 export const ContainerResources = styled.div`
   position: relative;
-  margin: 10% 0%;
+  margin: 6% 0%;
   width: 100%;
 `
 
