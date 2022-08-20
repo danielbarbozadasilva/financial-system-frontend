@@ -208,3 +208,23 @@ yarn start
 <br/>
 <br/>
 <br/>
+
+## **Responsividade - IPhone SE**
+<br/>
+
+## **Tela Inicial**
+<br/>
+<img src="./src/assets/img/prints/print01mob.png" alt="" width=350px />
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+## **Tela top 05**
+<br/>
+<img src="./src/assets/img/prints/print02mob.png" alt="" width=350px />
+<br/>
+<br/>
+<br/>
+<br/>
