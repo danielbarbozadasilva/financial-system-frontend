@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import * as moment from 'moment'
 import { signUpAction } from '../../../store/auth/auth.action'
 import { useDispatch, useSelector } from 'react-redux'
-import { Row, Col, Form } from 'react-bootstrap'
+import { Col, Form } from 'react-bootstrap'
 import InputMask from 'react-input-mask'
 import { Select } from '@material-ui/core'
 import ufCityFile from '../../../util/state-city.json'
-import { SForm, STextForm, SButton, SDesabledButton } from '../styled'
+import { SForm, SRow, SFormGroup, STextForm, SButton, SDesabledButton } from '../styled'
 import Loading from '../../../components/loading/form'
 
 const SignUp = () => {
@@ -205,8 +205,8 @@ const SignUp = () => {
   return (
     <SForm autoComplete="off">
       <STextForm>Cadastre-se</STextForm>
-      <Row className="mb-3">
-        <Form.Group as={Col}>
+      <SRow>
+        <SFormGroup as={Col}>
           <Form.Label>*Nome:</Form.Label>
           <Form.Control
             autoFocus
@@ -222,9 +222,9 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.name || ''}
           </Form.Control.Feedback>
-        </Form.Group>
+        </SFormGroup>
 
-        <Form.Group as={Col}>
+        <SFormGroup as={Col}>
           <Form.Label>*E-mail:</Form.Label>
           <Form.Control
             invalid={formValidate.email}
@@ -239,9 +239,9 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.email || ''}
           </Form.Control.Feedback>
-        </Form.Group>
+        </SFormGroup>
 
-        <Form.Group as={Col}>
+        <SFormGroup as={Col}>
           <Form.Label>*Cpf:</Form.Label>
           <InputMask
             mask="999.999.999-99"
@@ -258,9 +258,9 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.cpf || ''}
           </Form.Control.Feedback>
-        </Form.Group>
+        </SFormGroup>
 
-        <Form.Group as={Col}>
+        <SFormGroup as={Col}>
           <Form.Label>*Sexo</Form.Label>
           <Select
             fullWidth
@@ -279,10 +279,10 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.gender || ''}
           </Form.Control.Feedback>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group as={Col}>
+        </SFormGroup>
+      </SRow>
+      <SRow>
+        <SFormGroup as={Col}>
           <Form.Label>*Data de nascimento:</Form.Label>
           <Form.Control
             invalid={formValidate.birthDate}
@@ -302,8 +302,8 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.birthDate || ''}
           </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col}>
+        </SFormGroup>
+        <SFormGroup as={Col}>
           <Form.Label>*Senha:</Form.Label>
           <Form.Control
             invalid={formValidate.password}
@@ -318,8 +318,8 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.password || ''}
           </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col}>
+        </SFormGroup>
+        <SFormGroup as={Col}>
           <Form.Label>*Confirmar senha:</Form.Label>
           <Form.Control
             invalid={formValidate.confirmPassword}
@@ -334,10 +334,10 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.confirmPassword || ''}
           </Form.Control.Feedback>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group as={Col}>
+        </SFormGroup>
+      </SRow>
+      <SRow>
+        <SFormGroup as={Col}>
           <Form.Label>*Telefone:</Form.Label>
           <InputMask
             mask="(99)9999-9999"
@@ -354,8 +354,8 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.phone || ''}
           </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col}>
+        </SFormGroup>
+        <SFormGroup as={Col}>
           <Form.Label>*Endereço:</Form.Label>
           <Form.Control
             invalid={formValidate.address}
@@ -370,8 +370,8 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.address || ''}
           </Form.Control.Feedback>
-        </Form.Group>
-        <Form.Group as={Col}>
+        </SFormGroup>
+        <SFormGroup as={Col}>
           <Form.Label>*Uf:</Form.Label>
           <Select
             fullWidth
@@ -393,10 +393,10 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.uf || ''}
           </Form.Control.Feedback>
-        </Form.Group>
-      </Row>
-      <Row className="mb-3">
-        <Form.Group as={Col}>
+        </SFormGroup>
+      </SRow>
+      <SRow>
+        <SFormGroup as={Col}>
           <Form.Label>*Cidade:</Form.Label>
           <Select
             fullWidth
@@ -418,9 +418,9 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.city || ''}
           </Form.Control.Feedback>
-        </Form.Group>
+        </SFormGroup>
 
-        <Form.Group as={Col}>
+        <SFormGroup as={Col}>
           <Form.Label>*Cep:</Form.Label>
           <InputMask
             mask="99999-999"
@@ -437,9 +437,9 @@ const SignUp = () => {
           <Form.Control.Feedback type="text">
             {formValidate.zip_code || ''}
           </Form.Control.Feedback>
-        </Form.Group>
+        </SFormGroup>
 
-        <Form.Group as={Col}>
+        <SFormGroup as={Col}>
           <Form.Label>Complemento:</Form.Label>
           <Form.Control
             invalid={formValidate.complement}
@@ -451,8 +451,8 @@ const SignUp = () => {
             name="complement"
             placeholder="Informe o seu complemento"
           />
-        </Form.Group>
-      </Row>
+        </SFormGroup>
+      </SRow>
       {isNotValid() ? (
         <SDesabledButton type="button" disabled={true} onClick={insertData}>
           Cadastrar
