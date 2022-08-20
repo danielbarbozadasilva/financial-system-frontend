@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow'
 import { LinearProgress, Button } from '@material-ui/core'
 import {
   calcSubTotal,
-  calcTotal,
+  calcTotalTransfer,
   formatPrice
 } from '../../../../util/validations/price-validation'
 import { SInput, SBox, STable } from './styled'
@@ -22,7 +22,7 @@ const FormClient = ({ submit, ...props }) => {
   const handleSubmit = () => {
     let value = 1
     var subTotal = calcSubTotal(value, current_price)
-    var total = calcTotal(subTotal)
+    var total = calcTotalTransfer(subTotal)
     const newForm = {
       current_price: formatPrice(form.current_price || current_price),
       subtotal_price: formatPrice(form.subtotal_price || subTotal),
@@ -36,7 +36,7 @@ const FormClient = ({ submit, ...props }) => {
     const { value, name } = props?.target
     if (name === 'quantity') {
       var subTotal = calcSubTotal(value, current_price)
-      var total = calcTotal(subTotal)
+      var total = calcTotalTransfer(subTotal)
       setForm({
         current_price: current_price,
         subtotal_price: subTotal,
@@ -126,7 +126,7 @@ const FormClient = ({ submit, ...props }) => {
                   margin="normal"
                   name="total_price"
                   type="text"
-                  value={form.total_price || calcTotal(current_price)}
+                  value={form.total_price || calcTotalTransfer(current_price)}
                   disabled
                 />
               </TableCell>
