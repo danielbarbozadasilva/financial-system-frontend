@@ -17,6 +17,7 @@ import {
   TextTitle,
   STextInvest,
   SButtonTitle,
+  SButtonAbout,
   settings
 } from '../../../components/portal/cards/financial/styled'
 import { listAllAssetAction } from '../../../store/financial_assets/financial_assets.action'
@@ -51,6 +52,7 @@ function Home() {
       <ContainerImage>
         <StyleImg src={Image} />
       </ContainerImage>
+      
       <ContainerTitle>
         <TextTitle>
           <h1>
@@ -102,9 +104,9 @@ function Home() {
           </h1>
           <h4>Veja o que alguns dos nossos usuários estão dizendo.</h4>
           <CardAbout />
-          <SButtonTitle onClick={() => navigate(`/signup`)}>
+          <SButtonAbout onClick={() => navigate(`/signup`)}>
             ABRA SUA CONTA
-          </SButtonTitle>
+          </SButtonAbout>
         </STextInvest>
       </ContainerResources>
     </>

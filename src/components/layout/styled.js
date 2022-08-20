@@ -42,6 +42,10 @@ export const SDiv = styled.div`
 export const SNavbarLogo = styled.img`
   width: 13.5rem;
   margin: 5px 40px;
+  @media screen and (max-width: 470px) {
+    width: 11.5rem;
+    margin: 5px 20px;
+  }
 `
 
 export const SNavbarToggle = styled(Navbar.Toggle)`

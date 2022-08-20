@@ -5,7 +5,7 @@ const CardFinancial = (props) => {
   const { name, description, bvmf, count } = props.item
   return (
     <div className={'container-fluid'}>
-      <SCard style={{ width: '18rem' }}>
+      <SCard>
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text className="text-muted">Descrição: {description}</Card.Text>

@@ -81,6 +81,10 @@ export const SCard = styled.div`
   @media screen and (max-width: 487px) {
     margin: 50px 25px;
   }
+
+  @media screen and (max-width: 420px) {
+    margin: 50px 5px;
+  }
 `
 
 export const SContainer = styled.div`
@@ -194,7 +198,7 @@ export const ContainerAssets = styled.div`
 
 export const ContainerTitle = styled.div`
   width: 100%;
-  top: 9%;
+  top: 7%;
   position: absolute;
   z-index: 100;
 `
@@ -209,4 +213,24 @@ export const TextTitle = styled.div`
 
 export const STextInvest = styled.div`
   text-align: center;
+`
+
+export const SButtonAbout = styled.button`
+  text-align: center;
+  color: #fff;
+  background-color: #c79c60;
+  line-height: 38px;
+  padding: 0 18px;
+  margin: 15px 0px;
+  border: none;
+  font-weight: 500;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+
+  :hover {
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
+    transition: 1s;
+    opacity: 0.5;
+  }
 `

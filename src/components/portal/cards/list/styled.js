@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 
 export const SCard = styled.div`
+  width: 18rem;
+  min-height: 16rem;
   border: 1px solid #dcdcdc;
   padding: 7px 7px 20px;
   position: relative;
@@ -58,7 +60,11 @@ export const SCard = styled.div`
   }
 
   @media screen and (max-width: 487px) {
-    margin: 50px 55px;
+    margin: 50px 45px;
+  }
+
+  @media screen and (max-width: 380px) {
+    margin: 50px 30px;
   }
 `
 
@@ -119,6 +125,9 @@ export const ContainerTitle = styled.div`
   top: 14%;
   position: absolute;
   z-index: 100;
+  @media screen and (max-width: 770px) {
+    top: 7%;
+  }
 `
 
 export const STextInvest = styled.div`

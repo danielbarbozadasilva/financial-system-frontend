@@ -44,6 +44,7 @@ function Top05() {
       <ContainerImage>
         <StyleImg src={Image} />
       </ContainerImage>
+
       <ContainerTitle>
         <TextTitle>
           <h1>
@@ -56,12 +57,14 @@ function Top05() {
           ABRA SUA CONTA
         </SButtonTitle>
       </ContainerTitle>
+
       <STextInvest>
         <h2>
           Nosso <strong>Top 05</strong>
         </h2>
         <h4>Ativos mais adquiridos</h4>
       </STextInvest>
+      
       <ContainerCards>
         {!loading && financial.length === 0 ? (
           <h6>Não há Financiamentos disponiveis</h6>
