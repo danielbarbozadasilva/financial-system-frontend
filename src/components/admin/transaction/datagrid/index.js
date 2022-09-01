@@ -1,5 +1,5 @@
 import React from 'react'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { BoxTable } from '../../../datagrid/styled'
 import Loading from '../../../loading/page/index'
 
@@ -85,7 +85,21 @@ const DataList = ({ data, modal, loading }) => {
 
   return (
     <BoxTable>
-      <DataGrid rows={data} columns={columns} pageSize={10} />
+      <DataGrid
+        rows={data}
+        columns={columns}
+        loading={loading}
+        pageSize={10}
+        disableColumnSelector
+        disableDensitySelector
+        components={{ Toolbar: GridToolbar }}
+        componentsProps={{
+          toolbar: {
+            showQuickFilter: true,
+            quickFilterProps: { debounceMs: 500 }
+          }
+        }}
+      />
     </BoxTable>
   )
 }

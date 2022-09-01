@@ -1,7 +1,7 @@
 import React from 'react'
 import { IconButton, Tooltip } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { More as MoreIcon } from '@mui/icons-material'
 import { FiEdit } from 'react-icons/fi'
 import { BsToggleOff, BsToggleOn } from 'react-icons/bs'
@@ -197,7 +197,21 @@ const DataList = ({ data, modal, loading }) => {
   return (
     <>
       <BoxTable>
-        <DataGrid rows={data} columns={columns} pageSize={10} />
+        <DataGrid
+          rows={data}
+          columns={columns}
+          loading={loading}
+          pageSize={10}
+          disableColumnSelector
+          disableDensitySelector
+          components={{ Toolbar: GridToolbar }}
+          componentsProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 }
+            }
+          }}
+        />
       </BoxTable>
       <ListFinancialTransaction
         open={modalTransaction.open || false}
