@@ -1,5 +1,5 @@
 # **Front-End React Awesome Invest**
-O Projeto AWESOME INVEST é um sistema de gestão financeira criado para fins de estudo. O Sistema tem o objetivo de listar os ativos e efetuar o gerenciamento destes, possibilitando a consulta e compra por parte dos clientes. Além de garantir que o Administrador realize depósitos em conta de clientes e a consulta das transações realizadas.
+O Projeto AWESOME INVEST é um sistema de gestão financeira criado para fins de estudo. O Sistema tem como objetivo listar os ativos e efetuar o gerenciamento destes, possibilitando a consulta e a compra por parte do cliente. Além de garantir que o Administrador realize depósitos em conta de clientes e a consulta das transações realizadas.
 O Front-End foi desenvolvido utilizando o ReactJs.
 <br/>
 <br/>
@@ -102,7 +102,7 @@ yarn start
 * React-icons
 * React-redux-toastr
 * React-toast
-* Reactstrap
+* React-bootstrap
 * Redux-multi
 * Redux-thunk
 * React-helmet
