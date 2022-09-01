@@ -56,16 +56,13 @@ export const updateClientAction = (id, { ...data }) => {
       .then((result) => {
         dispatch(editClientAction(id))
         dispatch(listAllClientAction())
-        toastr.success(
-          `Cliente ${result.data.data.name}`,
-          'atualizado com sucesso!'
-        )
+        toastr.success(`Cliente`, 'atualizado com sucesso!')
         return true
       })
       .catch((error) => {
         dispatch({ type: TYPES.CLIENT_LOADING, status: false })
         const { data } = error.response
-        toastr.error('Erro', ...data.message.details)
+        toastr.error('Erro', data.message)
       })
       .finally(() => {
         dispatch({ type: TYPES.CLIENT_LOADING, status: false })
@@ -78,10 +75,7 @@ export const setStatusClient = (id, status) => {
     try {
       const result = await changeStatusService(id, status)
       var msg = status ? 'Ativado' : 'Desativado'
-      toastr.success(
-        `Cliente ${result.data.data.name}`,
-        `${msg} com sucesso`
-      )
+      toastr.success(`Cliente`, `${msg} com sucesso`)
       dispatch(listAllClientAction())
     } catch (err) {}
   }

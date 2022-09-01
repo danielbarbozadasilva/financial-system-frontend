@@ -2,7 +2,7 @@ import ReduxToastr from 'react-redux-toastr'
 
 const Toastr = () => (
   <ReduxToastr
-    timeOut={1500}
+    timeOut={2500}
     newestOnTop={false}
     preventDuplicates
     position='top-right'

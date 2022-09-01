@@ -13,29 +13,29 @@ import { listAllAccountAction, checkBalanceAction } from '../../store/account/ac
 export const createTransaction = (asset_id, data) => {
   return async (dispatch) => {
     try {
-      const user_id = getUser().id
-      const result = await createTransactionService(user_id, asset_id, data)
+      const userId = getUser().id
+      const result = await createTransactionService(userId, asset_id, data)
       dispatch({ type: TYPES.TRANSACTION_CREATE, data: result.data?.data })
       toastr.success('Transação', 'realizada com sucesso!')
       dispatch(checkBalanceAction())
     } catch (error) {
       const { data } = error.response
-      toastr.error('Transação', data.message.details)
+      toastr.error('Erro', data.message)
     }
   }
 }
 
-export const createDepositAction = (data) => {
+export const createDepositAction = (clientid, data) => {
   return async (dispatch) => {
     dispatch({ type: TYPES.BANK_LOADING, status: true })
     try {
-      const result = await createDepositService(data.user_id, data)
+      const result = await createDepositService(clientid, data)
       dispatch({ type: TYPES.TRANSACTION_BANK_DEPOSIT, data: result.data.data })
       toastr.success('Depósito', 'realizado com sucesso!')
       dispatch(listAllAccountAction())
     } catch (error) {
       const { data } = error.response
-      toastr.error('Depósito', data.message.details)
+      toastr.error('Erro', data.message)
     }
   }
 }

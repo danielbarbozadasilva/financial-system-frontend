@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Grid, LinearProgress, Select } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import { getMoney } from '../../../../util/validations/price-validation'
+import { getMoney, getTotalDeposit } from '../../../../util/validations/price-validation'
 import { Box, Submit, SButton, SInputLabel } from './styled'
 import InputMask from 'react-input-mask'
 
 const FormDeposit = ({ submit, ...props }) => {
   const [form, setForm] = useState({})
-  const user = props.data.id_user
   const listBanks = props.banks.map((item) => item.name)
   const percent = useSelector((state) => state.financial.upload?.percent || 0)
   const loading = useSelector((state) => state.financial.loading)
@@ -31,12 +30,6 @@ const FormDeposit = ({ submit, ...props }) => {
         }
         break
 
-      case 'branch':
-        if (value.trim() === '') {
-          message += 'Agência não pode ser vazio!'
-        }
-        break
-
       case 'cpf':
         let cpf = value
           .trim()
@@ -52,7 +45,7 @@ const FormDeposit = ({ submit, ...props }) => {
   }
 
   const isNotValid = () => {
-    const inputs = ['bank', 'branch', 'cpf']
+    const inputs = ['bank', 'cpf']
     const invalid = (label) =>
       !Object.keys(form).includes(label) || form[label].length === 0
 
@@ -64,10 +57,8 @@ const FormDeposit = ({ submit, ...props }) => {
 
   const handleSubmit = () => {
     const newForm = {
-      branch: form.branch,
       origin_cpf: form.cpf,
-      user_id: user,
-      value: getMoney(form.value).replace('R$', '').replace('.', '').replace(',','.'),
+      total: getTotalDeposit(form.total),
       bank_id: props.banks.find((banks) => banks.name === form.bank).cod_bank
     }
     submit(newForm)
@@ -104,22 +95,6 @@ const FormDeposit = ({ submit, ...props }) => {
         </div>
 
         <div>
-          <SInputLabel>Agência</SInputLabel>
-          <input
-            className="form-control"
-            name="branch"
-            type="text"
-            value={form.branch || ''}
-            onChange={handleChange}
-            placeholder="Informe a agência"
-            disabled={loading}
-          />
-          <div className="mt-1">
-            <p className="text-danger">{formValidate.branch}</p>
-          </div>
-        </div>
-
-        <div>
           <SInputLabel>Cpf</SInputLabel>
           <InputMask
             mask="999.999.999-99"
@@ -141,13 +116,13 @@ const FormDeposit = ({ submit, ...props }) => {
             maxLength="10"
             disabled={loading}
             type="text"
-            value={getMoney(form.value) || ''}
+            value={getMoney(form.total) || ''}
             onChange={handleChange}
-            name="value"
+            name="total"
             placeholder="Informe o valor"
           />
           <div className="mt-1">
-            <p className="text-danger">{formValidate.value}</p>
+            <p className="text-danger">{formValidate.total}</p>
           </div>
         </div>
 

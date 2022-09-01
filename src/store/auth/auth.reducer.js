@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   registered: false
 }
 
-const reducer = ({...state} = INITIAL_STATE, action) => {
+const reducer = ({ ...state } = INITIAL_STATE, action) => {
   switch (action.type) {
     case TYPES.SIGN_LOADING:
       state.error = []
@@ -17,6 +17,7 @@ const reducer = ({...state} = INITIAL_STATE, action) => {
       return state
 
     case TYPES.SIGN_IN:
+      state.registered = true
       state.token = action.data.token
       state.user = action.data.userDTO
       state.loading = false
@@ -40,9 +41,6 @@ const reducer = ({...state} = INITIAL_STATE, action) => {
       state.user = {}
       state.error = []
 
-    case TYPES.SIGN_UPDATE_REGISTER:
-      state.registered = false
-      return state
     default:
       return state
   }

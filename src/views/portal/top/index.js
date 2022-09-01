@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from '../../../components/loading'
+import Loading from '../../../components/loading/page/index'
 import { Col } from 'react-bootstrap'
 import CardFinancial from '../../../components/portal/cards/list/index'
 import { navigate } from '@reach/router'
 import {
-  SContainer,
+  ContainerImage,
+  ContainerCards,
   TextTitle,
   ContainerTitle,
   StyleImg,
@@ -40,9 +41,10 @@ function Top05() {
 
   return (
     <>
-      <div>
+      <ContainerImage>
         <StyleImg src={Image} />
-      </div>
+      </ContainerImage>
+
       <ContainerTitle>
         <TextTitle>
           <h1>
@@ -51,21 +53,25 @@ function Top05() {
             Invista nos ativos mais populares do mundo
           </h1>
         </TextTitle>
-        <SButtonTitle onClick={() => navigate(`/signup`)}>ABRA SUA CONTA</SButtonTitle>
+        <SButtonTitle onClick={() => navigate(`/signup`)}>
+          ABRA SUA CONTA
+        </SButtonTitle>
       </ContainerTitle>
+
       <STextInvest>
         <h2>
           Nosso <strong>Top 05</strong>
         </h2>
-        <h4>Ativos mais adquiridos de hoje</h4>
+        <h4>Ativos mais adquiridos</h4>
       </STextInvest>
-      <SContainer>
+      
+      <ContainerCards>
         {!loading && financial.length === 0 ? (
           <h6>Não há Financiamentos disponiveis</h6>
         ) : (
           FinancialList(financial)
         )}
-      </SContainer>
+      </ContainerCards>
     </>
   )
 }

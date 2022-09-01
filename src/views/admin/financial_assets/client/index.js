@@ -70,7 +70,7 @@ const FinancialClient = () => {
       </Grid>
 
       <DialogModal
-        title={'Realizar depósito'}
+        title={'Adquirir ativo'}
         open={modal.status || false}
         close={closeModal}
       >

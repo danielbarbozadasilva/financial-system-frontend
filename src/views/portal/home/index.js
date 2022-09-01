@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Loading from '../../../components/loading'
+import Loading from '../../../components/loading/page/index'
 import { Col } from 'react-bootstrap'
 import CardFinancial from '../../../components/portal/cards/financial/index'
 import CardAbout from '../../../components/portal/cards/about/index'
 import { navigate } from '@reach/router'
 import {
+  ContainerImage,
   ContainerAssets,
   ContainerFinancial,
   ContainerText,
@@ -16,10 +17,11 @@ import {
   TextTitle,
   STextInvest,
   SButtonTitle,
+  SButtonAbout,
   settings
 } from '../../../components/portal/cards/financial/styled'
 import { listAllAssetAction } from '../../../store/financial_assets/financial_assets.action'
-import Image from '../../../assets/img/investimento.webp'
+import Image from '../../../assets/img/investment_home.jpg'
 import Slider from 'react-slick'
 
 function Home() {
@@ -47,9 +49,10 @@ function Home() {
 
   return (
     <>
-      <div>
+      <ContainerImage>
         <StyleImg src={Image} />
-      </div>
+      </ContainerImage>
+      
       <ContainerTitle>
         <TextTitle>
           <h1>
@@ -58,7 +61,9 @@ function Home() {
             Invista nos ativos mais populares do mundo
           </h1>
         </TextTitle>
-        <SButtonTitle onClick={() => navigate(`/signup`)}>ABRA SUA CONTA</SButtonTitle>
+        <SButtonTitle onClick={() => navigate(`/signup`)}>
+          ABRA SUA CONTA
+        </SButtonTitle>
       </ContainerTitle>
 
       <STextInvest>
@@ -67,7 +72,8 @@ function Home() {
           <strong>Invista nos ativos mais populares do mundo</strong>
         </h1>
         <h4>
-          De indústrias estabelecidas a emergentes de todos os ramos, escolha seu investimento e comece a lucrar
+          De indústrias estabelecidas a emergentes de todos os ramos, escolha
+          seu investimento e comece a lucrar
         </h4>
       </STextInvest>
 
@@ -98,7 +104,9 @@ function Home() {
           </h1>
           <h4>Veja o que alguns dos nossos usuários estão dizendo.</h4>
           <CardAbout />
-          <SButtonTitle onClick={() => navigate(`/signup`)}>ABRA SUA CONTA</SButtonTitle>
+          <SButtonAbout onClick={() => navigate(`/signup`)}>
+            ABRA SUA CONTA
+          </SButtonAbout>
         </STextInvest>
       </ContainerResources>
     </>

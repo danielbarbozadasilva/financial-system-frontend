@@ -3,6 +3,12 @@ export function getMoney(str) {
   return formatReal(parseInt(result?.replace(/[\D]+/g, '')))
 }
 
+export function getTotalDeposit(str) {
+  return Number(
+    getMoney(str).replace('R$', '').replace('.', '').replace(',', '.')
+  )
+}
+
 export function calcSubTotal(value, current_price) {
   var resp = parseFloat(
     formatPrice(getMoney(current_price)) * value
@@ -13,7 +19,7 @@ export function calcSubTotal(value, current_price) {
   return resp
 }
 
-export function calcTotal(subtotal) {
+export function calcTotalTransfer(subtotal) {
   const TAX_RATE = 5
   var price = parseFloat(formatPrice(subtotal))
   var resp = price + (price / 100) * TAX_RATE
@@ -24,7 +30,13 @@ export function calcTotal(subtotal) {
 }
 
 export function formatPrice(num) {
-  return parseFloat(num?.replace(".","").replace(",",".").replaceAll(/\s+/g, '').replace("R$", ""))
+  return parseFloat(
+    num
+      ?.replace('.', '')
+      .replace(',', '.')
+      .replaceAll(/\s+/g, '')
+      .replace('R$', '')
+  )
 }
 
 export function formatReal(int) {
