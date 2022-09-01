@@ -213,6 +213,9 @@ export const TextTitle = styled.div`
 
 export const STextInvest = styled.div`
   text-align: center;
+  @media screen and (max-width: 420px) {
+    margin: 30px 15px;
+  }
 `
 
 export const SButtonAbout = styled.button`
