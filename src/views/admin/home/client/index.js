@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import Title from '../../../../components/title/index'
 import { listTop05AssetAction } from '../../../../store/financial_assets/financial_assets.action'
 import { ChartClient } from '../../../../components/client/chart/index'
-import { ContainerChart } from '../styled'
+import { ContainerChart, TitleChart } from '../styled'
 
 function Home() {
   const dispatch = useDispatch()
@@ -16,8 +16,9 @@ function Home() {
 
   return (
     <>
-      <Title title="Top 05 Ativos" actions={actions} />
+      <Title title="Dashboard" actions={actions} />
       <ContainerChart>
+        <TitleChart>Top 05 - Ativos em alta</TitleChart>
         <ChartClient />
       </ContainerChart>
     </>
