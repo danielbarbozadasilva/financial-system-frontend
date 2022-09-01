@@ -12,7 +12,7 @@ export const SNavbar = styled(Navbar)`
   }
 `
 
-export const SDiv = styled.div`
+export const SLink = styled.div`
   font-family: 'Montserrat', sans-serif !important;
   text-decoration: none;
   top: 0;
