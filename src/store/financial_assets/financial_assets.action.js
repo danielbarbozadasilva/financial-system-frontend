@@ -115,7 +115,8 @@ export const updateAssetAction = (id, { ...data }) => {
       .catch((error) => {
         dispatch({ type: TYPES.FINANCIAL_LOADING, status: false })
         dispatch({ type: TYPES.SIGN_ERROR, data: error })
-        toastr.error('Ativo', error.toString())
+        const { data } = error.response
+        toastr.error('Erro', data.message)
       })
       .finally(() => {
         dispatch({ type: TYPES.FINANCIAL_LOADING, status: false })
@@ -132,7 +133,8 @@ export const deleteAssetAction = (id) => {
       dispatch(listAllAssetAction())
       toastr.success('Ativo', 'removido com sucesso')
     } catch (error) {
-      toastr.error('Ocorreu um erro', error)
+      const { data } = error.response
+      toastr.error('Erro', data.message)
     }
   }
 }

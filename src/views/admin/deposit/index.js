@@ -40,7 +40,7 @@ const Account = () => {
   const closeModal = () => setModal({ status: false, type: 1 })
 
   const submitForm = (form) => {
-    dispatch(createDepositAction(form))
+    dispatch(createDepositAction(selected.id_user, form))
     setModal(false)
   }
 

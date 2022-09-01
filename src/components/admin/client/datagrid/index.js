@@ -1,13 +1,13 @@
 import React from 'react'
 import { IconButton, Tooltip } from '@material-ui/core'
 import { useDispatch } from 'react-redux'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { More as MoreIcon } from '@mui/icons-material'
 import { FiEdit } from 'react-icons/fi'
 import { BsToggleOff, BsToggleOn } from 'react-icons/bs'
 import { setStatusClient } from '../../../../store/client/client.action'
 import { listByIdUserAssetAction } from '../../../../store/transaction/transaction.action'
-import Loading from '../../../loading/index'
+import Loading from '../../../loading/page/index'
 import { BoxTable } from '../../../datagrid/styled'
 import ListFinancialAssets from '../financial_assets'
 import ListFinancialTransaction from '../financial_transaction'
@@ -38,7 +38,7 @@ const DataList = ({ data, modal, loading }) => {
   }
 
   const actionModalAssets = ({ id, row }) => {
-    const assets = row?.transaction_details.length !== 0
+    const assets = row?.transactiondetails?.length !== 0
     return (
       <>
         <Tooltip title="Ativos">
@@ -197,15 +197,29 @@ const DataList = ({ data, modal, loading }) => {
   return (
     <>
       <BoxTable>
-        <DataGrid rows={data} columns={columns} pageSize={10} />
+        <DataGrid
+          rows={data}
+          columns={columns}
+          loading={loading}
+          pageSize={10}
+          disableColumnSelector
+          disableDensitySelector
+          components={{ Toolbar: GridToolbar }}
+          componentsProps={{
+            toolbar: {
+              showQuickFilter: true,
+              quickFilterProps: { debounceMs: 500 }
+            }
+          }}
+        />
       </BoxTable>
       <ListFinancialTransaction
         open={modalTransaction.open || false}
         close={() => setModalTransaction({ ...modalTransaction, open: false })}
       />
       <ListClientDetails
-        details={modalDetails.data}
         open={modalDetails.open || false}
+        details={modalDetails.data}
         close={() => setModalDetails({ ...modalDetails, open: false })}
       />
       <ListFinancialAssets

@@ -195,6 +195,7 @@ const Form = ({ submit, ...props }) => {
           type="text"
           id="standard-error-helper-text"
           value={getMoney(form.current_price) || ''}
+          inputProps={{ maxLength: 8 }}
           onChange={handleChange}
           helperText={formValidate.current_price || ''}
           disabled={loading}

@@ -1,12 +1,11 @@
 import React from 'react'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { FiTrash2, FiEdit } from 'react-icons/fi'
 import { BoxTable, SImg } from '../../../datagrid/styled'
 import { IconButton } from '@material-ui/core'
-import Loading from '../../../loading/index'
+import Loading from '../../../loading/page/index'
 
 const DataList = ({ data, modal, loading }) => {
-  
   const thumb = ({ formattedValue }) => {
     return <SImg src={formattedValue} />
   }
@@ -30,7 +29,6 @@ const DataList = ({ data, modal, loading }) => {
       </>
     )
   }
-
 
   const columns = [
     {
@@ -100,7 +98,21 @@ const DataList = ({ data, modal, loading }) => {
 
   return (
     <BoxTable>
-      <DataGrid rows={data} columns={columns} pageSize={10} />
+      <DataGrid
+        rows={data}
+        columns={columns}
+        loading={loading}
+        pageSize={10}
+        disableColumnSelector
+        disableDensitySelector
+        components={{ Toolbar: GridToolbar }}
+        componentsProps={{
+          toolbar: {
+            showQuickFilter: true,
+            quickFilterProps: { debounceMs: 500 }
+          }
+        }}
+      />
     </BoxTable>
   )
 }

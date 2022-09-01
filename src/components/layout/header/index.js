@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Nav, Navbar } from 'react-bootstrap'
-import { SNavbar, SDiv, SNavbarLogo, SNavbarToggle } from '../styled'
+import { SNavbar, SLink, SNavbarLogo, SNavbarToggle } from '../styled'
 import LogoHeader from '../../../assets/img/header-image.png'
 import { Link } from '@reach/router'
 
@@ -29,23 +29,23 @@ const Header = () => {
         <Container>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <SDiv>
+              <SLink>
                 <NavLink to="/">Home</NavLink>
-              </SDiv>
-              <SDiv>
+              </SLink>
+              <SLink>
                 <NavLink to="/top05">Top 05</NavLink>
-              </SDiv>
+              </SLink>
             </Nav>
           </Navbar.Collapse>
 
           <SNavbar.Collapse className="justify-content-end">
             <Nav>
-              <SDiv>
+              <SLink>
                 <NavLink to="/signin">Logar</NavLink>
-              </SDiv>
-              <SDiv>
+              </SLink>
+              <SLink>
                 <NavLink to="/signup">Cadastrar</NavLink>
-              </SDiv>
+              </SLink>
             </Nav>
           </SNavbar.Collapse>
         </Container>

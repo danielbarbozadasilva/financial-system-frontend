@@ -40,7 +40,7 @@ export const Menu = [
     authorization: [2]
   },
   {
-    title: 'Ativos Clientes',
+    title: 'Ativos',
     icon: <ShoppingCartIcon />,
     route: '/assets',
     visibleMenu: true,

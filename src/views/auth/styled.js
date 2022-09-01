@@ -1,4 +1,4 @@
-import { Col, Form } from 'react-bootstrap'
+import { Col, Form, Row } from 'react-bootstrap'
 import styled from 'styled-components'
 
 export const SForm = styled(Form)`
@@ -8,6 +8,23 @@ export const SForm = styled(Form)`
   box-shadow: 0px 2px 15px 6px rgba(0, 0, 0, 0.11);
   padding: 50px;
   position: center;
+  @media screen and (max-width: 990px) {
+    width: 100%;
+    margin: 0;
+  }
+`
+
+export const SRow = styled(Row)`
+  margin-bottom: 2%;
+  @media screen and (max-width: 990px) {
+    flex-direction: column;
+  }
+`
+
+export const SFormGroup = styled(Row)`
+  @media screen and (max-width: 990px) {
+    padding-bottom: 5%;
+  }
 `
 
 export const SButtonSignIn = styled.button`
