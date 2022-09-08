@@ -38,6 +38,7 @@ export const SButtonSignIn = styled.button`
     text-decoration: underline;
     background-color: white;
     transition: 0.5s ease-out;
+  }
 `
 
 export const SColFooter = styled(Col)`

@@ -6,7 +6,14 @@ import { Col, Form } from 'react-bootstrap'
 import InputMask from 'react-input-mask'
 import { Select } from '@material-ui/core'
 import ufCityFile from '../../../util/state-city.json'
-import { SForm, SRow, SFormGroup, STextForm, SButton, SDesabledButton } from '../styled'
+import {
+  SForm,
+  SRow,
+  SFormGroup,
+  STextForm,
+  SButton,
+  SDesabledButton
+} from '../styled'
 import Loading from '../../../components/loading/form'
 
 const SignUp = () => {
@@ -84,14 +91,14 @@ const SignUp = () => {
         break
 
       case 'birthDate':
-        var datanasc = value.replaceAll('-', '/')
-        var dataAtual = moment().format('YYYY/MM/DD')
+        var dateBirth = value.replaceAll('-', '/')
+        var today = moment().format('YYYY/MM/DD')
 
-        if (!moment(datanasc).isValid) {
+        if (!moment(dateBirth).isValid) {
           message += 'Data inválida!'
-        } else if (moment(datanasc).isAfter(dataAtual)) {
+        } else if (moment(dateBirth).isAfter(today)) {
           message += 'Data maior que a atual!'
-        } else if (moment().diff(moment(datanasc), 'years') < 18) {
+        } else if (moment().diff(moment(dateBirth), 'years') < 18) {
           message += 'O usuário precisa ter no mínimo 18 anos!'
         }
         break

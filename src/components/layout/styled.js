@@ -50,7 +50,7 @@ export const SNavbarLogo = styled.img`
 
 export const SNavbarToggle = styled(Navbar.Toggle)`
   margin: 0px 30px;
-  background-color #b5a48d;
+  background-color: #b5a48d;
   color: #a59174 !important;
 `
 
@@ -135,7 +135,6 @@ export const FooterName = styled.h1`
 export const FooterImg = styled.img`
   position: center;
   width: 250px;
-  heigth: 250px;
   margin-top: 70px;
   margin-bottom: 25px;
   @media screen and (max-width: 990px) {
