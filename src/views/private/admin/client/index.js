@@ -5,12 +5,12 @@ import {
   listAllClientAction,
   editClientAction,
   updateClientAction
-} from '../../../store/client/client.action'
+} from '../../../../store/client/client.action'
 
-import Title from '../../../components/title/index'
-import DialogModal from '../../../components/dialog'
-import FormClient from '../../../components/admin/client/form/index'
-import DataList from '../../../components/admin/client/datagrid/index'
+import Title from '../../../../components/title/index'
+import DialogModal from '../../../../components/dialog'
+import FormClient from '../../../../components/admin/client/form/index'
+import DataList from '../../../../components/admin/client/datagrid/index'
 
 const Client = () => {
   const dispatch = useDispatch()

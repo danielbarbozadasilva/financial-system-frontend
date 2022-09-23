@@ -9,16 +9,18 @@ import LocalAtmIcon from '@mui/icons-material/LocalAtm'
 import CurrencyExchangeIcon from '@mui/icons-material/CurrencyExchange'
 
 import PanelLayout from '../../components/layout/layout-panel'
-import HomeAdmin from './home/admin/index'
-import HomeClient from './home/client/index'
-
-import Financial from './financial_assets/admin/index'
-import FinancialClient from './financial_assets/client/index'
-import Client from '../../views/admin/client/index'
-import TransactionsDetails from '../../views/admin/transaction/index'
-import Account from '../../views/admin/deposit/index'
-
 import Error404 from '../error/404/index'
+
+import HomeAdmin from './admin/home/index'
+import Financial from './admin/financial_assets/index'
+import Client from './admin/client/index'
+import TransactionsAdmin from './admin/transaction/index'
+import Account from './admin/deposit/index'
+
+import HomeClient from './client/home/index'
+import TransactionsClient from './client/transaction/index'
+import FinancialClient from './client/financial_assets/index'
+
 
 export const Menu = [
   {
@@ -72,8 +74,17 @@ export const Menu = [
     route: '/transactions',
     visibleMenu: true,
     enabled: true,
-    component: TransactionsDetails,
-    authorization: [1, 2]
+    component: TransactionsAdmin,
+    authorization: [1]
+  },
+  {
+    title: 'Transações',
+    icon: <CurrencyExchangeIcon />,
+    route: '/transactionsclient',
+    visibleMenu: true,
+    enabled: true,
+    component: TransactionsClient,
+    authorization: [2]
   },
   {
     title: 'Depositar',
@@ -86,7 +97,7 @@ export const Menu = [
   }
 ]
 
-const Admin = (props) => {
+const Private = (props) => {
   const typeUser = useSelector((state) => state.auth.user.type)
   const authorizedRoutes = Menu.filter((route) =>
     route.authorization.includes(typeUser)
@@ -104,4 +115,4 @@ const Admin = (props) => {
   )
 }
 
-export default Admin
+export default Private

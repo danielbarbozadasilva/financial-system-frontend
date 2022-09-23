@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux'
 import Title from '../../../../components/title/index'
 import { listTop05AssetAction } from '../../../../store/financial_assets/financial_assets.action'
 import { ChartClient } from '../../../../components/client/chart/index'
-import { ContainerChart, TitleChart } from '../styled'
+import { ContainerChart, TitleChart } from './styled'
 
 function Home() {
   const dispatch = useDispatch()

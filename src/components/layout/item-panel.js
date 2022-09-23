@@ -6,7 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 
 import { Link } from '@reach/router'
 import { useSelector } from 'react-redux'
-import { Menu } from '../../views/admin/index'
+import { Menu } from '../../views/private/index'
 
 const ListMenu = () => {
   const typeUser = useSelector((state) => state.auth.user.type)

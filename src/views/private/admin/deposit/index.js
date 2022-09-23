@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   listAllAccountAction,
   editAccountAction
-} from '../../../store/account/account.action'
-import { createDepositAction } from '../../../store/transaction/transaction.action'
-import { listBanksAction } from '../../../store/bank/bank.action'
-import Title from '../../../components/title/index'
-import DialogModal from '../../../components/dialog'
-import FormDeposit from '../../../components/admin/deposit/form/index'
-import DataList from '../../../components/admin/deposit/datagrid/index'
-import Form from '../../../components/admin/deposit/deposit'
+} from '../../../../store/account/account.action'
+import { createDepositAction } from '../../../../store/transaction/transaction.action'
+import { listBanksAction } from '../../../../store/bank/bank.action'
+import Title from '../../../../components/title/index'
+import DialogModal from '../../../../components/dialog'
+import FormDeposit from '../../../../components/admin/deposit/form/index'
+import DataList from '../../../../components/admin/deposit/datagrid/index'
+import Form from '../../../../components/admin/deposit/deposit'
 
 const Account = () => {
   const dispatch = useDispatch()
