@@ -87,7 +87,7 @@ const Financial = () => {
         </Grid>
       </Grid>
 
-      <DialogModal
+      <Dialog 
         title={'Ativo Financeiro'}
         open={modal.status || false}
         close={closeModal}
@@ -101,7 +101,7 @@ const Financial = () => {
             <Remove open={!!modal} close={closeModal} remove={submitForm} />
           ) : null}
         </>
-      </DialogModal>
+      </Dialog >
     </>
   )
 }
