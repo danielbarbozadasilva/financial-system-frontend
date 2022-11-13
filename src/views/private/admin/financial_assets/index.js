@@ -12,14 +12,14 @@ import DialogModal from '../../../../components/dialog'
 import DataList from '../../../../components/admin/financial_assets/datagrid/index'
 import Remove from '../../../../components/admin/financial_assets/remove'
 import Title from '../../../../components/title/index'
-import FormAdm from '../../../../components/admin/financial_assets/form/index'
+import FormAssetRegister from '../../../../components/admin/financial_assets/form/register/index'
+import FormAssetUpdate from '../../../../components/admin/financial_assets/form/update/index'
 
 const Financial = () => {
   const dispatch = useDispatch()
   const [modal, setModal] = React.useState({})
 
   const financial = useSelector((state) => state.financial.all)
-  const selected = useSelector((state) => state.financial.selected)
   const loading = useSelector((state) => state.financial.loading)
 
   const callFinancial = useCallback(() => {
@@ -87,21 +87,19 @@ const Financial = () => {
         </Grid>
       </Grid>
 
-      <Dialog 
+      <DialogModal
         title={'Ativo Financeiro'}
         open={modal.status || false}
         close={closeModal}
       >
         <>
-          {modal.type === 1 ? <FormAdm submit={submitForm} /> : null}
-          {modal.type === 2 ? (
-            <FormAdm submit={submitForm} data={selected} />
-          ) : null}
+          {modal.type === 1 ? <FormAssetRegister submit={submitForm} /> : null}
+          {modal.type === 2 ? <FormAssetUpdate submit={submitForm} /> : null}
           {modal.type === 3 ? (
             <Remove open={!!modal} close={closeModal} remove={submitForm} />
           ) : null}
         </>
-      </Dialog >
+      </DialogModal>
     </>
   )
 }

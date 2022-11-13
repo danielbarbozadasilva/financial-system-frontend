@@ -76,9 +76,10 @@ export default function Dashboard(props) {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
       }),
-      [theme.breakpoints.down('md')]: {
+      [theme.breakpoints.down('xs')]: {
         width: 0
-      }
+      },
+      overflow: "hidden"
     },
     menuButton: {
       marginRight: 36
@@ -99,10 +100,7 @@ export default function Dashboard(props) {
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen
-      }),
-      [theme.breakpoints.down('md')]: {
-        width: '100vw'
-      }
+      })
     },
     drawerPaperClose: {
       overflowX: 'hidden',
@@ -110,10 +108,7 @@ export default function Dashboard(props) {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen
       }),
-      width: 0,
-      [theme.breakpoints.down('md')]: {
-        width: 0
-      }
+      width: 0
     },
     appBarSpacer: theme.mixins.toolbar,
     content: {
@@ -143,17 +138,17 @@ export default function Dashboard(props) {
       alignItems: 'center'
     },
     userIcon: {
-      marginLeft: '77%',
+      marginLeft: `calc(100% - 30%)`,
       margin: theme.spacing(2),
       color: '#fff',
-      '@media (max-width: 1700px)': {
-        marginLeft: '70%'
-      },
       '@media (max-width: 1500px)': {
         marginLeft: '65%'
       },
       '@media (max-width: 1330px)': {
         marginLeft: '55%'
+      },
+      '@media (max-width: 1090px)': {
+        marginLeft: '0%'
       }
     }
   }))

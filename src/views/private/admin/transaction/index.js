@@ -7,7 +7,6 @@ import DataList from '../../../../components/admin/transaction/datagrid/index'
 
 const TransactionDetails = () => {
   const dispatch = useDispatch()
-
   const data = useSelector((state) => state.transaction.all)
   const loading = useSelector((state) => state.transaction.loading)
 

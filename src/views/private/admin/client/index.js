@@ -17,7 +17,6 @@ const Client = () => {
   const [modal, setModal] = React.useState({})
 
   const client = useSelector((state) => state.client.all)
-  const selected = useSelector((state) => state.client.selected)
   const loading = useSelector((state) => state.client.loading)
 
   const callClient = useCallback(() => {
@@ -56,7 +55,7 @@ const Client = () => {
         open={modal.status || false}
         close={closeModal}
       >
-        <FormClient submit={submitForm} data={selected} />
+        <FormClient submit={submitForm} />
       </DialogModal>
     </>
   )
