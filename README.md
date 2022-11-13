@@ -89,7 +89,7 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 | Identificação | Classificação | Descrição |
 | --- | --- | --- |
-|RN001   |Controle de acesso     |Os acessos permitidos ao sistema serão: Administrador e Cliente. O usuário anonimo terá acesso apenas ao portal do site.    |
+|RN001   |Controle de acesso     |Os acessos permitidos ao sistema serão: Administrador e Cliente. O usuário anônimo terá acesso apenas ao portal do site.    |
 |RN002   |Aplicar imposto     | Em todas as vendas serão acrescidos 5% (cinco por cento) referente a impostos.    |
 |RN003   |Controle de veracidade     |Apenas clientes autorizados pelo administrador poderão ter acesso ao sistema.     |
 |RN004   |Limite de ação     | Apenas o Administrador poderá incluir, editar e excluir ativos no sistema.    |
@@ -173,7 +173,7 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela Inicial**
 <br/>
-<img src="./src/assets/img/prints/print01.png" alt=""/>
+<img src="./src/assets/img/prints/1.png" alt=""/>
 <br/>
 <br/>
 <br/>
@@ -181,7 +181,7 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela Top05 Investimentos**
 <br/>
-<img src="./src/assets/img/prints/print02.png" alt=""/>
+<img src="./src/assets/img/prints/3.png" alt=""/>
 <br/>
 <br/>
 <br/>
@@ -189,7 +189,7 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela de Login**
 <br/>
-<img src="./src/assets/img/prints/print03.png" alt=""/>
+<img src="./src/assets/img/prints/5.png" alt=""/>
 <br/>
 <br/>
 <br/>
@@ -197,7 +197,7 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela de Cadastro**
 <br/>
-<img src="./src/assets/img/prints/print04.png" alt=""/>
+<img src="./src/assets/img/prints/6.png" alt=""/>
 <br/>
 <br/>
 <br/>
@@ -205,7 +205,7 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela Inicial do Cliente**
 <br/>
-<img src="./src/assets/img/prints/print07c.png" alt=""/>
+<img src="./src/assets/img/prints/7.jpg" alt=""/>
 <br/>
 <br/>
 <br/>
@@ -213,15 +213,39 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela Cliente Investimentos**
 <br/>
-<img src="./src/assets/img/prints/print05.png" alt=""/>
+<img src="./src/assets/img/prints/8.jpg" alt=""/>
 <br/>
 <br/>
 <br/>
 <br/>
 
-## **Tela Cliente Histórico de Transações Efetuadas**
+## **Tela Cliente Investimentos - Adquirir Ativo**
 <br/>
-<img src="./src/assets/img/prints/print06.png" alt=""/>
+<img src="./src/assets/img/prints/9.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Cliente - Buscar Ativo**
+<br/>
+<img src="./src/assets/img/prints/10.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Cliente - Histórico de Transações Efetuadas**
+<br/>
+<img src="./src/assets/img/prints/11.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Cliente - Histórico de Transações Efetuadas - Buscar transações**
+<br/>
+<img src="./src/assets/img/prints/12.jpg" alt=""/>
 <br/>
 <br/>
 <br/>
@@ -229,39 +253,148 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela Inicial do Administrador**
 <br/>
-<img src="./src/assets/img/prints/print07.png" alt=""/>
+<img src="./src/assets/img/prints/13.jpg" alt=""/>
 <br/>
 <br/>
 <br/>
 <br/>
 
-## **Tela Administrador Manter Ativos**
+## **Tela Administrador - Listar Ativos**
 <br/>
-<img src="./src/assets/img/prints/print08.png" alt=""/>
-<br/>
-<br/>
-<br/>
-<br/>
-
-## **Tela Administrador Manter Clientes**
-<br/>
-<img src="./src/assets/img/prints/print09.png" alt=""/>
+<img src="./src/assets/img/prints/14.jpg" alt=""/>
 <br/>
 <br/>
 <br/>
 <br/>
 
-## **Tela Administrador Consultar Transações**
+## **Tela Administrador - Cadastrar Ativo**
 <br/>
-<img src="./src/assets/img/prints/print10.png" alt=""/>
+<img src="./src/assets/img/prints/15.jpg" alt=""/>
 <br/>
 <br/>
 <br/>
 <br/>
 
-## **Tela Administrador Realizar Depósitos**
+## **Tela Administrador - Editar Ativo**
 <br/>
-<img src="./src/assets/img/prints/print11.png" alt=""/>
+<img src="./src/assets/img/prints/16.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Excluir Ativo**
+<br/>
+<img src="./src/assets/img/prints/17.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Buscar Ativo**
+<br/>
+<img src="./src/assets/img/prints/18.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Consultar Clientes**
+<br/>
+<img src="./src/assets/img/prints/19.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Listar Ativos Adquiridos**
+<br/>
+<img src="./src/assets/img/prints/20.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+## **Tela Administrador - Transações Realizadas**
+<br/>
+<img src="./src/assets/img/prints/21.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+## **Tela Administrador - Listar Endereço**
+<br/>
+<img src="./src/assets/img/prints/22.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+## **Tela Administrador - Editar Dados do Cliente**
+<br/>
+<img src="./src/assets/img/prints/23.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+## **Tela Administrador - Buscar Cliente**
+<br/>
+<img src="./src/assets/img/prints/24.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+
+## **Tela Administrador - Listar Transações Realizadas**
+<br/>
+<img src="./src/assets/img/prints/25.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Consultar Transação**
+<br/>
+<img src="./src/assets/img/prints/26.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Consultar Depósitos**
+<br/>
+<img src="./src/assets/img/prints/27.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Detalhes do Depósitos**
+<br/>
+<img src="./src/assets/img/prints/28.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Realizar Depósito**
+<br/>
+<img src="./src/assets/img/prints/29.jpg" alt=""/>
+<br/>
+<br/>
+<br/>
+<br/>
+
+## **Tela Administrador - Buscar por Número da Conta**
+<br/>
+<img src="./src/assets/img/prints/30.jpg" alt=""/>
 <br/>
 <br/>
 <br/>
@@ -272,7 +405,7 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela Inicial**
 <br/>
-<img src="./src/assets/img/prints/print01mob.png" alt="" width=350px />
+<img src="./src/assets/img/prints/2m.png" alt="" width=350px />
 <br/>
 <br/>
 <br/>
@@ -281,7 +414,7 @@ RF010 – O sistema deve listar os dados bancários do cliente.
 
 ## **Tela top 05**
 <br/>
-<img src="./src/assets/img/prints/print02mob.png" alt="" width=350px />
+<img src="./src/assets/img/prints/4m.png" alt="" width=350px />
 <br/>
 <br/>
 <br/>
