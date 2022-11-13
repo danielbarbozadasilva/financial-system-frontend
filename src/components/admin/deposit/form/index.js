@@ -1,65 +1,40 @@
 import React, { useState } from 'react'
 import { Grid, LinearProgress, Select } from '@material-ui/core'
 import { useSelector } from 'react-redux'
-import { getMoney, getTotalDeposit } from '../../../../util/validations/price-validation'
 import { Box, Submit, SButton, SInputLabel } from './styled'
 import InputMask from 'react-input-mask'
+import {
+  getMoney,
+  getTotalDeposit
+} from '../../../../util/validations/price-validation'
+import {
+  isNotValid,
+  fieldValidate
+} from '../../../../util/validations/form-deposit'
 
-const FormDeposit = ({ submit, ...props }) => {
+const FormDeposit = ({ submit }) => {
   const [form, setForm] = useState({})
-  const listBanks = props.banks.map((item) => item.name)
+  const banks = useSelector((state) => state.bank.all)
+  const listBanks = banks.map((item) => item.name)
   const percent = useSelector((state) => state.financial.upload?.percent || 0)
   const loading = useSelector((state) => state.financial.loading)
   const [formValidate, setFormValidate] = useState({})
 
   const handleChange = (props) => {
     const { value, name } = props.target
-    fieldValidate(name, value)
+    const message = fieldValidate(name, value)
+    setFormValidate({ ...formValidate, [name]: message })
     setForm({
       ...form,
       [name]: value
     })
   }
 
-  const fieldValidate = (nome, value) => {
-    let message = ''
-    switch (nome) {
-      case 'bank':
-        if (value === 'selecione') {
-          message += 'Não pode ser vazio!'
-        }
-        break
-
-      case 'cpf':
-        let cpf = value
-          .trim()
-          .replaceAll('-', '')
-          .replaceAll('_', '')
-          .replaceAll('.', '')
-        if (cpf.length < 11) {
-          message += 'CPF inválido!'
-        }
-        break
-    }
-    setFormValidate({ ...formValidate, [nome]: message })
-  }
-
-  const isNotValid = () => {
-    const inputs = ['bank', 'cpf']
-    const invalid = (label) =>
-      !Object.keys(form).includes(label) || form[label].length === 0
-
-    const validate =
-      Object.values(formValidate).filter((item) => item !== '').length > 0
-
-    return inputs.some((item) => invalid(item)) || validate
-  }
-
-  const handleSubmit = () => {
+  const submitForm = () => {
     const newForm = {
       origin_cpf: form.cpf,
       total: getTotalDeposit(form.total),
-      bank_id: props.banks.find((banks) => banks.name === form.bank).cod_bank
+      bank_id: banks.find((banks) => banks.name === form.bank).cod_bank
     }
     submit(newForm)
   }
@@ -125,14 +100,13 @@ const FormDeposit = ({ submit, ...props }) => {
             <p className="text-danger">{formValidate.total}</p>
           </div>
         </div>
-
         <Submit>
           <SButton
-            size="small"
-            disabled={isNotValid()}
-            type="submit"
             variant="contained"
-            onClick={handleSubmit}
+            size="small"
+            type="submit"
+            onClick={submitForm}
+            disabled={isNotValid(form, formValidate)}
           >
             Confirmar
           </SButton>

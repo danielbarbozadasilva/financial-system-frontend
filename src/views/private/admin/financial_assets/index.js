@@ -10,7 +10,7 @@ import {
 } from '../../../../store/financial_assets/financial_assets.action'
 import DialogModal from '../../../../components/dialog'
 import DataList from '../../../../components/admin/financial_assets/datagrid/index'
-import Remove from '../../../../components/admin/financial_assets/remove'
+import Remove from '../../../../components/admin/financial_assets/form/remove'
 import Title from '../../../../components/title/index'
 import FormAssetRegister from '../../../../components/admin/financial_assets/form/register/index'
 import FormAssetUpdate from '../../../../components/admin/financial_assets/form/update/index'

@@ -73,17 +73,24 @@ const FormAssetRegister = ({ submit }) => {
             </Grid>
           </Grid>
         ) : (
-          <SButton fullWidth component="label">
-            Upload Foto
-            <input
-              accept="image/*"
-              type="file"
-              name="image"
-              hidden
-              onChange={previewImg}
-              disabled={loading}
-            />
-          </SButton>
+          <Grid container direction="column">
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              component="label"
+            >
+              Enviar Foto
+              <input
+                accept="image/*"
+                type="file"
+                name="image"
+                hidden
+                onChange={previewImg}
+                disabled={loading}
+              />
+            </Button>
+          </Grid>
         )}
 
         <TextField
@@ -164,7 +171,6 @@ const FormAssetRegister = ({ submit }) => {
             </Grid>
           ) : (
             <SButton
-              fullWidth
               type="button"
               onClick={submitForm}
               disabled={isNotValid(form, formValidate)}

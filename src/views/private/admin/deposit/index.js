@@ -16,10 +16,8 @@ import Form from '../../../../components/admin/deposit/deposit'
 const Account = () => {
   const dispatch = useDispatch()
   const [modal, setModal] = React.useState({})
-
-  const banks = useSelector((state) => state.bank.all)
-  const account = useSelector((state) => state.account.all)
   const selected = useSelector((state) => state.account.selected)
+  const account = useSelector((state) => state.account.all)
   const loading = useSelector((state) => state.account.loading)
 
   const callClient = useCallback(() => {
@@ -65,7 +63,7 @@ const Account = () => {
       >
         <>
           {modal.type === 1 ? (
-            <FormDeposit submit={submitForm} data={selected} banks={banks} />
+            <FormDeposit submit={submitForm} />
           ) : (
             <Form data={selected} />
           )}

@@ -18,7 +18,7 @@ export function isNotValid(form, formValidate) {
 
 export function fieldValidate(name, value) {
   let message = ''
-  const regex = /\d/g
+  let regex = /\d/g
 
   switch (name) {
     case 'name':
@@ -38,6 +38,12 @@ export function fieldValidate(name, value) {
         message += 'Nome não pode ser vazio!'
       } else if (value.length <= 10) {
         message += 'Precisa ter mais que 10 caracteres!'
+      }
+      break
+
+    case 'quantity':
+      if (!regex.test(value)) {
+        message += 'Não pode conter letras!'
       }
       break
   }
