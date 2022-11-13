@@ -138,11 +138,14 @@ export default function Dashboard(props) {
       alignItems: 'center'
     },
     userIcon: {
-      marginLeft: `calc(100% - 30%)`,
+      marginLeft: `calc(100% - 24%)`,
       margin: theme.spacing(2),
       color: '#fff',
+      '@media (max-width: 1900px)': {
+        marginLeft: `calc(100% - 30%)`,
+      },
       '@media (max-width: 1500px)': {
-        marginLeft: '65%'
+        marginLeft: '60%'
       },
       '@media (max-width: 1330px)': {
         marginLeft: '55%'
