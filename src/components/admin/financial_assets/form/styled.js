@@ -19,7 +19,7 @@ export const Submit = styled.div`
 `
 
 export const SButton = styled(Button)`
-  background-color: #E0E0E0;
+  background-color: #ccc;
   color: black;
   :disabled {
     background-color: #ededed;
