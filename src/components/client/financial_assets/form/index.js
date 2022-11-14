@@ -13,18 +13,17 @@ import {
 } from '../../../../util/validations/price-validation'
 import { SInput, SBox, STable } from './styled'
 
-const FormClient = ({ submit, ...props }) => {
+const FormClient = ({ submit }) => {
+  const selected = useSelector((state) => state.financial.selected)
   const [form, setForm] = useState({})
-
-  const current_price = props.data.current_price
   const percent = useSelector((state) => state.financial.upload?.percent || 0)
 
   const handleSubmit = () => {
     let value = 1
-    var subTotal = calcSubTotal(value, current_price)
+    var subTotal = calcSubTotal(value, selected.current_price)
     var total = calcTotalTransfer(subTotal)
     const newForm = {
-      current_price: formatPrice(form.current_price || current_price),
+      current_price: formatPrice(form.current_price || selected.current_price),
       subtotal_price: formatPrice(form.subtotal_price || subTotal),
       total_price: formatPrice(form.total_price || total),
       quantity: Number(form.quantity) || value
@@ -35,10 +34,10 @@ const FormClient = ({ submit, ...props }) => {
   const handleChange = (props) => {
     const { value, name } = props?.target
     if (name === 'quantity') {
-      var subTotal = calcSubTotal(value, current_price)
+      var subTotal = calcSubTotal(value, selected.current_price)
       var total = calcTotalTransfer(subTotal)
       setForm({
-        current_price: current_price,
+        current_price: selected.current_price,
         subtotal_price: subTotal,
         total_price: total,
         [name]: value
@@ -59,7 +58,7 @@ const FormClient = ({ submit, ...props }) => {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell>{props.data.bvmf}</TableCell>
+            <TableCell>{selected.bvmf}</TableCell>
             <TableCell align="right" style={{ paddingLeft: '70px' }}>
               <SInput
                 style={{ border: '0.5px solid grey' }}
@@ -72,7 +71,7 @@ const FormClient = ({ submit, ...props }) => {
               />
             </TableCell>
             <TableCell align="right" style={{ paddingLeft: '90px' }}>
-              {current_price}
+              {selected.current_price}
             </TableCell>
             <TableCell align="right">
               <SInput
@@ -80,7 +79,7 @@ const FormClient = ({ submit, ...props }) => {
                 margin="normal"
                 name="subtotal_price"
                 type="text"
-                value={form.subtotal_price || current_price}
+                value={form.subtotal_price || selected.current_price}
                 disabled
               />
             </TableCell>
@@ -98,7 +97,7 @@ const FormClient = ({ submit, ...props }) => {
                   margin="normal"
                   name="subtotal_price"
                   type="text"
-                  value={form.subtotal_price || current_price}
+                  value={form.subtotal_price || selected.current_price}
                   disabled
                 />
               </TableCell>
@@ -126,7 +125,7 @@ const FormClient = ({ submit, ...props }) => {
                   margin="normal"
                   name="total_price"
                   type="text"
-                  value={form.total_price || calcTotalTransfer(current_price)}
+                  value={form.total_price || calcTotalTransfer(selected.current_price)}
                   disabled
                 />
               </TableCell>

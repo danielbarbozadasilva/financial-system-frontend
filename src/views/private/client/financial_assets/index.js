@@ -12,10 +12,8 @@ import FormClient from '../../../../components/client/financial_assets/form/inde
 const FinancialClient = () => {
   const dispatch = useDispatch()
   const [modal, setModal] = React.useState({})
-
   const financial = useSelector((state) => state.financial.all)
   const account = useSelector((state) => state.account.balance)
-  const selected = useSelector((state) => state.financial.selected)
   const loading = useSelector((state) => state.financial.loading)
 
   const callFinancial = useCallback(() => {
@@ -74,7 +72,7 @@ const FinancialClient = () => {
         open={modal.status || false}
         close={closeModal}
       >
-        <FormClient submit={submitForm} data={selected} />
+        <FormClient submit={submitForm} />
       </DialogModal>
     </>
   )
