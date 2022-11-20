@@ -61,8 +61,7 @@ const SignUp = ({ submit }) => {
       uf: form.uf,
       city: form.city,
       zip_code: form.zip_code,
-      complement: form.complement,
-      auth: true
+      complement: form.complement
     }
     submit(nform)
   }
