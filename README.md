@@ -2,11 +2,17 @@
 O Projeto AWESOME INVEST é um sistema de gestão financeira criado para fins de estudo. O Sistema tem como objetivo listar os ativos e efetuar o gerenciamento destes, possibilitando a consulta e a compra por parte do cliente. Além de garantir que o Administrador realize depósitos em contas de clientes e a consulta das transações realizadas.
 O Front-End foi desenvolvido utilizando o ReactJs.
 <br/>
-<br/>
 
 A API foi desenvolvida utilizando o NodeJs, ExpressJs e o ORM Sequelize com Banco de dados MySql. E está disponível para consulta no link abaixo:
 ```
 https://github.com/danielbarbozadasilva/financial-system-backend.git
+```
+<br/>
+
+O Aplicativo foi desenvolvido utilizando o React Native utilizando o Typescript. E está disponível para consulta no link abaixo:
+
+```
+https://github.com/danielbarbozadasilva/app-financial-React-Native
 ```
 <br/>
 <br/>
