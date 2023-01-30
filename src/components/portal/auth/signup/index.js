@@ -30,17 +30,17 @@ const SignUp = ({ submit }) => {
     })
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     const localization = ufCityFile.states.map(({ name, uf }) => ({ name, uf }))
     setUf(localization)
   }, [])
 
-  useEffect(() => {
-    const result = ufCityFile.states.find((item) => item.uf === form.uf)
+  React.useEffect(() => {
+    const result = ufCityFile.states.find((item) => item.uf === watch('uf'))
     if (result) {
       setCity(result.city)
     }
-  }, [form.uf])
+  }, [watch('uf')])
 
   useEffect(() => {
     if (registered) {
