@@ -3,7 +3,7 @@ import { DataGrid, GridToolbar } from '@mui/x-data-grid'
 import { BoxTable } from '../../../datagrid/styled'
 import Loading from '../../../loading/page/index'
 
-const DataList = ({ data, modal, loading }) => {
+const DataList = ({ data, loading }) => {
   const columns = [
     {
       field: 'id',

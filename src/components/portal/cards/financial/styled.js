@@ -39,51 +39,11 @@ export const SCard = styled.div`
   height: 480px;
   width: 310px;
   text-align: center;
-  margin: 50px 100px;
+  margin: 20px auto;
   :hover {
     box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
     transition: 1s;
     opacity: 0.5;
-  }
-
-  @media screen and (max-width: 1700px) {
-    margin: 50px 70px;
-  }
-
-  @media screen and (max-width: 1500px) {
-    margin: 50px 30px;
-  }
-
-  @media screen and (max-width: 1240px) {
-    margin: 50px 20px;
-  }
-
-  @media screen and (max-width: 1150px) {
-    margin: 50px 85px;
-  }
-
-  @media screen and (max-width: 780px) {
-    margin: 50px 155px;
-  }
-
-  @media screen and (max-width: 700px) {
-    margin: 50px 125px;
-  }
-
-  @media screen and (max-width: 625px) {
-    margin: 50px 75px;
-  }
-
-  @media screen and (max-width: 525px) {
-    margin: 50px 55px;
-  }
-
-  @media screen and (max-width: 487px) {
-    margin: 50px 25px;
-  }
-
-  @media screen and (max-width: 420px) {
-    margin: 50px 5px;
   }
 `
 
@@ -176,8 +136,6 @@ export const ContainerText = styled.div`
 `
 
 export const TextInvestiment = styled.div`
-  font-weight: 500;
-  word-wrap: break-word;
   margin-top: 0;
   color: #ebebeb;
   text-align: center;

@@ -73,7 +73,7 @@ export const updateClientAction = (id, { ...data }) => {
 export const setStatusClient = (id, status) => {
   return async (dispatch) => {
     try {
-      const result = await changeStatusService(id, status)
+      await changeStatusService(id, status)
       var msg = status ? 'Ativado' : 'Desativado'
       toastr.success(`Cliente`, `${msg} com sucesso`)
       dispatch(listAllClientAction())
