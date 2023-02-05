@@ -11,53 +11,30 @@ import { Submit, SignBox, FormStyle, SInputLabel, SButton } from './styled'
 import ufCityFile from '../../../../util/state-city.json'
 import * as moment from 'moment'
 import InputMask from 'react-input-mask'
+import Loading from '../../../loading/form/index'
+import {
+  fieldValidate,
+  isNotValid
+} from '../../../../util/validations/form-client'
 
-const FormClient = ({ submit, ...props }) => {
-  const [form, setForm] = useState({})
-  const [isEdit, setEdit] = useState(false)
+const FormClient = ({ submit }) => {
   const [button, setButton] = useState(false)
-
   const loading = useSelector((state) => state.financial.loading)
   const percent = useSelector((state) => state.financial.upload?.percent || 0)
+  const selected = useSelector((state) => state.client.selected)
+  const [form, setForm] = useState({ ...selected })
   const [formValidate, setFormValidate] = useState({})
   const [uf, setUf] = useState([])
   const [city, setCity] = useState([])
 
-  if (Object.keys(props).length > 0 && !isEdit) {
-    setForm(props.data)
-    setEdit(true)
-  }
-
   const handleChange = (props) => {
     const { value, name } = props.target
-    fieldValidate(name, value)
+    const message = fieldValidate(name, value)
+    setFormValidate({ ...formValidate, [name]: message })
     setForm({
       ...form,
       [name]: value
     })
-  }
-
-  const isNotValid = () => {
-    const inputs = [
-      'name',
-      'email',
-      'cpf',
-      'gender',
-      'birth_date',
-      'password',
-      'phone',
-      'address',
-      'uf',
-      'city',
-      'zip_code'
-    ]
-    const invalid = (label) =>
-      !Object.keys(form).includes(label) || form[label].length === 0
-
-    const validations =
-      Object.values(formValidate).filter((item) => item !== '').length > 0
-
-    return inputs.some((item) => invalid(item)) || validations
   }
 
   useEffect(() => {
@@ -71,104 +48,6 @@ const FormClient = ({ submit, ...props }) => {
       setCity(result.city)
     }
   }, [form.uf])
-
-  const fieldValidate = (name, value) => {
-    let message = ''
-    let regex = ''
-    switch (name) {
-      case 'name':
-        regex = /\d/g
-        if (regex.test(value)) {
-          message += 'Não pode conter números!'
-        } else if (value.trim() === '') {
-          message += 'Não pode ser vazio!'
-        } else if (value.length <= 4) {
-          message += 'Acima de 4 caracteres!'
-        }
-        break
-
-      case 'email':
-        regex =
-          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-
-        if (!regex.test(value)) {
-          message += 'E-mail inválido!'
-        } else if (value.trim() === '') {
-          message += 'Campo em branco!'
-        }
-        break
-
-      case 'cpf':
-        let cpf = value
-          .trim()
-          .replaceAll('-', '')
-          .replaceAll('_', '')
-          .replaceAll('.', '')
-        if (cpf.length < 11) {
-          message += 'CPF inválido!'
-        }
-        break
-
-      case 'gender':
-        if (value === 'selecione') {
-          message += 'Selecione um sexo!'
-        }
-        break
-
-      case 'birth_date':
-        var datanasc = value.replaceAll('-', '/')
-        var dataAtual = moment().format('YYYY/MM/DD')
-
-        if (!moment(datanasc).isValid) {
-          message += 'Data inválida!'
-        } else if (moment(datanasc).isAfter(dataAtual)) {
-          message += 'Data maior que a atual!'
-        } else if (moment().diff(moment(datanasc), 'years') < 18) {
-          message += 'O usuário precisa ter no mínimo 18 anos!'
-        }
-        break
-
-      case 'phone':
-        let phone = value.trim().replaceAll('-', '').replaceAll('_', '')
-
-        regex =
-          /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/
-
-        if (!regex.test(phone)) {
-          message += 'Número de telefone inválido!'
-        }
-        break
-
-      case 'address':
-        if (value.trim() === '') {
-          message += 'Não pode ser vazio!'
-        } else if (value.length <= 4) {
-          message += 'Precisa ter mais que 4 caracteres!'
-        }
-        break
-
-      case 'uf':
-        if (value === 'selecione') {
-          message += 'Selecione uma uf!'
-        }
-        break
-
-      case 'city':
-        if (value === 'selecione') {
-          message += 'Selecione uma cidade!'
-        }
-        break
-
-      case 'zip_code':
-        let zip_code = value.trim().replaceAll('-', '').replaceAll('_', '')
-        if (zip_code.length < 8) {
-          message += 'Cep inválido!'
-        }
-        break
-    }
-
-    setFormValidate({ ...formValidate, [name]: message })
-  }
 
   const handleSubmit = () => {
     const newForm = {
@@ -189,14 +68,6 @@ const FormClient = ({ submit, ...props }) => {
     submit(newForm)
   }
 
-  const changeButton = () => {
-    if (button) {
-      setButton(false)
-    } else {
-      setButton(true)
-    }
-  }
-
   return (
     <Container component="main" maxWidth="xs">
       <SignBox>
@@ -206,7 +77,6 @@ const FormClient = ({ submit, ...props }) => {
             <TextField
               fullWidth
               size="small"
-              error={!!formValidate.name}
               id="standard-error-helper-text"
               name="name"
               value={form.name || ''}
@@ -214,6 +84,7 @@ const FormClient = ({ submit, ...props }) => {
               helperText={formValidate.name || ''}
               disabled={loading}
               variant="outlined"
+              error={!!formValidate.name}
             />
           </div>
 
@@ -222,7 +93,6 @@ const FormClient = ({ submit, ...props }) => {
             <TextField
               fullWidth
               size="small"
-              error={!!formValidate.email}
               id="standard-error-helper-text"
               name="email"
               value={form.email || ''}
@@ -230,6 +100,7 @@ const FormClient = ({ submit, ...props }) => {
               helperText={formValidate.email || ''}
               disabled={loading}
               variant="outlined"
+              error={!!formValidate.email}
             />
           </div>
 
@@ -285,10 +156,12 @@ const FormClient = ({ submit, ...props }) => {
                   : ''
               }
               onChange={handleChange}
-              helperText={formValidate.birth_date || ''}
               disabled={loading}
               variant="outlined"
             />
+            <div className="mt-1">
+              <p className="text-danger">{formValidate.birth_date}</p>
+            </div>
           </div>
 
           <div>
@@ -374,7 +247,7 @@ const FormClient = ({ submit, ...props }) => {
               <p className="text-danger">{formValidate.city}</p>
             </div>
           </div>
-          
+
           <div>
             <SInputLabel>Cep</SInputLabel>
             <InputMask
@@ -423,35 +296,36 @@ const FormClient = ({ submit, ...props }) => {
               />
             </div>
           ) : (
-            ''
+            <></>
           )}
           <SButton
             variant="contained"
             fullWidth
             size="small"
             margin="normal"
-            onClick={() => changeButton()}
+            onClick={() => setButton(!button)}
           >
             {button ? 'Ocultar campo' : 'Alterar senha'}
           </SButton>
 
           <Submit>
-            <SButton
-              required
-              fullWidth
-              size="small"
-              disabled={isNotValid()}
-              type="submit"
-              variant="contained"
-              onClick={handleSubmit}
-            >
-              Atualizar
-            </SButton>
+            {loading ? (
+              <Grid container direction="column">
+                <LinearProgress variant="determinate" value={percent} />
+              </Grid>
+            ) : (
+              <SButton
+                fullWidth
+                size="small"
+                variant="contained"
+                type="submit"
+                onClick={handleSubmit}
+                disabled={isNotValid(form, formValidate)}
+              >
+                Atualizar
+              </SButton>
+            )}
           </Submit>
-
-          <Grid container direction="column">
-            <LinearProgress variant="determinate" value={percent} />
-          </Grid>
         </FormStyle>
       </SignBox>
     </Container>

@@ -72,3 +72,7 @@ export function formatReal(int) {
     ? '-' + 'R$' + tmp.replace('NaN', '')
     : 'R$' + tmp.replace('NaN', '')
 }
+
+export function formatFormMoney(data) {
+  return data.replace('R$', '').replace(',', '.').trim()
+}

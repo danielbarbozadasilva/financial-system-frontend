@@ -93,7 +93,7 @@ const DataList = ({ data, modal, loading }) => {
             quickFilterProps: { debounceMs: 500 }
           }
         }}
-      />{' '}
+      />
     </BoxTable>
   )
 }

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Paper } from '@material-ui/core'
+import { Paper, Button } from '@material-ui/core'
 
 export const Box = styled(Paper)`
   padding: 25px;
@@ -18,20 +18,11 @@ export const Submit = styled.div`
   margin: 25px 7px;
 `
 
-export const SInput = styled.input`
-  text-align: right;
-  border: none;
-  background-color: white;
-`
-
-export const STable = styled.div`
-  padding-top: 45px;
-  padding-left: 45%;
-  background-color: white;
-  border: none;
-`
-
-export const SBox = styled.div`
-  padding: 20px 0px;
-  padding-left: 65%;
+export const SButton = styled(Button)`
+  background-color: #ccc;
+  color: black;
+  :disabled {
+    background-color: #ededed;
+    color: black;
+  }
 `
